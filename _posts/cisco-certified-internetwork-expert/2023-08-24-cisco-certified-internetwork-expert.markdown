@@ -94,7 +94,7 @@ Toplamda 8 saat sürecek bir maraton başlıyor. Her iki modülün de süreleri 
 
 ## Puanlama Mantığı
 
-Öncelikle sınavdan geçerseniz puanınız sizinle paylaşılmıyor, bu yazıyı okuyan ve CCIE sınavına hazırlanan tüm adayların da puanını görememesini ümit ederim. :smiley:
+Öncelikle sınavdan geçerseniz puanınız sizinle paylaşılmıyor, bu yazıyı okuyan ve CCIE sınavına hazırlanan tüm adayların da puanını görememesini ümit ederim. 😊
 
 Modüllerin puanları da ayrı ayrı değerlendiriliyor. Her iki modülden de almanız gereken minimum bir puan var, ayrıca toplamda da almanız gereken minimum bir puan var. Modüllerin ikisinden de minimum puanı kıl payı almışsanız sınavdan kalma ihtimaliniz oldukça yüksek. 3 örnek üzerinden durumu özetleyeceğim.
 
