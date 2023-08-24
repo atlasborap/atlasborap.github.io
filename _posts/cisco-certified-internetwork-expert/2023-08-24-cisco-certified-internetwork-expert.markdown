@@ -128,7 +128,7 @@ Modüllerin puanları da ayrı ayrı değerlendiriliyor. Her iki modülden de al
 
 Bence uzunca bir süre switch ve router görmek istemeyeceksiniz. 😁
 
-Hayalimi gerçekleştirdiğim için çok mutluyum, kariyer açısından tamamlanmış hissediyorum. Yaklaşık 5 yıllık sektör tecrübemde neredeyse tüm zamanımı hayalimi gerçekleştirmek için harcadım. Bundan sonraki süreçte topluma yarar sağlayacak Türkçe içerikler oluşturmak istiyorum.
+Hayalimi gerçekleştirdiğim için çok mutluyum, kariyer açısından tamamlanmış hissediyorum. Yaklaşık 5 yıllık sektör tecrübemde neredeyse tüm zamanımı, hayalimi gerçekleştirmek için harcadım. Bundan sonraki süreçte topluma yarar sağlayacak Türkçe içerikler oluşturmak istiyorum.
 
 Bakarsınız **ikinci CCIE** için kolları sıvarım. 😎
 
