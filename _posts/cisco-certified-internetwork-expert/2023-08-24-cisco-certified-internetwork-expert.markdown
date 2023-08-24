@@ -20,13 +20,13 @@ Edindiğiniz tüm bilgi ve sektör tecrübesini bir Cisco sertifikasıyla taçla
 
 | Sınav İsmi | Sınav Kodu | Sınav Tarihi | Başarı Durumu |
 | ---------- | ---------- | ------------ | ------------- |
-| CCIE EI | Lab | 2 Ağustos 2023 | **Başarılı** |
-| CCNP ENCOR | 350-401 | 25 Mart 2023 | **Başarılı** |
-| CCNP TSHOOT | 300-135 | 21 Şubat 2020 | **Başarılı** |
-| CCNP TSHOOT | 300-135 | 14 Şubat 2020 | **Başarısız** |
-| CCNP ROUTE | 300-101 | 13 Ocak 2020 | **Başarılı** |
-| CCNP SWITCH | 300-115 | 24 Eylül 2019 | **Başarılı** |
 | CCNA R&S | 200-125 | 12 Mart 2019 | **Başarılı** |
+| CCNP SWITCH | 300-115 | 24 Eylül 2019 | **Başarılı** |
+| CCNP ROUTE | 300-101 | 13 Ocak 2020 | **Başarılı** |
+| CCNP TSHOOT | 300-135 | 14 Şubat 2020 | **Başarısız** |
+| CCNP TSHOOT | 300-135 | 21 Şubat 2020 | **Başarılı** |
+| CCNP ENCOR | 350-401 | 25 Mart 2023 | **Başarılı** |
+| CCIE EI | Lab | 2 Ağustos 2023 | **Başarılı** |
 
 # CCIE sınavına nasıl hazırlandım?
 
@@ -74,7 +74,7 @@ Mobile Lab sınavları da ikiye ayrılıyor. Birincisinde **Cisco kit**'lerle s�
 - 1 adet ekstra monitör (maksimum 24 inç)
 - 1 adet USB hub (kablolu)
 
-İstanbul'da Mobile BYOD Lab oldu, bu durum iki açıdan fayda sağlıyor. Birincisi BYOD Lab'lar diğer sınav türlerine göre $300 daha ucuz ($1600), ikincisi ise alışık olduğunuz cihazlarla sınava giriyorsunuz. Sınava giren CCIE adaylarının en çok şikayet ettiği konulardan birisi klavye oluyor. Zamanın bu denli değerli olduğu bir sınavda bir de klavyeye alışma süreci zorlayıcı olabilir. BYOD Lab'ta kendi klavyemizle girebiliyor olmak benim açımdan da büyük artıydı, ayrıca dilerseniz Türkçe klavye düzeni de kullanabiliyorsunuz. Ben bilgisayarımı *US Keyboard Layout*'ta kullanıyordum, dolayısıyla değiştirmedim.
+İstanbul'da Mobile BYOD Lab oldu, bu durum iki açıdan fayda sağlıyor. Birincisi BYOD Lab'lar diğer sınav türlerine göre $300 daha ucuz ($1600), ikincisi ise alışık olduğunuz cihazlarla sınava giriyorsunuz. Sınava giren CCIE adaylarının en çok şikayet ettiği konulardan biri klavye oluyor. Zamanın bu denli değerli olduğu bir sınavda bir de klavyeye alışma süreci zorlayıcı olabilir. BYOD Lab'ta kendi klavyemizle girebiliyor olmak benim açımdan da büyük artıydı, ayrıca dilerseniz Türkçe klavye düzeni de kullanabiliyorsunuz. Ben bilgisayarımı *US Keyboard Layout*'ta kullanıyordum, dolayısıyla değiştirmedim.
 
 Sınava biri yedek olmak üzere 2 adet dizüstü bilgisayar, 1 adet kablolu klavye, 1 adet kablolu mouse, 1 adet usb dongle'lı kablosuz mouse ve 24 inç monitörle gittim. Olası tüm sorunlara hazırlıklıydım ve neyse ki sınav boyunca donanımlarla alakalı bir sorun yaşamadım. Sınav süresince de dizüstü bilgisayar, monitör ve kablosuz mouse kullandım, harici klavye veya kablolu mouse kullanmadım.
 
