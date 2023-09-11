@@ -182,6 +182,14 @@ table {
     border-spacing: 0;
 }
 
+@media only screen and (max-width: 600px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
 thead th {
     padding: 14px 14px 14px 12px;
     text-align: left;
