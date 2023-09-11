@@ -70,7 +70,7 @@ body {
     justify-content: center;
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 600px) {
     .box {
         width: 95%;
     }
@@ -97,6 +97,12 @@ header h2 {
     letter-spacing: 0.1em;
 }
 
+@media only screen and (max-width: 600px) {
+    header h2 {
+        letter-spacing: 0;
+    }
+}
+
 header button {
     position: fixed;
     top: 25px;
@@ -106,6 +112,12 @@ header button {
     background-color: transparent;
     color: var(--heading);
     cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+    header button {
+        display: none;
+    }
 }
 
 hr {
@@ -207,6 +219,12 @@ footer hr {
 footer h2 {
     font-weight: 400;
     letter-spacing: 0.1em;
+}
+
+@media only screen and (max-width: 600px) {
+    footer h2 {
+        letter-spacing: 0;
+    }
 }
 
 footer a {
