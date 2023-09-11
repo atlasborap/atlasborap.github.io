@@ -46,7 +46,7 @@ ENCOR sınavını geçtikten sonra [Cisco Expert Level Certifications Tracker](h
 
 CCIE ve CCDE sınavlarının sürekli olarak yapıldığı [8 lokasyon](https://www.cisco.com/c/en/us/training-events/training-certifications/certifications/expert/ccie-lab-exam-locations.html) var.
 
-| Lab Lokasyonu | Enterprise Infrastructure | Security | Service Provider | Data Center | Collaboration | Enterprise Wireless | CCDE |
+| Lab Lokasyonu | EI * | SEC * | SP * | DC * | COLLAB * | EW * | CCDE |
 | ------------- | ------------------------- | -------- | ---------------- | ----------- | ------------- | ------------------- | ---- |
 | [Bangalor, Hindistan](https://www.cisco.com/c/en/us/training-events/training-certifications/certifications/expert/ccie-lab-exam-locations/bangalore.html) | X | X | X | X | X | X | X |
 | [Pekin, Çin](https://www.cisco.com/c/en/us/training-events/training-certifications/certifications/expert/ccie-lab-exam-locations/beijing.html) | X | X | X | X | X | X | X |
@@ -56,6 +56,14 @@ CCIE ve CCDE sınavlarının sürekli olarak yapıldığı [8 lokasyon](https://
 | [Richardson, ABD](https://www.cisco.com/c/en/us/training-events/training-certifications/certifications/expert/ccie-lab-exam-locations/richardson.html) | X | X | X | X | X | X | X |
 | [Sidney, Avustralya](https://www.cisco.com/c/en/us/training-events/training-certifications/certifications/expert/ccie-lab-exam-locations/sydney.html) | X | X | X | X | X | X | X |
 | [Tokyo, Japonya](https://www.cisco.com/c/en/us/training-events/training-certifications/certifications/expert/ccie-lab-exam-locations/tokyo.html) | X | X | X | X | X | X | X |
+
+* EI: Enterprise Infrastructure
+* SEC: Security
+* SP: Service Provider
+* DC: Data Center
+* COLLAB: Collaboration
+* EW: Enterprise Wireless
+* CCDE: Cisco Certified Design Expert
 
 Sabit lab lokasyonlarına ek olarak bir de [Mobile Lab](https://learningnetwork.cisco.com/s/article/CCIE-Mobile-Lab-Info)'lar var. Her sene hangi ülke ve şehirlerde yapılacağı Cisco tarafından duyuruluyor. Uzun bir aradan sonra bu sene (2023) Mobile Lab İstanbul'a geldi. Benim o kadar umudum yoktu ki ilk başta sınavımı 26 Haziran'a Brüksel'e *schedule* etmiştim. Ardından 2-4 Ağustos aralığında İstanbul'da olacağını görünce sınavımı [*reschedule*](https://learningnetwork.cisco.com/s/mobile-lab-scheduler) ettim.
 
