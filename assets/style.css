@@ -172,6 +172,13 @@ article a:hover {
     margin-top: 0;
 }
 
+@media only screen and (max-width: 600px) {
+    .anasayfa p {
+        margin-top: 8px;
+        line-height: 1.25em;
+    }
+}
+
 strong {
     font-weight: 600;
 }
