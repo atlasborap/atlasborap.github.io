@@ -39,7 +39,7 @@
 }
 
 code {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'Courier New', monospace;
     background-color: var(--layer2);
     color: var(--heading);
 }
