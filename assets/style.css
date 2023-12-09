@@ -269,13 +269,20 @@ article img {
 
 @media only screen and (max-width: 600px) {
     article img {
-        border-radius: 10px;
+        border-radius: 5px;
     }
 }
 
 .icerik {
     background-color: var(--layer2);
+    border-radius: 20px;
     padding: 15px;
+}
+
+@media only screen and (max-width: 600px) {
+    .icerik {
+        border-radius: 5px;
+    }
 }
 
 @media only screen and (max-width: 600px) {
