@@ -267,9 +267,21 @@ article img {
     border-radius: 20px;
 }
 
+@media only screen and (max-width: 600px) {
+    article img {
+        border-radius: 10px;
+    }
+}
+
 .icerik {
     background-color: var(--layer2);
     padding: 15px;
+}
+
+@media only screen and (max-width: 600px) {
+    code pre {
+        overflow-x: auto;
+    }
 }
 
 footer {
