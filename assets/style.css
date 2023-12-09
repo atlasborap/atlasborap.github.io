@@ -44,6 +44,14 @@ code {
     color: var(--heading);
 }
 
+code pre {
+    padding: 15px;
+    line-height: 1.75em;
+    font-family: 'Courier New', monospace;
+    background-color: var(--layer2);
+    color: var(--heading);
+}
+
 body {
     background-color: var(--layer1);
 }
@@ -152,6 +160,12 @@ article a {
 
 article a:hover {
     text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-thickness: 1px;
+}
+
+article.anasayfa a:hover {
+    text-decoration-line: underline;
     text-decoration-style: wavy;
     text-decoration-thickness: 1px;
 }
@@ -214,12 +228,42 @@ tbody tr:nth-child(odd) {
     background-color: var(--muted1);
 }
 
-ul {
+ol, ul {
     color: var(--text);
 }
 
 li {
     line-height: 1.75em;
+}
+
+button.accordion-icerik, button.accordion-wlan-profile, button.accordion-policy-profile, button.accordion-ap-join-profile, button.accordion-flex-profile, button.accordion-rf-profile {
+    display: block;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    color: var(--heading);
+    cursor: pointer;
+    line-height: 0;
+}
+
+ul.panel {
+    display: none;
+    overflow: hidden;
+}
+
+figure {
+    margin: 0 0 10 0;
+    display: flex;
+    justify-content: center;
+}
+
+article img {
+    border-radius: 20px;
+}
+
+.icerik {
+    background-color: var(--layer2);
+    padding: 15px;
 }
 
 footer {
