@@ -257,6 +257,12 @@ figure {
     justify-content: center;
 }
 
+@media only screen and (max-width: 600px) {
+    figure {
+        overflow-x: auto;
+    }
+}
+
 article img {
     border-radius: 20px;
 }
