@@ -46,10 +46,17 @@ code {
 
 code pre {
     padding: 15px;
+    border-radius: 20px;
     line-height: 1.75em;
     font-family: 'Courier New', monospace;
     background-color: var(--layer2);
     color: var(--heading);
+}
+
+@media only screen and (max-width: 600px) {
+    code pre {
+        border-radius: 5px;
+    }
 }
 
 body {
