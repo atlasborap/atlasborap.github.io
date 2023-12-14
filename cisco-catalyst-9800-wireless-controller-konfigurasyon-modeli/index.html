@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Catalyst 9800 serisi Wireless Controller'ların konfigürasyonu nasıl yapılır?">
+    <meta name="description" content="Cisco Catalyst 9800 serisi Wireless Controller'ların konfigürasyonu nasıl yapılır?">
     <meta property="og:locale" content="tr_TR">
     <meta property="og:type" content="article">
     <meta property="og:title" content="Cisco Catalyst 9800 Wireless Controller Konfigürasyon Modeli - Atlas Borap, CCIE #67754">
-    <meta property="og:description" content="Catalyst 9800 serisi Wireless Controller'ların konfigürasyonu nasıl yapılır?">
+    <meta property="og:description" content="Cisco Catalyst 9800 serisi Wireless Controller'ların konfigürasyonu nasıl yapılır?">
     <meta property="og:url" content="https://atlasborap.com/cisco-catalyst-9800-wireless-controller-konfigurasyon-modeli/">
     <meta property="og:site_name" content="Atlas Borap, CCIE #67754">
     <meta property="article:section" content="Wireless">
@@ -327,15 +327,15 @@
                     <figure>
                         <img src="images/Configuration-VLAN-light.webp" alt="Configuration VLAN" id="configuration-vlan"/>
                     </figure>
-                    <p><strong>Adım 2. </strong>Gerekli bilgileri (VLAN ID, Name) girin.</p>
+                    <p><strong>Adım 2. </strong>Gerekli bilgileri (VLAN ID, Name) girin ve Apply to Device butonuna tıklayın.</p>
                     <figure>
                         <img src="images/Create-VLAN-light.webp" alt="Create VLAN" id="create-vlan"/>
                     </figure>
                     <p><strong>Not: </strong>Eğer "Name" alanını boş bırakırsanız VLAN ismi "VLANXXXX" olarak atanır; burada XXXX, VLAN ID'dir.</p>
                     <p>Wireless'ta kullanacağınız tüm VLAN'lar için adım 1 ve adım 2'yi tekrarlayın.</p>
                     <p><strong>Adım 3:</strong> Oluşturduğunuz VLAN'ların Trunk portun "Allowed Vlan" listesinde olup olmadığını kontrol edin.</p>
-                    <p>Eğer Port Channel kullanıyorsanız, Configuration > Interface > Logical > Port Channel Name > General'a gidin. "Allowed Vlan" alanında "All" seçeneğinin işaretli olduğunu görürseniz ekstra bir konfigürasyon yapmanıza gerek yok. "Allowed Vlan" alanında "Vlan IDs" seçeneği işaretli ise, kullandığınız VLAN'ları listeye ekleyin ve "Update & Apply to Device" butonuna tıklayın.</p>
-                    <p>Eğer Port Channel kullanmıyorsanız, Configuration > Interface > Ethernet > Interface Name > General'a gidin. "Allowed Vlan" alanında "All" seçeneğinin işaretli olduğunu görürseniz ekstra bir konfigürasyon yapmanıza gerek yok. "Allowed Vlan" alanında "Vlan IDs" seçeneği işaretli ise, kullandığınız VLAN'ları listeye ekleyin ve "Update & Apply to Device" butonuna tıklayın.</p>
+                    <p>Eğer Port Channel kullanıyorsanız, <strong>Configuration > Interface > Logical > Port Channel Name > General</strong>'a gidin. "Allowed Vlan" alanında "All" seçeneğinin işaretli olduğunu görürseniz ekstra bir konfigürasyon yapmanıza gerek yok. "Allowed Vlan" alanında "Vlan IDs" seçeneği işaretli ise, kullandığınız VLAN'ları listeye ekleyin ve "Update & Apply to Device" butonuna tıklayın.</p>
+                    <p>Eğer Port Channel kullanmıyorsanız, <strong>Configuration > Interface > Ethernet > Interface Name > General</strong>'a gidin. "Allowed Vlan" alanında "All" seçeneğinin işaretli olduğunu görürseniz ekstra bir konfigürasyon yapmanıza gerek yok. "Allowed Vlan" alanında "Vlan IDs" seçeneği işaretli ise, kullandığınız VLAN'ları listeye ekleyin ve "Update & Apply to Device" butonuna tıklayın.</p>
                     <p><strong>Konfigürasyonda değişiklik yapmanıza gerek yok:</strong></p>
                     <figure>
                         <img src="images/Trunk-Allowed-Vlan-All-light.webp" alt="Trunk Allowed Vlan: All" id="trunk-allowed-vlan-all"/>
