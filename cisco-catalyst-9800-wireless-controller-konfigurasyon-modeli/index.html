@@ -653,6 +653,16 @@ write</pre>
                         <img src="images/Edit-AP-Site-light.webp" alt="Edit AP Site" id="edit-ap-site"/>
                     </figure>
                     <p><strong>Not: </strong>Access Point'teki Site Tag'i değiştirmeniz durumunda Access Point ile Wireless Controller arasındaki bağlantı yaklaşık 1 dakikalığına düşecektir, ardından Access Point Wireless Controller'a tekrar Join olur.</p>
+                    <h4>CLI:</h4>
+                    <code>
+<pre>configure terminal
+
+ap [ethernet-mac-addr]
+ site-tag first-site-tag
+ end
+
+write</pre>
+                    </code>
                     <h4 id="icerik-site-tagin-access-pointlere-toplu-atanmasi">Site Tag'in Access Point'lere Toplu Atanması</h4>
                     <p><strong>Adım 1: </strong>Configuration > Wireless Setup > Advanced > Start Now > Tag APs</p>
                     <figure>
@@ -730,6 +740,16 @@ write</pre>
                         <img src="images/Edit-AP-RF-light.webp" alt="Edit AP RF" id="edit-ap-rf"/>
                     </figure>
                     <p><strong>Not: </strong>Access Point'teki RF Tag'i değiştirmeniz durumunda Access Point ile Wireless Controller arasındaki bağlantı yaklaşık 1 dakikalığına düşecektir, ardından Access Point Wireless Controller'a tekrar Join olur.</p>
+                    <h4>CLI:</h4>
+                    <code>
+<pre>configure terminal
+
+ap [ethernet-mac-addr]
+ rf-tag first-rf-tag
+ end
+
+write</pre>
+                    </code>
                     <h4 id="icerik-rf-tagin-access-pointlere-toplu-atanmasi">RF Tag'in Access Point'lere Toplu Atanması</h4>
                     <p><strong>Adım 1: </strong>Configuration > Wireless Setup > Advanced > Start Now > Tag APs</p>
                     <figure>
