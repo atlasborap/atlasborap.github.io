@@ -6,8 +6,7 @@ const enableDarkMode = () => {
   document.body.classList.add('darkmode');
   document.getElementById("changeicon").innerHTML = "light_mode"
   document.getElementById('capwap').src = "images/CAPWAP-dark.webp"
-  document.getElementById('local-switching').src = "images/Local-Switching-dark.webp"
-  document.getElementById('central-switching').src = "images/Central-Switching-dark.webp"
+  document.getElementById('local-switching-central-switching').src = "images/Local-Switching-Central-Switching-dark.webp"
   document.getElementById('network-topolojisi-flex').src = "images/Network-Topolojisi-Flex-dark.webp"
   document.getElementById('configuration-vlan').src = "images/Configuration-VLAN-dark.webp"
   document.getElementById('create-vlan').src = "images/Create-VLAN-dark.webp"
@@ -55,8 +54,7 @@ const disableDarkMode = () => {
   document.body.classList.remove('darkmode');
   document.getElementById("changeicon").innerHTML = "dark_mode"
   document.getElementById('capwap').src = "images/CAPWAP-light.webp"
-  document.getElementById('local-switching').src = "images/Local-Switching-light.webp"
-  document.getElementById('central-switching').src = "images/Central-Switching-light.webp"
+  document.getElementById('local-switching-central-switching').src = "images/Local-Switching-Central-Switching-light.webp"
   document.getElementById('network-topolojisi-flex').src = "images/Network-Topolojisi-Flex-light.webp"
   document.getElementById('configuration-vlan').src = "images/Configuration-VLAN-light.webp"
   document.getElementById('create-vlan').src = "images/Create-VLAN-light.webp"
