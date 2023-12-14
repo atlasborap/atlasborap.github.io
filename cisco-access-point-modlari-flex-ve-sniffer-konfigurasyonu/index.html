@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cisco Access Point Modları nelerdir? Catalyst 9800 serisi Wireless Controller'larda Flex ve Sniffer konfigürasyonu nasıl yapılır?">
+    <meta property="og:locale" content="tr_TR">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Cisco Access Point Modları, Flex ve Sniffer Konfigürasyonu - Atlas Borap, CCIE #67754">
+    <meta property="og:description" content="Cisco Access Point Modları nelerdir? Catalyst 9800 serisi Wireless Controller'larda Flex ve Sniffer konfigürasyonu nasıl yapılır?">
+    <meta property="og:url" content="https://atlasborap.com/cisco-access-point-modlari-flex-ve-sniffer-konfigurasyonu/">
+    <meta property="og:site_name" content="Atlas Borap, CCIE #67754">
+    <meta property="article:section" content="Wireless">
+    <meta property="og:image" content="https://atlasborap.com/cisco-access-point-modlari-flex-ve-sniffer-konfigurasyonu/og-cisco-access-point-modlari-flex-ve-sniffer-konfigurasyonu.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="../assets/normalize.css">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="icon" href="../assets/favicon.ico">
+    <link rel="apple-touch-icon" href="../assets/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="../assets/favicon.ico">
+    <link rel="shortcut icon" href="../assets/favicon.ico">
+    <title>Cisco Access Point Modları, Flex ve Sniffer Konfigürasyonu - Atlas Borap, CCIE #67754</title>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <header>
+                <div class="atlasborap">
+                    <a href="../"><h2>Atlas Borap, CCIE #67754</h2></a>
+                </div>
+                <div class="darkmodebutton">
+                    <button id="dark-mode-toggle" class="dark-mode-toggle">
+                        <span id="changeicon" class="material-symbols-sharp">
+                            dark_mode
+                        </span>
+                    </button>
+                </div>
+            </header>
+            <main>
+                <hr>
+                <article>
+                    <h1>Cisco Access Point Modları,<br>Flex ve Sniffer Konfigürasyonu</h1>
+                    <h5>15 Aralık 2023 · 6 dakika okuma</h5>
+                    <div class="icerik">
+                        <button class="accordion-icerik"><h2 id="icerik-accordion">+ İçerik</h2></button>
+                        <ul class="panel">
+                            <li><a href="#icerik-cisco-access-point-modlari">Cisco Access Point Modları</a></li>
+                                <ul>
+                                    <li><a href="#icerik-local">Local</a></li>
+                                    <li><a href="#icerik-flexconnect">FlexConnect</a></li>
+                                    <li><a href="#icerik-sniffer">Sniffer</a></li>
+                                    <li><a href="#icerik-monitor">Monitor</a></li>
+                                    <li><a href="#icerik-se-connect">SE-Connect</a></li>
+                                    <li><a href="#icerik-rogue-detector">Rogue Detector</a></li>
+                                    <li><a href="#icerik-bridge">Bridge</a></li>
+                                    <li><a href="#icerik-flex-bridge">Flex+Bridge</a></li>
+                                </ul>
+                            <li><a href="#icerik-flex-konfigurasyonu">Flex Konfigürasyonu</a></li>
+                                <ul>
+                                    <li><a href="#icerik-vlanlarin-olusturulmasi">VLAN'ların Oluşturulması</a></li>
+                                    <li><a href="#icerik-wlan-profilelarin-olusturulmasi">WLAN Profile'ların Oluşturulması</a></li>
+                                    <li><a href="#icerik-policy-profilelarin-olusturulmasi">Policy Profile'ların Oluşturulması</a></li>
+                                    <li><a href="#icerik-policy-tagin-olusturulmasi">Policy Tag'in Oluşturulması</a></li>
+                                    <li><a href="#icerik-flex-profilein-olusturulmasi">Flex Profile'ın Oluşturulması</a></li>
+                                    <li><a href="#icerik-site-tagin-olusturulmasi">Site Tag'in Oluşturulması</a></li>
+                                    <li><a href="#icerik-policy-tag-ve-site-tagin-access-pointe-atanmasi">Policy Tag ve Site Tag'in Access Point'e Atanması</a></li>
+                                    <ul>
+                                        <li><a href="#icerik-policy-ve-site-tagin-tek-access-pointe-atanmasi">Policy ve Site Tag'in Tek Access Point'e Atanması</a></li>
+                                        <li><a href="#icerik-policy-ve-site-tagin-access-pointlere-toplu-atanmasi">Policy ve Site Tag'in Access Point'lere Toplu Atanması</a></li>
+                                    </ul>
+                                    <li><a href="#icerik-flex-access-control-listler">Flex Access Control List'ler</a></li>
+                                    <ul>
+                                        <li><a href="#icerik-access-control-listin-olusturulmasi">Access Control List'in Oluşturulması</a></li>
+                                        <li><a href="#icerik-central-switchingte-aclin-uygulanmasi">Central Switching'te ACL'in Uygulanması</a></li>
+                                        <li><a href="#icerik-local-switchingte-aclin-uygulanmasi">Local Switching'te ACL'in Uygulanması</a></li>
+                                        <li><a href="#icerik-access-control-listlerin-kontrolu">Access Control List'lerin Kontrolü</a></li>
+                                    </ul>
+                                    <li><a href="#icerik-konfigurasyon-dogrulama">Konfigürasyon Doğrulama</a></li>
+                                    <ul>
+                                        <li><a href="#icerik-vlan-ve-interface-konfigurasyonu-dogrulama">VLAN ve Interface Konfigürasyonu</a></li>
+                                        <li><a href="#icerik-wlan-konfigurasyonu-dogrulama">WLAN Konfigürasyonu</a></li>
+                                        <li><a href="#icerik-profile-konfigurasyonu-dogrulama">Profile Konfigürasyonu</a></li>
+                                        <li><a href="#icerik-tag-konfigurasyonu-dogrulama">Tag Konfigürasyonu</a></li>
+                                        <li><a href="#icerik-access-point-konfigurasyonu-dogrulama">Access Point Konfigürasyonu</a></li>
+                                    </ul>
+                                </ul>
+                            <li><a href="#icerik-sniffer-konfigurasyonu">Sniffer Konfigürasyonu</a></li>
+                        </ul>
+                        </div>
+                    <h2 id="icerik-cisco-access-point-modlari">Cisco Access Point Modları</h2>
+                    <p>Çoğu Cisco Access Point, hangi image'ın yüklü olduğuna bağlı olarak <strong>Autonomous</strong> veya <strong>Lightweight</strong> modda çalışabilir.</p>
+                    <p>Mobility Express image'ı yüklü olan bir Access Point; kendi web arayüzünden veya komut satırından konfigürasyonu gerçekleştirilerek, Wireless Controller'a ihtiyaç duymaksızın çalışabilir. Bu mod, <strong>Autonomous</strong> olarak adlandırılır.</p>
+                    <p>Lightweight image'ı yüklü bir Access Point'in konfigürasyonu ise Wireless Controller üzerinden gerçekleştirilir ve Access Point Wireless Controller üzerinden yönetilir. Bu mod ise, <strong>Lightweight</strong> olarak adlandırılır.</p>
+                    <p>Catalyst 9800 Wireless Controller'dan, Lightweight Access Point'i aşağıdaki özel amaçlı modlardan birinde çalışacak şekilde de yapılandırabilirsiniz.</p>
+                    <h3 id="icerik-local">Local</h3>
+                    <p>Local Mode, varsayılan moddur. Local moddaki her Access Point ile Wireless Controller arasında iki adet <strong>CAPWAP Tunnel</strong> açılır.</p>
+                    <p>Bunlardan ilki, <strong>CAPWAP Control</strong>, Access Point'in yönetilmesi için kullanılır. CAPWAP Control DTLS Tunnel, UDP 5246 portunu kullanır.</p>
+                    <p>Bir diğeri ise, <strong>CAPWAP Data</strong>, kablosuz ağ kullanıcılarının trafiğini Wireless Controller'a taşımak için kullanılır. Kablosuz kullanıcı trafiğini Wireless Controller yönetir ve bu davranış <strong>Central Switching</strong> olarak adlandırılır. CAPWAP Data DTLS Tunnel, UDP 5247 portunu kullanır.</p>
+                    <figure>
+                        <img src="images/CAPWAP-light.webp" alt="CAPWAP" id="capwap">
+                    </figure>
+                    <h3 id="icerik-flexconnect">FlexConnect</h3>
+                    <p>FlexConnect moddaki bir Access Point, kendisine bağlı olan kablosuz kullanıcının data trafiğini Wireless Controller'a taşımaz, direkt yönlendirir. Bu davranış <strong>Local Switching</strong> olarak adlandırılır. Autonomous Access Point gibi davranır fakat Wireless Controller üzerinden yönetilir.</p>
+                    <p>Bu yazının ilerleyen kısımlarında FlexConnect detaylıca ele alınacak ve konfigürasyonu yapılacaktır.</p>
+                    <h3 id="icerik-sniffer">Sniffer</h3>
+                    <p>Sniffer moddaki bir Access Point, belirli bir kanaldaki tüm paketleri yakalayıp paket analiz yazılımı çalıştıran (Wireshark) bir makineye gönderir. Bu paketler zaman damgaları, sinyal gücü, paket boyutları gibi bilgileri içerir. Bu sayede ağ etkinliğini izleyebilir, kaydedebilir ve sorunları tespit edebilirsiniz.</p>
+                    <p>Sniffer moddaki Access Point'i tekrar Local veya Flex modda kullanabilmek için Clear Mode'a çekmelisiniz.</p>
+                    <p>Bu yazının son kısmı Sniffer Mode konfigürasyonuna ayrılmıştır.</p>
+                    <h3 id="icerik-monitor">Monitor</h3>
+                    <p>Monitor moddaki bir Access Point; hiçbir şekilde iletim yapmaz, özel bir sensör gibi davranır. IDS olaylarını kontrol eder, Rouge Access Point'leri tespit eder ve Wireless Station'ların konumunu belirler.</p>
+                    <h3 id="icerik-se-connect">SE-Connect</h3>
+                    <p>SE-Connect (Spectrum Expert Connection) moddaki bir Access Point tüm wireless kanallarında Spectrum analizi yapar. Interference (parazit) kaynaklarını keşfetmek amacıyla Spectrum analiz verilerini toplar. Cisco Spectrum Expert veya MetaGeek Chanalyzer gibi bir yazılımla SE-Connect moddaki Access Point'ten verileri toplayabilir ve analiz edebilirsiniz.</p>
+                    <h3 id="icerik-rogue-detector">Rogue Detector</h3>
+                    <p>Rogue Detector moddaki bir Access Point, kablolu ağdaki MAC adresleriyle kablosuz ağdaki MAC adreslerini ilişkilendirir ve tam zamanlı olarak Rogue Device'ları tespit eder. Rogue Device'lar, her iki ağda da görünen cihazlardır. Bu modda çalışan Access Point, SSID yayını yapmaya devam eder ve kablosuz kullanıcılar bağlanabilir.</p>
+                    <h3 id="icerik-bridge">Bridge</h3>
+                    <p>Bridge moddaki iki Access Point, iki uzak noktayı birbirine bağlamakla görevlidir. Noktadan noktaya veya noktadan çok noktaya bağlantı gerçekleştirilebilir. Kablosuz kullanıcılar, Bridge moddaki Access Point'lere bağlanamazlar.</p>
+                    <h3 id="icerik-flex-bridge">Flex+Bridge</h3>
+                    <p>Bridge moddaki Access Point'lerin, Flex özelliklerini kullanmasına olanak tanıyan özel bir moddur.</p>
+                    <p><strong>Kaynak: </strong><a href="https://www.ciscopress.com/store/ccna-200-301-official-cert-guide-volume-1-9780135792735" target="_blank">CCNA 200-301 Official Cert Guide, Volume 1</a></p>
+                    <hr>
+                    <h2 id="icerik-flex-konfigurasyonu">Flex Konfigürasyonu</h2>
+                    <p>Flex ya da FlexConnect; bir Access Point'in, kablosuz kullanıcılardan gelen trafiğin doğrudan Access Point düzeyinde ağa mı aktarılacağını (Local Switching) yoksa Catalyst 9800 Wireless Controller'a mı yönlendireceğini (Central Switching) belirleme yeteneğini ifade eder.</p>
+                    <figure>
+                        <img src="images/Local-Switching-light.webp" alt="Local Switching" id="local-switching">
+                        <img src="images/Central-Switching-light.webp" alt="Central Switching" id="central-switching">
+                    </figure>
+                    <p>Bu yazı boyunca gerçekleştirilecek olan konfigürasyonun görsel şeması:</p>
+                    <figure>
+                        <img src="images/Network-Topolojisi-Flex-light.webp" alt="Network Topolojisi" id="network-topolojisi-flex">
+                    </figure>
+                    <p>Konfigürasyon akışı:</p>
+                    <ol>
+                        <li>VLAN'ların Oluşturulması</li>
+                        <li>WLAN Profile'ların Oluşturulması</li>
+                        <li>Policy Profile'ların Oluşturulması</li>
+                        <li>Policy Tag'in Oluşturulması</li>
+                        <li>Flex Profile'ın Oluşturulması</li>
+                        <li>Site Tag'in Oluşturulması</li>
+                        <li>Policy Tag ve Site Tag'in Access Point'e Atanması</li>
+                    </ol>
+                    <h3 id="icerik-vlanlarin-olusturulmasi">VLAN'ların Oluşturulması</h3>
+                    <p>Herhangi bir konfigürasyona başlamadan önce <strong>Central Switching</strong>'te kullanacağınız VLAN'ları Wireless Controller'da oluşturmalısınız. Aynı durum <strong>Local Switching</strong> için geçerli değil, <u>Flex'te kullanacağınız VLAN'ları Wireless Controller'da oluşturmanıza gerek yok.</u></p>
+                    <p><strong>Adım 1. </strong>Configuration > Layer2 > VLAN > + Add</p>
+                    <figure>
+                        <img src="images/Configuration-VLAN-light.webp" alt="Configuration VLAN" id="configuration-vlan">
+                    </figure>
+                    <p><strong>Adım 2. </strong>Gerekli bilgileri (VLAN ID, Name) girin ve Apply to Device butonuna tıklayın.</p>
+                    <figure>
+                        <img src="images/Create-VLAN-light.webp" alt="Create VLAN" id="create-vlan">
+                    </figure>
+                    <p><strong>Not: </strong>Eğer "Name" alanını boş bırakırsanız VLAN ismi "VLANXXXX" olarak atanır; burada XXXX, VLAN ID'dir.</p>
+                    <p><strong>Local Switching</strong>'te kullnacağınız tüm VLAN'lar için adım 1 ve adım 2'yi tekrarlayın.</p>
+                    <p><strong>Adım 3: </strong>Oluşturduğunuz VLAN'ların Trunk portun "Allowed Vlan" listesinde olup olmadığını kontrol edin.</p>
+                    <p>Eğer Port Channel kullanıyorsanız, <strong>Configuration > Interface > Logical > Port Channel Name > General</strong>'a gidin. "Allowed Vlan" alanında "All" seçeneğinin işaretli olduğunu görürseniz ekstra bir konfigürasyon yapmanıza gerek yok. "Allowed Vlan" alanında "Vlan IDs" seçeneği işaretli ise, kullandığınız VLAN'ları listeye ekleyin ve "Update & Apply to Device" butonuna tıklayın.</p>
+                    <p>Eğer Port Channel kullanmıyorsanız, <strong>Configuration > Interface > Ethernet > Interface Name > General</strong>'a gidin. "Allowed Vlan" alanında "All" seçeneğinin işaretli olduğunu görürseniz ekstra bir konfigürasyon yapmanıza gerek yok. "Allowed Vlan" alanında "Vlan IDs" seçeneği işaretli ise, kullandığınız VLAN'ları listeye ekleyin ve "Update & Apply to Device" butonuna tıklayın.</p>
+                    <p><strong>Konfigürasyonda değişiklik yapmanıza gerek yok:</strong></p>
+                    <figure>
+                        <img src="images/Trunk-Allowed-Vlan-All-light.webp" alt="Trunk Allowed Vlan: All" id="trunk-allowed-vlan-all"/>
+                    </figure>
+                    <p><strong>Kullandığınız VLAN'ları listeye eklemelisiniz:</strong></p>
+                    <figure>
+                        <img src="images/Trunk-Allowed-Vlan-Vlan-IDs-light.webp" alt="Trunk Allowed Vlan: Vlan IDs" id="trunk-allowed-vlan-vlan-ids"/>
+                    </figure>
+                    <h4>CLI:</h4>
+                    <code>
+<pre>configure terminal
+
+ vlan 2660
+  name Central-1
+  exit
+
+ interface GigabitEthernet2
+  switchport trunk allowed vlan add 2660
+  end
+
+write</pre>
+                    </code>
+                    <h3 id="icerik-wlan-profilelarin-olusturulmasi">WLAN Profile'ların Oluşturulması</h3>
+                    <p><strong>Adım 1: </strong>Configuration > Tags & Profiles > WLANs > + Add</p>
+                    <figure>
+                        <img src="images/WLANs-Add-light.webp" alt="WLANs Add" id="wlans-add"/>
+                    </figure>
+                    <p><strong>Adım 2: </strong>Gerekli bilgileri (Profile Name, SSID, Security Type vb.) girin ve Apply to Device butonuna tıklayın.</p>
+                    <figure>
+                        <img src="images/Add-WLAN-light.webp" alt="Add WLAN" id="add-wlan"/>
+                    </figure>
+                    <p><strong>Adım 3: Flex 1 </strong>ve <strong>Flex 2 </strong>WLAN Profile'larını da oluşturun.</p>
+                    <figure>
+                        <img src="images/WLANs-light.webp" alt="WLANs" id="wlans"/>
+                    </figure>
+                    <h4>CLI:</h4>
+                    <code>
+<pre>configure terminal
+
+ wlan [profile-name] [wlan-id] [ssid]
+  --- desired settings ---
+  no shutdown
+exit
+
+write</pre>
+                    </code>
+                    <h3 id="icerik-policy-profilelarin-olusturulmasi">Policy Profile'ların Oluşturulması</h3>
+                    <p><strong>Adım 1: </strong>Configuration > Tags & Profiles > Policy > + Add</p>
+                    <figure>
+                        <img src="images/Policy-Profile-Add-light.webp" alt="Policy Profile Add" id="policy-profile-add"/>
+                    </figure>
+                    <p><strong>Adım 2: </strong>General sekmesinde Name alanını doldurun, Status durumunu Enabled konuma getirin ve Central Switching durumunun Enabled olduğundan emin olun.</p>
+                    <figure>
+                        <img src="images/Add-Policy-Profile-for-Central-1-General-light.webp" alt="Add Policy Profile for Central 1 - General" id="add-policy-profile-for-central-1-general"/>
+                    </figure>
+                    <p><strong>Adım 3: </strong>Access Policies sekmesinde Central Switching'te kullanacağınız VLAN'ı seçin. <a href="#icerik-vlanlarin-olusturulmasi">VLAN'ların Oluşturulması</a> başlığı altında, VLAN ID'si 2660 olan Central-1 isimli VLAN'ı oluşturmuştuk, bu senaryoda onu seçiyoruz. Ardından Apply to Device butonuna tıklayın.</p>
+                    <figure>
+                        <img src="images/Add-Policy-Profile-for-Central-1-Access-Policies-light.webp" alt="Add Policy Profile for Central 1 - Access Policies" id="add-policy-profile-for-central-1-access-policies"/>
+                    </figure>
+                    <p><strong>Adım 4: </strong>Flex Policy Profile'ları oluştururken Central Switching ve Central DHCP durumlarının Disabled olduğundan emin olun.</p>
+                    <figure>
+                        <img src="images/Add-Policy-Profile-for-Flex-1-General-light.webp" alt="Add Policy Profile for Flex 1 - General" id="add-policy-profile-for-flex-1-general"/>
+                    </figure>
+                    <p>Central Switching'i devre dışı bıraktığınızda bir uyarı ekranı çıkacaktır, Yes butonuna tıklayarak devam edin.</p>
+                    <figure>
+                        <img src="images/Disabling-Central-Switching-light.webp" alt="Disabling Central Switching" id="disabling-central-switching"/>
+                    </figure>
+                    <p><strong>Adım 5: </strong>Access Policies sekmesinde Local Switching'te kullanacağınız VLAN'ı girin. <u>Flex'te kullanacağınız VLAN'ları Wireless Controller'da oluşturmanıza gerek yok, sadece Policy Profile'da girmeniz yeterlidir.</u> Ardından Apply to Device butonuna tıklayın.</p>
+                    <figure>
+                        <img src="images/Add-Policy-Profile-for-Flex-1-Access-Policies-light.webp" alt="Add Policy Profile for Flex 1 - Access Policies" id="add-policy-profile-for-flex-1-access-policies"/>
+                    </figure>
+                    <p><strong>Adım 6: </strong>Adım 4 ve adım 5'i Flex 2 Policy Profile için de uygulayın.</p>
+                    <figure>
+                        <img src="images/Add-Policy-Profile-for-Flex-2-General-light.webp" alt="Add Policy Profile for Flex 2 - General" id="add-policy-profile-for-flex-2-general"/>
+                    </figure>
+                    <figure>
+                        <img src="images/Add-Policy-Profile-for-Flex-2Access-Policies-light.webp" alt="Add Policy Profile for Flex 2 - Access Policies" id="add-policy-profile-for-flex-2-access-policies"/>
+                    </figure>
+                    <p>Sonuçta, default-policy-profile'a ek olarak 3 adet Policy Profile oluşturuldu.</p>
+                    <figure>
+                        <img src="images/Add-Policy-Profile-light.webp" alt="Policy Profile" id="policy-profile"/>
+                    </figure>
+                    <h4>CLI:</h4>
+                    <code>
+<pre>configure terminal
+
+ wireless profile policy central-1-policy-profile
+  description "Policy Profile for Central 1"
+  vlan Central-1
+  no shutdown
+  exit
+
+ wireless profile policy flex-1-policy-profile
+  no central dhcp
+  no central switching
+  description "Policy Profile for Flex 1"
+  vlan 2685
+  no shutdown
+  exit
+
+ wireless profile policy flex-2-policy-profile
+  no central dhcp
+  no central switching
+  description "Policy Profile for Flex 2"
+  vlan 2686
+  no shutdown
+  end
+
+write</pre>
+                    </code>
+                    <h3 id="icerik-policy-tagin-olusturulmasi">Policy Tag'in Oluşturulması</h3>
+                    <p>Policy Tag, SSID ile Policy Profile'ın bağlantısını sağlayan bir yapıdır. WLAN'ın hangi VLAN'da çalışacağını belirler.</p>
+                    <p><strong>Adım 1: </strong>Configuration > Tags & Profiles > Tags > Policy > + Add</p>
+                    <figure>
+                        <img src="images/Policy-Tag-light.webp" alt="Policy Tag" id="policy-tag"/>
+                    </figure>
+                    <p><strong>Adım 2: </strong>Gerekli bilgileri (Name, Description) girin ve WLAN-POLICY Maps alanındaki + Add butonuna tıklayarak oluşturduğunuz WLAN Profile ve Policy Profile'ları seçin, Apply (✓) butonuna tıklayın.</p>
+                    <figure>
+                        <img src="images/Add-Policy-Tag-1-light.webp" alt="Add Policy Tag" id="add-policy-tag-1"/>
+                    </figure>
+                    <p>Tüm WLAN Profile ve Policy Profile'ları ekledikten sonra Apply to Device butonuna tıklayın.</p>
+                    <figure>
+                        <img src="images/Add-Policy-Tag-2-light.webp" alt="Add Policy Tag" id="add-policy-tag-2"/>
+                    </figure>
+                    <h4>CLI:</h4>
+                    <code>
+<pre>configure terminal
+
+ wireless tag policy policy-tag
+  description "Policy Tag"
+  wlan flex-1-wlan-profile policy flex-1-policy-profile
+  wlan flex-2-wlan-profile policy flex-2-policy-profile
+  wlan central-1-wlan-profile policy central-1-policy-profile 
+  end
+
+write</pre>
+                    </code>
+                    <h3 id="icerik-flex-profilein-olusturulmasi">Flex Profile'ın Oluşturulması</h3>
+                    <p><strong>Adım 1: </strong>Configuration > Tags & Profiles > Flex > + Add</p>
+                    <figure>
+                        <img src="images/Flex-Profile-light.webp" alt="Flex Profile" id="flex-profile"/>
+                    </figure>
+                    <p><strong>Adım 2: </strong>Gerekli bilgileri (Name, Description, Native VLAN ID) girin. <u>Flex Modda çalıştırdığınız Access Point'lerin, Switch'lerdeki portları trunk modda olmalıdır, Access Point ise o porttaki Native VLAN'dan IP alır.</u> Dolayısıyla Access Point'lerin bağlı olduğu Switch'lerin portlarındaki Native VLAN bilgisini burada da girmelisiniz.</p>
+                    <figure>
+                        <img src="images/Add-Flex-Profile-General-light.webp" alt="Add Flex Profile - General" id="add-flex-profile-general"/>
+                    </figure>
+                    <p><strong>Adım 3: </strong>VLAN sekmesinde kullanacağınız VLAN'ları oluşturun. Bu senaryoda Flex-1 için 2685, Flex-2 için 2686 VLAN'larını kullanacağız.</p>
+                    <figure>
+                        <img src="images/Add-Flex-Profile-Add-VLAN-light.webp" alt="Add Flex Profile - Add VLAN" id="add-flex-profile-add-vlan"/>
+                    </figure>
+                    <p><strong>Adım 4: </strong>Tüm VLAN'ları oluşturduktan sonra Apply to Device butonuna tıklayın.</p>
+                    <figure>
+                        <img src="images/Add-Flex-Profile-Added-VLAN-light.webp" alt="Add Flex Profile - Added VLAN" id="add-flex-profile-added-vlan"/>
+                    </figure>
+                    <h4>CLI:</h4>
+                    <code>
+<pre>configure terminal
+
+ wireless profile flex new-flex-profile
+  description "New Flex Profile"
+  native-vlan-id 2601
+  vlan-name Flex-1
+   vlan-id 2685
+  vlan-name Flex-2
+   vlan-id 2686
+  end
+
+write</pre>
+                    </code>
+                    <h3 id="icerik-site-tagin-olusturulmasi">Site Tag'in Oluşturulması</h3>
+                    <p><strong>Adım 1: </strong>Configuration > Tags & Profiles > Tags > Site > + Add</p>
+                    <figure>
+                        <img src="images/Site-Tag-light.webp" alt="Site Tag" id="site-tag"/>
+                    </figure>
+                    <p><strong>Adım 2: </strong>Gerekli bilgileri (Name, Description) girin. Site Tag içinde Flex Profile seçeneğinin aktif olabilmesi için Enable Local Site seçeneğini inaktif etmelisiniz. <u>Bir Access Point, Enable Local Site seçeneği inaktif bir Site Tag'e atandığında modunu FlexConnect'e dönüştürecektir.</u> Oluşturduğunuz Flex Profile'ı seçtikten sonra Apply to Device butonuna tıklayın.</p>
+                    <figure>
+                        <img src="images/Add-Site-Tag-light.webp" alt="Add Site Tag" id="add-site-tag"/>
+                    </figure>
+                    <h4>CLI:</h4>
+                    <code>
+<pre>configure terminal
+
+ wireless tag site new-site-tag
+  description "New Site Tag"
+  flex-profile new-flex-profile
+  no local-site
+  end
+
+write</pre>
+                    </code>
+                    <h3 id="icerik-policy-tag-ve-site-tagin-access-pointe-atanmasi">Policy Tag ve Site Tag'in Access Point'e Atanması</h3>
+                    <p>Site Tag'i direkt bir Access Point'e veya birden çok Access Point'e toplu olarak atayabilirsiniz.</p>
+                    <h4 id="icerik-policy-ve-site-tagin-tek-access-pointe-atanmasi">Policy ve Site Tag'in Tek Access Point'e Atanması</h4>
+                    <p><strong>Adım 1: </strong>Configuration > Wireless > Access Points > AP-Name</p>
+                    <figure>
+                        <img src="images/Access-Points-light.webp" alt="Access Points" id="access-points"/>
+                    </figure>
+                    <p><strong>Adım 2: </strong>General > Tags alanında oluşturduğunuz Policy ve Site Tag'i seçin ve Update & Apply to Device butonuna tıklayın.</p>
+                    <figure>
+                        <img src="images/Edit-AP-Policy-Site-light.webp" alt="Edit AP Policy Site" id="edit-ap-policy-site"/>
+                    </figure>
+                    <p><strong>Not: </strong>Access Point'teki Policy ve Site Tag'i değiştirmeniz durumunda Access Point ile Wireless Controller arasındaki bağlantı yaklaşık 1 dakikalığına düşecektir, ardından Access Point Wireless Controller'a tekrar Join olur.</p>
+                    <h4 id="icerik-policy-ve-site-tagin-access-pointlere-toplu-atanmasi">Policy ve Site Tag'in Access Point'lere Toplu Atanması</h4>
+                    <p><strong>Adım 1: </strong>Configuration > Wireless Setup > Advanced > Start Now > Tag APs</p>
+                    <figure>
+                        <img src="images/Advanced-Wireless-Setup-light.webp" alt="Advanced Wireless Setup" id="advanced-wireless-setup"/>
+                    </figure>
+                    <p><strong>Adım 2: </strong>Site Tag'i atayacağınız tüm Access Point'leri seçip + Tag APs butonuna tıklayın.</p>
+                    <figure>
+                        <img src="images/Tag-APs-Site-Tag-light.webp" alt="Tag APs Site Tag" id="tag-aps-site-tag"/>
+                    </figure>
+                    <p><strong>Adım 3: </strong>Access Point'lere atamak istediğiniz Policy ve Site Tag'i seçin, Apply to Device butonuna tıklayın.</p>
+                    <figure>
+                        <img src="images/Tag-APs-Policy-Tag-Site-Tag-light.webp" alt="Tag APs Policy Tag Site Tag" id="tag-aps-policy-tag-site-tag"/>
+                    </figure>
+                    <h4>CLI:</h4>
+                    <code>
+<pre>configure terminal
+
+ ap [ap-ethernet-mac-address]
+  policy-tag new-policy-tag
+  site-tag new-site-tag
+  end
+
+write</pre>
+                    </code>
+                    <p>Flex konfigürasyonu bitti.</p>
+                    <h3 id="icerik-flex-access-control-listler">Flex Access Control List'ler</h3>
+                    <p>Local Switching'te çalışan bir WLAN'ınız olduğunda göz önünde bulundurmanız gereken konulardan biri, Access Control List'lerin kablosuz kullanıcılara nasıl uygulanacağıdır.</p>
+                    <p>Central Switching'te çalışan bir WLAN'da kablosuz kullanıcıların tüm trafiği Wireless Controller üstünden geçtiği için Access Control List'in Wireless Controller'da var olması yeterlidir fakat Local Switching'te durum böyle değildir.</p>
+                    <p>Local Switching'te kablosuz kullanıcının tüm trafiği Access Point üzerinden aktığı için Access Control List'lerin Access Point'e gönderilmesi gerekmektedir.</p>
+                    <h4 id="icerik-access-control-listin-olusturulmasi">Access Control List'in Oluşturulması</h4>
+                    <p>Test etmek amacıyla, kablosuz kullanıcıların 1.1.1.1 adresine ping atmasını engelleyecek bir Access Control List oluşturmakla başlıyoruz.</p>
+                    <p><strong>Adım 1: </strong>Configuration > Security > ACL > + Add</p>
+                    <figure>
+                        <img src="images/ACL-light.webp" alt="ACL" id="acl"/>
+                    </figure>
+                    <p><strong>Adım 2: </strong>ACL Name alanını doldurduktan sonra Destination IP'si 1.1.1.1 olan ICMP paketlerini engelleyen ACL yazın, onun dışındaki her şeye izin verin.</p>
+                    <figure>
+                        <img src="images/Add-ACL-Setup-light.webp" alt="Add ACL Setup" id="add-acl-setup"/>
+                    </figure>
+                    <h4 id="icerik-central-switchingte-aclin-uygulanmasi">Central Switching'te ACL'in Uygulanması</h4>
+                    <p>Central Switching'te, Access Control List'in Policy Profile'da aktif edilmesi yeterlidir.</p>
+                    <p><strong>Configuration > Tags & Profiles > Policy > central-1-policy-profile</strong></p>
+                    <p><strong>Access Policies</strong> sekmesindeki <strong>WLAN ACL</strong> alanında oluşturduğunuz ACL'i seçin ve <strong>Update & Apply to Device</strong> butonuna tıklayın.</p>
+                    <figure>
+                        <img src="images/Edit-Policy-Profile-WLAN-ACL-light.webp" alt="Edit Policy Profile WLAN ACL" id="edit-policy-profile-wlan-acl"/>
+                    </figure>
+                    <h4 id="icerik-local-switchingte-aclin-uygulanmasi">Local Switching'te ACL'in Uygulanması</h4>
+                    <p>Local Switching'te, <u>Access Control List'in Policy Profile'da aktif edilmesine ek olarak Flex Profile'da da aktif edilmesi gerekmektedir.</u></p>
+                    <p><strong>Configuration > Tags & Profiles > Flex > new-flex-profile</strong></p>
+                    <p><strong>Policy ACL</strong> sekmesindeki <strong>+ Add</strong> butonuna tıklayarak oluşturduğunuz ACL'i seçin ve <strong>Update & Apply to Device</strong> butonuna tıklayın.</p>
+                    <figure>
+                        <img src="images/Edit-Flex-Profile-Policy-ACL-light.webp" alt="Edit Flex Profile Policy ACL" id="edit-flex-profile-policy-acl">
+                    </figure>
+                    <h4 id="icerik-access-control-listlerin-kontrolu">Access Control List'lerin Kontrolü</h4>
+                    <p>Kablosuz kullanıcılara Access Control List'lerin uygulanıp uygulanmadığını <strong>Monitoring > Wireless > Clients</strong> sayfasından kullanıcıyı seçerek <strong>General > Security Information</strong> sekmesindeki <strong>Policies</strong> alanlarından kontrol edebilirsiniz.</p>
+                    <figure>
+                        <img src="images/Monitoring-Wireless-Clients-light.webp" alt="Monitoring Wireless Clients" id="monitoring-wireless-clients">
+                    </figure>
+                    <p>Ayrıca Access Point'e SSH ile bağlanarak <strong>show ip access-lists</strong> komutuyla Access List'leri kontrol edebilirsiniz.</p>
+                    <h3 id="icerik-konfigurasyon-dogrulama">Konfigürasyon Doğrulama</h3>
+                    <p>Aşağıdaki komutları kullanarak konfigürasyonunuzu kontrol edebilirsiniz.</p>
+                    <h4 id="icerik-vlan-ve-interface-konfigurasyonu-dogrulama">VLAN ve Interface Konfigürasyonu</h4>
+                    <code>
+<pre>show vlan brief
+show interfaces trunk
+show running-config interface [interface-id]</pre>
+                    </code>
+                    <h4 id="icerik-wlan-konfigurasyonu-dogrulama">WLAN Konfigürasyonu</h4>
+                    <code>
+<pre>show wlan summary
+show running-config wlan [wlan-profile-name]
+show wlan { id [wlan-id] | name [wlan-profile-name] | all }</pre>
+                    </code>
+                    <h4 id="icerik-profile-konfigurasyonu-dogrulama">Profile Konfigürasyonu</h4>
+                    <code>
+<pre>show wireless profile { flex | policy } summary
+show wireless profile { flex | policy } detailed [profile-name]
+show ap profile name [ap-join-profile-name] detailed</pre>
+                    </code>
+                    <h4 id="icerik-tag-konfigurasyonu-dogrulama">Tag Konfigürasyonu</h4>
+                    <code>
+<pre>show wireless tag { policy | site | rf } summary
+show wireless tag { policy | site | rf } detailed [tag-name]</pre>
+                    </code>
+                    <h4 id="icerik-access-point-konfigurasyonu-dogrulama">Access Point Konfigürasyonu</h4>
+                    <code>
+<pre>show ap summary
+show ap tag summary
+show ap name [ap-name] tag { info | detail }</pre>
+                    </code>
+                    <p><strong>Kaynak: </strong><a href="https://www.cisco.com/c/en/us/support/docs/wireless/catalyst-9800-series-wireless-controllers/213945-understand-flexconnect-on-9800-wireless.html" target="_blank">Understand FlexConnect on Catalyst 9800 Wireless Controller</a></p>
+                    <hr>
+                    <h2 id="icerik-sniffer-konfigurasyonu">Sniffer Konfigürasyonu</h2>
+                    <p><strong>Adım 1: </strong>Configuration > Wireless > Access Points > AP-Name</p>
+                    <figure>
+                        <img src="images/Access-Points-light.webp" alt="Access Points Sniffer" id="access-points-sniffer"/>
+                    </figure>
+                    <p><strong>Adım 2: </strong>General > AP Mode alanında Sniffer'ı seçin ve Update & Apply to Device butonuna tıklayın.</p>
+                    <figure>
+                        <img src="images/Edit-AP-General-AP-Mode-Sniffer-light.webp" alt="Edit AP - AP Mode" id="edit-ap-ap-mode"/>
+                    </figure>
+                    <p>Access Point'in modunu değiştirdiğinizde reboot edecektir.</p>
+                    <p><strong>Adım 3: </strong>Access Point, Wireless Controller'a tekrar Join olduktan sonra <strong>Configuration > Access Points > { 6 GHz Radios | 5 GHz Radios | 2.4 GHz Radios } > AP-Name</strong> sayfasına erişin. <strong>Sniffer Channel Assignment</strong> alanında <strong>Sniffing</strong>'i aktif ettikten sonra "koklamak" istediğiniz kanalı seçin ve Wireshark kurulu olan bilgisayarınızın IP'sini <strong>Sniffer IP</strong> alanına girin.</p>
+                    <figure>
+                        <img src="images/Edit-Radios-24-GHz-Band-Enable-Sniffing-light.webp" alt="Edit Radios 2.4 GHz Band - Enable Sniffing" id="edit-radios-24-ghz-band-enable-sniffing"/>
+                    </figure>
+                    <p><strong>Adım 4: </strong><strong>Sniffer IP</strong> alanına girdiğiniz IP'ye sahip Interface'i Wireshark'ta dinleyin. Çok fazla paket akacağı için UDP 5555 ve UDP 5000 paketlerini filtreleyebilirsiniz.</p>
+                    <h4>Kullanabileceğiniz Wireshark Filtresi:</h4>
+                    <code>
+<pre>udp.srcport == 5555 && udp.dstport == 5000</pre>
+                    </code>
+                    <figure>
+                        <img src="images/Wireshark-Capture-1.webp" alt="Wireshark Capture - 1" id="wireshark-capture-1"/>
+                    </figure>
+                    <p><strong>Adım 5: </strong>Paketlerin içeriğini görmek için <strong>PEEKREMOTE</strong> olarak <strong>decode</strong> etmelisiniz.</p>
+                    <figure>
+                        <img src="images/Wireshark-Capture-2.webp" alt="Wireshark Capture - 2" id="wireshark-capture-2"/>
+                    </figure>
+                    <figure>
+                        <img src="images/Wireshark-Capture-3.webp" alt="Wireshark Capture - 3" id="wireshark-capture-3"/>
+                    </figure>
+                    <p><strong>Vee ta taa! 🎉</strong></p>
+                    <figure>
+                        <img src="images/Wireshark-Capture-4.webp" alt="Wireshark Capture - 4" id="wireshark-capture-4"/>
+                    </figure>
+                    <p>Unutmadan, Sniffer moddaki Access Point'i tekrar Local veya Flex modda kullanabilmek için <strong>Clear Mode</strong>'a çekmelisiniz.</p>
+                    <figure>
+                        <img src="images/Edit-AP-General-AP-Mode-Clear-light.webp" alt="Edit AP - AP Mode Clear" id="edit-ap-general-ap-mode-clear"/>
+                    </figure>
+                    <p><strong>Kaynak: </strong><a href="https://mrncciew.com/2018/04/07/wifi-captures-with-sniffer-mode-ap/" target="_blank">WiFi Captures with Sniffer mode AP</a></p>
+                </article>
+            </main>
+            <footer>
+                <hr>
+                <h2>Atlas Borap, CCIE #67754</h2>
+                <p>ccie [🐴] atlasborap [🫥] com</p>
+                <p>❤️</p>
+            </footer>
+        </div>
+    </div>
+    <script src="../assets/darkmode-cisco-access-point-modlari-flex-ve-sniffer-konfigurasyonu.js"></script>
+</body>
+</html>
