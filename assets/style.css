@@ -260,6 +260,10 @@ button.accordion-icerik, button.accordion-wlan-profile, button.accordion-policy-
     line-height: 0;
 }
 
+ul {
+    list-style: circle;
+}
+
 ul.panel {
     display: none;
     overflow: hidden;
