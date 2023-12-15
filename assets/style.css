@@ -197,6 +197,7 @@ article.anasayfa a:hover {
 }
 
 .anasayfa p {
+    margin-top: 10px;
     line-height: 1.5em;
 }
 
