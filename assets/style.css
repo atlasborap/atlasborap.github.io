@@ -166,6 +166,11 @@ p {
     text-wrap: pretty;
 }
 
+p.tarih {
+    font-size: 0.83em;
+    margin-bottom: 6px;
+}
+
 article a {
     color: var(--heading);
     text-decoration: none;
