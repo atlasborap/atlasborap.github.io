@@ -4,7 +4,7 @@ const darkModeToggle = document.querySelector('#dark-mode-toggle');
 
 const enableDarkMode = () => {
   document.body.classList.add('darkmode');
-  document.getElementById("changeicon").innerHTML = "light_mode"
+  document.getElementById("changeicon").src = "assets/dark-mode.svg"
   document.getElementById('capwap').src = "images/CAPWAP-dark.webp"
   document.getElementById('local-switching-central-switching').src = "images/Local-Switching-Central-Switching-dark.webp"
   document.getElementById('network-topolojisi-flex').src = "images/Network-Topolojisi-Flex-dark.webp"
@@ -52,7 +52,7 @@ const enableDarkMode = () => {
 
 const disableDarkMode = () => {
   document.body.classList.remove('darkmode');
-  document.getElementById("changeicon").innerHTML = "dark_mode"
+  document.getElementById("changeicon").src = "assets/light-mode.svg"
   document.getElementById('capwap').src = "images/CAPWAP-light.webp"
   document.getElementById('local-switching-central-switching').src = "images/Local-Switching-Central-Switching-light.webp"
   document.getElementById('network-topolojisi-flex').src = "images/Network-Topolojisi-Flex-light.webp"
