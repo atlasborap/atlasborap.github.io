@@ -4,7 +4,7 @@ const darkModeToggle = document.querySelector('#dark-mode-toggle');
 
 const enableDarkMode = () => {
   document.body.classList.add('darkmode');
-  document.getElementById("changeicon").src = "assets/dark-mode.svg"
+  document.getElementById("changeicon").src = "assets/light-mode.svg"
   document.getElementById('access-point-konfigurasyon-gorsel-semasi').src = "images/Access-Point-Konfigurasyon-Gorsel-Semasi-dark.webp"
   document.getElementById('policy-tag-konfigurasyon-gorsel-semasi').src = "images/Policy-Tag-Konfigurasyon-Gorsel-Semasi-dark.webp"
   document.getElementById('site-tag-konfigurasyon-gorsel-semasi').src = "images/Site-Tag-Konfigurasyon-Gorsel-Semasi-dark.webp"
@@ -62,7 +62,7 @@ const enableDarkMode = () => {
 
 const disableDarkMode = () => {
   document.body.classList.remove('darkmode');
-  document.getElementById("changeicon").src = "assets/light-mode.svg"
+  document.getElementById("changeicon").src = "assets/dark-mode.svg"
   document.getElementById('access-point-konfigurasyon-gorsel-semasi').src = "images/Access-Point-Konfigurasyon-Gorsel-Semasi-light.webp"
   document.getElementById('policy-tag-konfigurasyon-gorsel-semasi').src = "images/Policy-Tag-Konfigurasyon-Gorsel-Semasi-light.webp"
   document.getElementById('site-tag-konfigurasyon-gorsel-semasi').src = "images/Site-Tag-Konfigurasyon-Gorsel-Semasi-light.webp"
