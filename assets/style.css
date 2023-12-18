@@ -170,6 +170,7 @@ p {
 
 p.tarih {
     font-size: 0.83em;
+    line-height: 1em;
     margin-bottom: 6px;
 }
 
