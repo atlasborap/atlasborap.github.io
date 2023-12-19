@@ -1,346 +1,458 @@
 <!DOCTYPE html>
 <html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cisco Catalyst 9800 serisi Wireless Controller'ların konfigürasyonu nasıl yapılır?">
-    <meta property="og:locale" content="tr_TR">
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="Cisco Catalyst 9800 Wireless Controller Konfigürasyon Modeli - Atlas Borap, CCIE #67754">
-    <meta property="og:description" content="Cisco Catalyst 9800 serisi Wireless Controller'ların konfigürasyonu nasıl yapılır?">
-    <meta property="og:url" content="https://atlasborap.com/cisco-catalyst-9800-wireless-controller-konfigurasyon-modeli/">
-    <meta property="og:site_name" content="Atlas Borap, CCIE #67754">
-    <meta property="article:section" content="Wireless">
-    <meta property="og:image" content="https://atlasborap.com/cisco-catalyst-9800-wireless-controller-konfigurasyon-modeli/og-cisco-catalyst-9800-wireless-controller-konfigürasyon-modeli.webp">
-    <link rel="stylesheet" href="../assets/normalize.css">
-    <link rel="stylesheet" href="../assets/style.css">
-    <link rel="icon" href="../assets/favicon.ico">
-    <link rel="apple-touch-icon" href="../assets/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" href="../assets/favicon.ico">
-    <link rel="shortcut icon" href="../assets/favicon.ico">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Cisco Catalyst 9800 serisi Wireless Controller'ların konfigürasyonu nasıl yapılır?" />
+    <meta property="og:locale" content="tr_TR" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Cisco Catalyst 9800 Wireless Controller Konfigürasyon Modeli - Atlas Borap, CCIE #67754" />
+    <meta property="og:description" content="Cisco Catalyst 9800 serisi Wireless Controller'ların konfigürasyonu nasıl yapılır?" />
+    <meta property="og:url" content="https://atlasborap.com/cisco-catalyst-9800-wireless-controller-konfigurasyon-modeli/" />
+    <meta property="og:site_name" content="Atlas Borap, CCIE #67754" />
+    <meta property="article:section" content="Wireless" />
+    <meta
+      property="og:image"
+      content="https://atlasborap.com/cisco-catalyst-9800-wireless-controller-konfigurasyon-modeli/og-cisco-catalyst-9800-wireless-controller-konfigürasyon-modeli.webp"
+    />
+    <link rel="stylesheet" href="../assets/normalize.css" />
+    <link rel="stylesheet" href="../assets/style.css" />
+    <link rel="icon" href="../assets/favicon.ico" />
+    <link rel="apple-touch-icon" href="../assets/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" href="../assets/favicon.ico" />
+    <link rel="shortcut icon" href="../assets/favicon.ico" />
     <title>Cisco Catalyst 9800 Wireless Controller Konfigürasyon Modeli - Atlas Borap, CCIE #67754</title>
-</head>
-<body>
+  </head>
+
+  <body>
     <div class="container">
-        <div class="box">
-            <header>
-                <div class="atlasborap">
-                    <a href="../"><h2>Atlas Borap, CCIE #67754</h2></a>
-                </div>
-                <div class="darkmodebutton">
-                    <button id="dark-mode-toggle" class="dark-mode-toggle">
-                        <img src="../assets/dark-mode.svg" alt="Dark Mode" id="changeicon">
-                    </button>
-                </div>
-            </header>
-            <main>
-                <hr>
-                <article>
-                    <h1>Cisco Catalyst 9800 Wireless Controller Konfigürasyon Modeli</h1>
-                    <h5>9 Aralık 2023 · 7 dakika okuma</h5>
-                    <div class="icerik">
-                    <button class="accordion-icerik"><h2 id="icerik-accordion">+ İçerik</h2></button>
-                    <ul class="panel">
-                        <li><a href="#icerik-temel-bilgiler">Temel Bilgiler</a></li>
-                            <li><a href="#icerik-policy-tag">Policy Tag</a></li>
-                            <ul>
-                                <li><a href="#icerik-wlan-profile">WLAN Profile (SSID)</a></li>
-                                <li><a href="#icerik-policy-profile">Policy Profile</a></li>
-                            </ul>
-                            <li><a href="#icerik-site-tag">Site Tag</a></li>
-                            <ul>
-                                <li><a href="#icerik-ap-join-profile">AP Join Profile</a></li>
-                                <li><a href="#icerik-flex-profile">Flex Profile</a></li>
-                            </ul>
-                            <li><a href="#icerik-rf-tag">RF Tag</a></li>
-                            <ul>
-                                <li><a href="#icerik-24ghz-profile">2.4 GHz Profile</a></li>
-                                <li><a href="#icerik-5ghz-profile">5 GHz Profile</a></li>
-                                <li><a href="#icerik-6ghz-profile">6 GHz Profile</a></li>
-                            </ul>
-                            <li><a href="#icerik-profilelardaki-ayarlarin-listesi">Profile'lardaki Ayarların Listesi</a></li>
-                            <ul>
-                                <li><a href="#wlan-profile-accordion">WLAN Profile</a></li>
-                                <li><a href="#policy-profile-accordion">Policy Profile</a></li>
-                                <li><a href="#ap-join-profile-accordion">AP Join Profile</a></li>
-                                <li><a href="#flex-profile-accordion">Flex Profile</a></li>
-                                <li><a href="#rf-profile-accordion">RF Profile</a></li>
-                            </ul>
-                        <li><a href="#icerik-network-topolojisi">Network Topolojisi</a></li>
-                        <li><a href="#icerik-konfigurasyon">Konfigürasyon</a></li>
-                        <ul>
-                            <li><a href="#icerik-vlanlarin-olusturulmasi">VLAN'ların Oluşturulması</a></li>
-                            <li><a href="#icerik-aaa-konfigurasyonu">AAA Konfigürasyonu (İsteğe Bağlı)</a></li>
-                            <ul>
-                                <li><a href="#icerik-radius-serverin-eklenmesi">RADIUS Server'ın Eklenmesi</a></li>
-                                <li><a href="#icerik-radius-groupun-olusturulmasi">RADIUS Group'un Oluşturulması</a></li>
-                                <li><a href="#icerik-aaa-methodun-olusturulmasi">AAA Method'un Oluşturulması</a></li>
-                            </ul>
-                            <li><a href="#icerik-policy-tag-konfigurasyonu">Policy Tag Konfigürasyonu</a></li>
-                            <ul>
-                                <li><a href="#icerik-wlan-profilein-olusturulmasi">WLAN Profile'ın Oluşturulması</a></li>
-                                <li><a href="#icerik-policy-profilein-olusturulmasi">Policy Profile'ın Oluşturulması</a></li>
-                                <li><a href="#icerik-policy-tagin-olusturulmasi">Policy Tag'in Oluşturulması (SSID ve Policy Profile'ın Birbirine Bağlanması)</a></li>
-                                <li><a href="#icerik-policy-tagin-access-pointe-atanmasi">Policy Tag'in Access Point'e Atanması</a></li>
-                                <ul>
-                                    <li><a href="#icerik-policy-tagin-tek-access-pointe-atanmasi">Policy Tag'in Tek Access Point'e Atanması</a></li>
-                                    <li><a href="#icerik-policy-tagin-access-pointlere-toplu-atanmasi">Policy Tag'in Access Point'lere Toplu Atanması</a></li>
-                                </ul>
-                            </ul>
-                            <li><a href="#icerik-site-tag-konfigurasyonu">Site Tag Konfigürasyonu</a></li>
-                            <ul>
-                                <li><a href="#icerik-ap-join-profilein-olusturulmasi">AP Join Profile'ın Oluşturulması</a></li>
-                                <li><a href="#icerik-flex-profilein-olusturulmasi">Flex Profile'ın Oluşturulması (İsteğe Bağlı, Access Point'ler Flex Modda ise)</a></li>
-                                <li><a href="#icerik-site-tagin-olusturulmasi">Site Tag'in Oluşturulması</a></li>
-                                <li><a href="#icerik-site-tagin-access-pointe-atanmasi">Site Tag'in Access Point'e Atanması</a></li>
-                                <ul>
-                                    <li><a href="#icerik-site-tagin-tek-access-pointe-atanmasi">Site Tag'in Tek Access Point'e Atanması</a></li>
-                                    <li><a href="#icerik-site-tagin-access-pointlere-toplu-atanmasi">Site Tag'in Access Point'lere Toplu Atanması</a></li>
-                                </ul>
-                            </ul>
-                            <li><a href="#icerik-rf-tag-konfigurasyonu">RF Tag Konfigürasyonu</a></li>
-                            <ul>
-                                <li><a href="#icerik-rf-profilelarin-olusturulmasi">RF Profile'ların Oluşturulması</a></li>
-                                <li><a href="#icerik-rf-tagin-olusturulmasi">RF Tag'in Oluşturulması</a></li>
-                                <li><a href="#icerik-rf-tagin-access-pointe-atanmasi">RF Tag'in Access Point'e Atanması</a></li>
-                                <ul>
-                                    <li><a href="#icerik-rf-tagin-tek-access-pointe-atanmasi">RF Tag'in Tek Access Point'e Atanması</a></li>
-                                    <li><a href="#icerik-rf-tagin-access-pointlere-toplu-atanmasi">RF Tag'in Access Point'lere Toplu Atanması</a></li>
-                                </ul>
-                            </ul>
-                        </ul>
-                        <li><a href="#icerik-konfigurasyon-dogrulama">Konfigürasyon Doğrulama</a></li>
-                            <ul>
-                                <li><a href="#icerik-vlan-ve-interface-konfigurasyonu-dogrulama">VLAN ve Interface Konfigürasyonu</a></li>
-                                <li><a href="#icerik-aaa-konfigurasyonu-dogrulama">AAA Konfigürasyonu</a></li>
-                                <li><a href="#icerik-wlan-konfigurasyonu-dogrulama">WLAN Konfigürasyonu</a></li>
-                                <li><a href="#icerik-profile-konfigurasyonu-dogrulama">Profile Konfigürasyonu</a></li>
-                                <li><a href="#icerik-tag-konfigurasyonu-dogrulama">Tag Konfigürasyonu</a></li>
-                                <li><a href="#icerik-access-point-konfigurasyonu-dogrulama">Access Point Konfigürasyonu</a></li>
-                            </ul>
-                        <li><a href="#icerik-sikca-sorulan-sorular">Sıkça Sorulan Sorular</a></li>
-                    </ul>
-                    </div>
-                    <h2 id="icerik-temel-bilgiler">Temel Bilgiler</h2>
-                    <p>Catalyst 9800 serisi Wireless Controller'larda <strong>Tag</strong>'ler (etiketler), her Access Point için mevcut olan özellikleri kontrol etmek amacıyla kullanılır. Tag'ler her Access Point'e atanır ve her tag içinde Access Point'e uygulanan tüm ayarları bulabilirsiniz.</p>
-                    <p><u>Profile'lar yani ayarlar, Tag'lerde toplanır; Tag'ler ise Access Point'lere atanır.</u> Böylece o Access Point'in çalışma modu, yayınlayacağı SSID'ler, o SSID'lerin hangi VLAN'larda çalışacağı, SSH ve Telnet'in aktif/pasif edilmesi gibi yapılandırmalar gerçekleştirilmiş olur.</p>
-                    <p>Üç tag vardır:</p>
+      <div class="box">
+        <header>
+          <div class="atlasborap">
+            <a href="../">
+              <h2>Atlas Borap, CCIE #67754</h2>
+            </a>
+          </div>
+          <div class="darkmodebutton">
+            <button id="dark-mode-toggle" class="dark-mode-toggle">
+              <img src="../assets/dark-mode.svg" alt="Dark Mode" id="changeicon" />
+            </button>
+          </div>
+        </header>
+        <main>
+          <hr />
+          <article>
+            <h1>Cisco Catalyst 9800 Wireless Controller Konfigürasyon Modeli</h1>
+            <h5>9 Aralık 2023 · 7 dakika okuma</h5>
+            <div class="icerik">
+              <button class="accordion-icerik">
+                <h2 id="icerik-accordion">+ İçerik</h2>
+              </button>
+              <ul class="panel">
+                <li><a href="#icerik-temel-bilgiler">Temel Bilgiler</a></li>
+                <li><a href="#icerik-policy-tag">Policy Tag</a></li>
+                <ul>
+                  <li><a href="#icerik-wlan-profile">WLAN Profile (SSID)</a></li>
+                  <li><a href="#icerik-policy-profile">Policy Profile</a></li>
+                </ul>
+                <li><a href="#icerik-site-tag">Site Tag</a></li>
+                <ul>
+                  <li><a href="#icerik-ap-join-profile">AP Join Profile</a></li>
+                  <li><a href="#icerik-flex-profile">Flex Profile</a></li>
+                </ul>
+                <li><a href="#icerik-rf-tag">RF Tag</a></li>
+                <ul>
+                  <li><a href="#icerik-24ghz-profile">2.4 GHz Profile</a></li>
+                  <li><a href="#icerik-5ghz-profile">5 GHz Profile</a></li>
+                  <li><a href="#icerik-6ghz-profile">6 GHz Profile</a></li>
+                </ul>
+                <li><a href="#icerik-profilelardaki-ayarlarin-listesi">Profile'lardaki Ayarların Listesi</a></li>
+                <ul>
+                  <li><a href="#wlan-profile-accordion">WLAN Profile</a></li>
+                  <li><a href="#policy-profile-accordion">Policy Profile</a></li>
+                  <li><a href="#ap-join-profile-accordion">AP Join Profile</a></li>
+                  <li><a href="#flex-profile-accordion">Flex Profile</a></li>
+                  <li><a href="#rf-profile-accordion">RF Profile</a></li>
+                </ul>
+                <li><a href="#icerik-network-topolojisi">Network Topolojisi</a></li>
+                <li><a href="#icerik-konfigurasyon">Konfigürasyon</a></li>
+                <ul>
+                  <li><a href="#icerik-vlanlarin-olusturulmasi">VLAN'ların Oluşturulması</a></li>
+                  <li><a href="#icerik-aaa-konfigurasyonu">AAA Konfigürasyonu (İsteğe Bağlı)</a></li>
+                  <ul>
+                    <li><a href="#icerik-radius-serverin-eklenmesi">RADIUS Server'ın Eklenmesi</a></li>
+                    <li><a href="#icerik-radius-groupun-olusturulmasi">RADIUS Group'un Oluşturulması</a></li>
+                    <li><a href="#icerik-aaa-methodun-olusturulmasi">AAA Method'un Oluşturulması</a></li>
+                  </ul>
+                  <li><a href="#icerik-policy-tag-konfigurasyonu">Policy Tag Konfigürasyonu</a></li>
+                  <ul>
+                    <li><a href="#icerik-wlan-profilein-olusturulmasi">WLAN Profile'ın Oluşturulması</a></li>
+                    <li><a href="#icerik-policy-profilein-olusturulmasi">Policy Profile'ın Oluşturulması</a></li>
+                    <li>
+                      <a href="#icerik-policy-tagin-olusturulmasi"
+                        >Policy Tag'in Oluşturulması (SSID ve Policy Profile'ın Birbirine Bağlanması)</a
+                      >
+                    </li>
+                    <li><a href="#icerik-policy-tagin-access-pointe-atanmasi">Policy Tag'in Access Point'e Atanması</a></li>
                     <ul>
-                        <li>Policy Tag</li>
-                        <li>Site Tag</li>
-                        <li>RF Tag</li>
+                      <li><a href="#icerik-policy-tagin-tek-access-pointe-atanmasi">Policy Tag'in Tek Access Point'e Atanması</a></li>
+                      <li>
+                        <a href="#icerik-policy-tagin-access-pointlere-toplu-atanmasi">Policy Tag'in Access Point'lere Toplu Atanması</a>
+                      </li>
                     </ul>
-                    <p>Access Point konfigürasyonunun görsel şeması:</p>
-                    <figure>
-                        <img src="images/Access-Point-Konfigurasyon-Gorsel-Semasi-light.webp" alt="Access Point Konfigürasyon Görsel Şeması" id="access-point-konfigurasyon-gorsel-semasi"/>
-                    </figure>
-                    <p>Varsayılan olarak Access Point'lere varsayılan tag'ler (default-policy-tag, default-site-tag, default-rf-tag) atanır ve varsayılan tag'lere varsayılan profile'lar (default-policy-profile, default-ap-profile, default-flex-profile, default-rf-profile) atanmıştır.</p>
-                    <h2 id="icerik-policy-tag">Policy Tag</h2>
-                    <p>Policy Tag, WLAN Profile (SSID) ve Policy Profile arasındaki bağlantıdır.</p>
-                    <figure>
-                        <img src="images/Policy-Tag-Konfigurasyon-Gorsel-Semasi-light.webp" alt="Policy Tag Konfigürasyon Görsel Şeması" id="policy-tag-konfigurasyon-gorsel-semasi"/>
-                    </figure>
-                    <h3 id="icerik-wlan-profile">WLAN Profile (SSID)</h3>
-                    <p>WLAN Profile'da SSID'nin yanı sıra WLAN güvenliği (WPA, WPA2, WPA3, AAA), 802.11v ve 802.11k gibi protokollerin ayarlarını yapabilirsiniz.</p>
-                    <h3 id="icerik-policy-profile">Policy Profile</h3>
-                    <p>Bir Policy Profile içinde; VLAN bilgisini, trafiğin merkezi mi (central switching) lokal mi (local switching) olduğunu, Mobility Anchor'ları, QoS (Quality of Services - Hizmet Kalitesi) ayarlarını yapılandırabilirsiniz.</p>
-                    <h2 id="icerik-site-tag">Site Tag</h2>
-                    <p>Site Tag, Access Point'lerin local modda mı yoksa flex modda mı olduğunu tanımlar. Monitor, Sniffer, Clear gibi diğer Access Point modları doğrudan Access Point üzerinde yapılandırılır.</p>
-                    <p>Site Tag, AP Join Profile ve Flex Profile bilgilerini barındırır.</p>
-                    <p><strong>Not: </strong>Site Tag içinde Flex Profile, yalnızca Local Site devre dışı bırakıldığında kullanılabilir.</p>
-                    <figure>
-                        <img src="images/Site-Tag-Konfigurasyon-Gorsel-Semasi-light.webp" alt="Site Tag Konfigürasyon Görsel Şeması" id="site-tag-konfigurasyon-gorsel-semasi"/>
-                    </figure>
-                    <h3 id="icerik-ap-join-profile">AP Join Profile</h3>
-                    <p>AP Join Profile içinde, Access Point'lerin ülke kodu, NTP sunucu adresi, CAPWAP Timer'ları, Backup Primary/Secondary Controller bilgileri, uzaktan erişim (Telnet/SSH) yapılandırması, CDP durumu gibi ayarları yapılandırabilirsiniz.</p>
-                    <h3 id="icerik-flex-profile">Flex Profile</h3>
-                    <p>Flex Profile'da, Native VLAN ID, ARP Caching, VLAN vb. ayarlar bulunur.</p>
-                    <h2 id="icerik-rf-tag">RF Tag</h2>
-                    <p>RF Tag'inin içinde herhangi bir RF Profile'ı seçebilir veya Global RF yapılandırmasını kullanmayı seçebilirsiniz.</p>
-                    <figure>
-                        <img src="images/RF-Tag-Konfigurasyon-Gorsel-Semasi-light.webp" alt="RF Tag Konfigürasyon Görsel Şeması" id="rf-tag-konfigurasyon-gorsel-semasi"/>
-                    </figure>
-                    <h3 id="icerik-24ghz-profile">2.4 GHz Profile</h3>
-                    <p>2.4 GHz bandı için kullanılacak veri hızlarını ve <a href="https://www.cisco.com/c/en/us/td/docs/wireless/controller/technotes/8-3/b_RRM_White_Paper/rrm-concepts.html" target="_blank">Radio Resource Management (RRM)</a> ayarlarını tanımlamanıza olanak tanır.</p>
-                    <h3 id="icerik-5ghz-profile">5 GHz Profile</h3>
-                    <p>5 GHz bandı için kullanılacak veri hızlarını ve <a href="https://www.cisco.com/c/en/us/td/docs/wireless/controller/technotes/8-3/b_RRM_White_Paper/rrm-concepts.html" target="_blank">Radio Resource Management (RRM)</a> ayarlarını tanımlamanıza olanak tanır.</p>
-                    <h3 id="icerik-6ghz-profile">6 GHz Profile</h3>
-                    <p>6 GHz bandı için kullanılacak veri hızlarını ve <a href="https://www.cisco.com/c/en/us/td/docs/wireless/controller/technotes/8-3/b_RRM_White_Paper/rrm-concepts.html" target="_blank">Radio Resource Management (RRM)</a> ayarlarını tanımlamanıza olanak tanır.</p>
-                    <h2 id="icerik-profilelardaki-ayarlarin-listesi">Profile'lardaki Ayarların Listesi</h2>
-                    <p>Bir önceki nesil Wireless Controller ailesi olan <strong>AireOS</strong>'a aşina iseniz, WLAN yapılandırması altında SSID'nin tüm özelliklerini yapılandırabiliyordunuz. Catalyst 9800 serisi Wireless Controller'larda bu ayarlar WLAN Profile ve Policy Profile arasında bölünmüştür. Ayrıca AireOS arayüzündeki Wireless > Global Configuration altında görülen bazı yapılandırmalar AP Join Profile'a taşınmıştır. Burada her profile'ın altında yapılandırabileceğiniz tüm ayarların listesini bulabilirsiniz.</p>
-                    <button class="accordion-wlan-profile"><h3 id="wlan-profile-accordion">+ WLAN Profile</h3></button>
-                    <ul class="panel">
-                        <li>802.11ax Settings per WLAN</li>
-                        <li>802.11k</li>
-                        <li>802.11v (BSS, DMS, TFS, WNM)</li>
-                        <li>Access Control List (ACLs)</li>
-                        <li>Authentication List</li>
-                        <li>Band Select</li>
-                        <li>Broadcast SSID</li>
-                        <li>Cisco Client Extensions (CCX)</li>
-                        <li>Client Association Limit</li>
-                        <li>Coverage Hole Detection (CHD)</li>
-                        <li>Delivery Traffic Indication Map (DTIM)</li>
-                        <li>Diagnostic Channel Capability</li>
-                        <li>Load Balance</li>
-                        <li>Local Authentication Settings</li>
-                        <li>Media Stream Settings</li>
-                        <li>Off Channel Scanning Defer</li>
-                        <li>P2P Blocking</li>
-                        <li>Protected Management Frame (PMF)</li>
-                        <li>Radio Policy</li>
-                        <li>Roamed Voice Clients Re-Anchor</li>
-                        <li>Security Settings (PSK, 802.1x, Web Auth)</li>
-                        <li>Static IP Clients Support</li>
-                        <li>Universal AP</li>
-                        <li>Unscheduled Automatic Power Save Delivery (U-APSD) for WLAN</li>
-                        <li>Wi-Fi Direct</li>
-                        <li>Wi-Fi Multimedia (WMM)</li>
-                        <li>Workgroup Bridge (WGB) Support</li>
+                  </ul>
+                  <li><a href="#icerik-site-tag-konfigurasyonu">Site Tag Konfigürasyonu</a></li>
+                  <ul>
+                    <li><a href="#icerik-ap-join-profilein-olusturulmasi">AP Join Profile'ın Oluşturulması</a></li>
+                    <li>
+                      <a href="#icerik-flex-profilein-olusturulmasi"
+                        >Flex Profile'ın Oluşturulması (İsteğe Bağlı, Access Point'ler Flex Modda ise)</a
+                      >
+                    </li>
+                    <li><a href="#icerik-site-tagin-olusturulmasi">Site Tag'in Oluşturulması</a></li>
+                    <li><a href="#icerik-site-tagin-access-pointe-atanmasi">Site Tag'in Access Point'e Atanması</a></li>
+                    <ul>
+                      <li><a href="#icerik-site-tagin-tek-access-pointe-atanmasi">Site Tag'in Tek Access Point'e Atanması</a></li>
+                      <li><a href="#icerik-site-tagin-access-pointlere-toplu-atanmasi">Site Tag'in Access Point'lere Toplu Atanması</a></li>
                     </ul>
-                    <button class="accordion-policy-profile"><h3 id="policy-profile-accordion">+ Policy Profile</h3></button>
-                    <ul class="panel">
-                        <li>AAA Override</li>
-                        <li>AAA Policy</li>
-                        <li>Accounting List</li>
-                        <li>Auto QoS</li>
-                        <li>Call Snooping</li>
-                        <li>Central/Local Switching</li>
-                        <li>CiscoTrustSec (CTS)</li>
-                        <li>Datalink ACL</li>
-                        <li>Description</li>
-                        <li>DHCP TLV Caching</li>
-                        <li>DNS Layer Security Parameter Map / Umbrella Parameter Map</li>
-                        <li>Fabric Profile</li>
-                        <li>Flex NAT/PAT</li>
-                        <li>Flex Split MAC ACL</li>
-                        <li>Flex VLAN Central Switching</li>
-                        <li>HTTP TLV Caching</li>
-                        <li>Idle Threshold</li>
-                        <li>Idle Timeout</li>
-                        <li>IPv4 DHCP</li>
-                        <li>IPv4/IPv6 ACL</li>
-                        <li>IPv4/IPv6 Flexible Netflow Monitor</li>
-                        <li>Local Subscriber Policy Name</li>
-                        <li>Mobility Anchors</li>
-                        <li>Multicast VLAN</li>
-                        <li>NAC State</li>
-                        <li>NBAR (Network Based Application Recognition) Protocol Discovery</li>
-                        <li>Passive Client</li>
-                        <li>RADIUS Profiling</li>
-                        <li>Reanchor</li>
-                        <li>Security Group ACLs (SGACLs</li>
-                        <li>Service Policy</li>
-                        <li>Session Timeout</li>
-                        <li>SIP-CAC</li>
-                        <li>Static IP Mobility</li>
-                        <li>URL Filters</li>
-                        <li>VLAN</li>
-                        <li>WGB Broadcast Tagging</li>
-                        <li>WGB VLAN</li>
+                  </ul>
+                  <li><a href="#icerik-rf-tag-konfigurasyonu">RF Tag Konfigürasyonu</a></li>
+                  <ul>
+                    <li><a href="#icerik-rf-profilelarin-olusturulmasi">RF Profile'ların Oluşturulması</a></li>
+                    <li><a href="#icerik-rf-tagin-olusturulmasi">RF Tag'in Oluşturulması</a></li>
+                    <li><a href="#icerik-rf-tagin-access-pointe-atanmasi">RF Tag'in Access Point'e Atanması</a></li>
+                    <ul>
+                      <li><a href="#icerik-rf-tagin-tek-access-pointe-atanmasi">RF Tag'in Tek Access Point'e Atanması</a></li>
+                      <li><a href="#icerik-rf-tagin-access-pointlere-toplu-atanmasi">RF Tag'in Access Point'lere Toplu Atanması</a></li>
                     </ul>
-                    <button class="accordion-ap-join-profile"><h3 id="ap-join-profile-accordion">+ AP Join Profile</h3></button>
-                    <ul class="panel">
-                        <li>2.4 GHz / 5 GHz Client Statistics Reporting Interval</li>
-                        <li>802.1x Credentials for APs which act as supplicants</li>
-                        <li>AP Preferred Mode (IPv4/IPv6)</li>
-                        <li>AP Statistics</li>
-                        <li>AP User Management</li>
-                        <li>CAPWAP Backup Primary Controller</li>
-                        <li>CAPWAP Backup Secondary Controller</li>
-                        <li>CAPWAP Fallback</li>
-                        <li>CAPWAP Retransmit Timers</li>
-                        <li>CAPWAP Timers</li>
-                        <li>CAPWAP Window Size</li>
-                        <li>CDP for APs</li>
-                        <li>Core Dump</li>
-                        <li>Country Code</li>
-                        <li>Description</li>
-                        <li>Extended Module Support</li>
-                        <li>Hyperlocation</li>
-                        <li>ICap</li>
-                        <li>Jumbo MTU</li>
-                        <li>LAG Mode</li>
-                        <li>LED State</li>
-                        <li>Link Encryption</li>
-                        <li>Link Latency</li>
-                        <li>Mesh Profile</li>
-                        <li>NTP Server</li>
-                        <li>Packet Capture Profile</li>
-                        <li>Persistent SSID Broadcast</li>
-                        <li>Power over Ethernet (PoE)</li>
-                        <li>Rogue Detection Settings</li>
-                        <li>System Log</li>
-                        <li>TCP MSS Configuration</li>
-                        <li>Telnet/SSH Configuration</li>
-                        <li>TFTP Downgrade</li>
-                        <li>Trace Profile</li>
-                        <li>USB Enable</li>
-                    </ul>
-                    <button class="accordion-flex-profile"><h3 id="flex-profile-accordion">+ Flex Profile</h3></button>
-                    <ul class="panel">
-                        <li>ARP Caching</li>
-                        <li>CTS Policy</li>
-                        <li>Description</li>
-                        <li>Fallback Radio Shut</li>
-                        <li>Flex Resilient</li>
-                        <li>HTTP Proxy IP Address</li>
-                        <li>HTTP Proxy Port</li>
-                        <li>Join Minimum Latency</li>
-                        <li>Local Authentication</li>
-                        <li>Native VLAN ID</li>
-                        <li>OfficeExtend AP mode</li>
-                        <li>Policy ACL</li>
-                        <li>Predownload</li>
-                    </ul>
-                    <button class="accordion-rf-profile"><h3 id="rf-profile-accordion">+ RF Profile</h3></button>
-                    <ul class="panel">
-                        <li>ATF Configuration</li>
-                        <li>Band Select</li>
-                        <li>Client Distribution</li>
-                        <li>Coverage Hole Detection</li>
-                        <li>Description</li>
-                        <li>Dynamic Channel Assignment</li>
-                        <li>High Density Parameters</li>
-                        <li>High Speed Roam</li>
-                        <li>Load Balance Settings</li>
-                        <li>Operational Rates</li>
-                        <li>Profile Thresholds for Traps</li>
-                        <li>RRM (Radio Resource Management)</li>
-                        <li>RSSI Settings</li>
-                        <li>Transmit Power Control</li>
-                    </ul>
-                    <h2 id="icerik-network-topolojisi">Network Topolojisi</h2>
-                    <figure>
-                        <img src="images/Network-Topolojisi-light.webp" alt="Network Topolojisi" id="network-topolojisi"/>
-                    </figure>
-                    <h2 id="icerik-konfigurasyon">Konfigürasyon</h2>
-                    <h3 id="icerik-vlanlarin-olusturulmasi">VLAN'ların Oluşturulması</h3>
-                    <p>Herhangi bir konfigürasyona başlamadan önce wireless istemcilerinin kullanacağı VLAN'ları oluşturmanız gerekir.</p>
-                    <p><strong>Adım 1. </strong>Configuration > Layer2 > VLAN > + Add</p>
-                    <figure>
-                        <img src="images/Configuration-VLAN-light.webp" alt="Configuration VLAN" id="configuration-vlan"/>
-                    </figure>
-                    <p><strong>Adım 2. </strong>Gerekli bilgileri (VLAN ID, Name) girin ve Apply to Device butonuna tıklayın.</p>
-                    <figure>
-                        <img src="images/Create-VLAN-light.webp" alt="Create VLAN" id="create-vlan"/>
-                    </figure>
-                    <p><strong>Not: </strong>Eğer "Name" alanını boş bırakırsanız VLAN ismi "VLANXXXX" olarak atanır; burada XXXX, VLAN ID'dir.</p>
-                    <p>Wireless'ta kullanacağınız tüm VLAN'lar için adım 1 ve adım 2'yi tekrarlayın.</p>
-                    <p><strong>Adım 3:</strong> Oluşturduğunuz VLAN'ların Trunk portun "Allowed Vlan" listesinde olup olmadığını kontrol edin.</p>
-                    <p>Eğer Port Channel kullanıyorsanız, <strong>Configuration > Interface > Logical > Port Channel Name > General</strong>'a gidin. "Allowed Vlan" alanında "All" seçeneğinin işaretli olduğunu görürseniz ekstra bir konfigürasyon yapmanıza gerek yok. "Allowed Vlan" alanında "Vlan IDs" seçeneği işaretli ise, kullandığınız VLAN'ları listeye ekleyin ve "Update & Apply to Device" butonuna tıklayın.</p>
-                    <p>Eğer Port Channel kullanmıyorsanız, <strong>Configuration > Interface > Ethernet > Interface Name > General</strong>'a gidin. "Allowed Vlan" alanında "All" seçeneğinin işaretli olduğunu görürseniz ekstra bir konfigürasyon yapmanıza gerek yok. "Allowed Vlan" alanında "Vlan IDs" seçeneği işaretli ise, kullandığınız VLAN'ları listeye ekleyin ve "Update & Apply to Device" butonuna tıklayın.</p>
-                    <p><strong>Konfigürasyonda değişiklik yapmanıza gerek yok:</strong></p>
-                    <figure>
-                        <img src="images/Trunk-Allowed-Vlan-All-light.webp" alt="Trunk Allowed Vlan: All" id="trunk-allowed-vlan-all"/>
-                    </figure>
-                    <p><strong>Kullandığınız VLAN'ları listeye eklemelisiniz:</strong></p>
-                    <figure>
-                        <img src="images/Trunk-Allowed-Vlan-Vlan-IDs-light.webp" alt="Trunk Allowed Vlan: Vlan IDs" id="trunk-allowed-vlan-vlan-ids"/>
-                    </figure>
-                    <h4>CLI:</h4>
-                    <code>
-<pre>configure terminal
+                  </ul>
+                </ul>
+                <li><a href="#icerik-konfigurasyon-dogrulama">Konfigürasyon Doğrulama</a></li>
+                <ul>
+                  <li><a href="#icerik-vlan-ve-interface-konfigurasyonu-dogrulama">VLAN ve Interface Konfigürasyonu</a></li>
+                  <li><a href="#icerik-aaa-konfigurasyonu-dogrulama">AAA Konfigürasyonu</a></li>
+                  <li><a href="#icerik-wlan-konfigurasyonu-dogrulama">WLAN Konfigürasyonu</a></li>
+                  <li><a href="#icerik-profile-konfigurasyonu-dogrulama">Profile Konfigürasyonu</a></li>
+                  <li><a href="#icerik-tag-konfigurasyonu-dogrulama">Tag Konfigürasyonu</a></li>
+                  <li><a href="#icerik-access-point-konfigurasyonu-dogrulama">Access Point Konfigürasyonu</a></li>
+                </ul>
+                <li><a href="#icerik-sikca-sorulan-sorular">Sıkça Sorulan Sorular</a></li>
+              </ul>
+            </div>
+            <h2 id="icerik-temel-bilgiler">Temel Bilgiler</h2>
+            <p>
+              Catalyst 9800 serisi Wireless Controller'larda <strong>Tag</strong>'ler (etiketler), her Access Point için mevcut olan
+              özellikleri kontrol etmek amacıyla kullanılır. Tag'ler her Access Point'e atanır ve her tag içinde Access Point'e uygulanan
+              tüm ayarları bulabilirsiniz.
+            </p>
+            <p>
+              <u>Profile'lar yani ayarlar, Tag'lerde toplanır; Tag'ler ise Access Point'lere atanır.</u>
+              Böylece o Access Point'in çalışma modu, yayınlayacağı SSID'ler, o SSID'lerin hangi VLAN'larda çalışacağı, SSH ve Telnet'in
+              aktif/pasif edilmesi gibi yapılandırmalar gerçekleştirilmiş olur.
+            </p>
+            <p>Üç tag vardır:</p>
+            <ul>
+              <li>Policy Tag</li>
+              <li>Site Tag</li>
+              <li>RF Tag</li>
+            </ul>
+            <p>Access Point konfigürasyonunun görsel şeması:</p>
+            <figure>
+              <img
+                src="images/Access-Point-Konfigurasyon-Gorsel-Semasi-light.webp"
+                alt="Access Point Konfigürasyon Görsel Şeması"
+                id="access-point-konfigurasyon-gorsel-semasi"
+              />
+            </figure>
+            <p>
+              Varsayılan olarak Access Point'lere varsayılan tag'ler (default-policy-tag, default-site-tag, default-rf-tag) atanır ve
+              varsayılan tag'lere varsayılan profile'lar (default-policy-profile, default-ap-profile, default-flex-profile,
+              default-rf-profile) atanmıştır.
+            </p>
+            <h2 id="icerik-policy-tag">Policy Tag</h2>
+            <p>Policy Tag, WLAN Profile (SSID) ve Policy Profile arasındaki bağlantıdır.</p>
+            <figure>
+              <img
+                src="images/Policy-Tag-Konfigurasyon-Gorsel-Semasi-light.webp"
+                alt="Policy Tag Konfigürasyon Görsel Şeması"
+                id="policy-tag-konfigurasyon-gorsel-semasi"
+              />
+            </figure>
+            <h3 id="icerik-wlan-profile">WLAN Profile (SSID)</h3>
+            <p>
+              WLAN Profile'da SSID'nin yanı sıra WLAN güvenliği (WPA, WPA2, WPA3, AAA), 802.11v ve 802.11k gibi protokollerin ayarlarını
+              yapabilirsiniz.
+            </p>
+            <h3 id="icerik-policy-profile">Policy Profile</h3>
+            <p>
+              Bir Policy Profile içinde; VLAN bilgisini, trafiğin merkezi mi (central switching) lokal mi (local switching) olduğunu,
+              Mobility Anchor'ları, QoS (Quality of Services - Hizmet Kalitesi) ayarlarını yapılandırabilirsiniz.
+            </p>
+            <h2 id="icerik-site-tag">Site Tag</h2>
+            <p>
+              Site Tag, Access Point'lerin local modda mı yoksa flex modda mı olduğunu tanımlar. Monitor, Sniffer, Clear gibi diğer Access
+              Point modları doğrudan Access Point üzerinde yapılandırılır.
+            </p>
+            <p>Site Tag, AP Join Profile ve Flex Profile bilgilerini barındırır.</p>
+            <p><strong>Not: </strong>Site Tag içinde Flex Profile, yalnızca Local Site devre dışı bırakıldığında kullanılabilir.</p>
+            <figure>
+              <img
+                src="images/Site-Tag-Konfigurasyon-Gorsel-Semasi-light.webp"
+                alt="Site Tag Konfigürasyon Görsel Şeması"
+                id="site-tag-konfigurasyon-gorsel-semasi"
+              />
+            </figure>
+            <h3 id="icerik-ap-join-profile">AP Join Profile</h3>
+            <p>
+              AP Join Profile içinde, Access Point'lerin ülke kodu, NTP sunucu adresi, CAPWAP Timer'ları, Backup Primary/Secondary
+              Controller bilgileri, uzaktan erişim (Telnet/SSH) yapılandırması, CDP durumu gibi ayarları yapılandırabilirsiniz.
+            </p>
+            <h3 id="icerik-flex-profile">Flex Profile</h3>
+            <p>Flex Profile'da, Native VLAN ID, ARP Caching, VLAN vb. ayarlar bulunur.</p>
+            <h2 id="icerik-rf-tag">RF Tag</h2>
+            <p>RF Tag'inin içinde herhangi bir RF Profile'ı seçebilir veya Global RF yapılandırmasını kullanmayı seçebilirsiniz.</p>
+            <figure>
+              <img
+                src="images/RF-Tag-Konfigurasyon-Gorsel-Semasi-light.webp"
+                alt="RF Tag Konfigürasyon Görsel Şeması"
+                id="rf-tag-konfigurasyon-gorsel-semasi"
+              />
+            </figure>
+            <h3 id="icerik-24ghz-profile">2.4 GHz Profile</h3>
+            <p>
+              2.4 GHz bandı için kullanılacak veri hızlarını ve
+              <a
+                href="https://www.cisco.com/c/en/us/td/docs/wireless/controller/technotes/8-3/b_RRM_White_Paper/rrm-concepts.html"
+                target="_blank"
+                >Radio Resource Management (RRM)</a
+              >
+              ayarlarını tanımlamanıza olanak tanır.
+            </p>
+            <h3 id="icerik-5ghz-profile">5 GHz Profile</h3>
+            <p>
+              5 GHz bandı için kullanılacak veri hızlarını ve
+              <a
+                href="https://www.cisco.com/c/en/us/td/docs/wireless/controller/technotes/8-3/b_RRM_White_Paper/rrm-concepts.html"
+                target="_blank"
+                >Radio Resource Management (RRM)</a
+              >
+              ayarlarını tanımlamanıza olanak tanır.
+            </p>
+            <h3 id="icerik-6ghz-profile">6 GHz Profile</h3>
+            <p>
+              6 GHz bandı için kullanılacak veri hızlarını ve
+              <a
+                href="https://www.cisco.com/c/en/us/td/docs/wireless/controller/technotes/8-3/b_RRM_White_Paper/rrm-concepts.html"
+                target="_blank"
+                >Radio Resource Management (RRM)</a
+              >
+              ayarlarını tanımlamanıza olanak tanır.
+            </p>
+            <h2 id="icerik-profilelardaki-ayarlarin-listesi">Profile'lardaki Ayarların Listesi</h2>
+            <p>
+              Bir önceki nesil Wireless Controller ailesi olan <strong>AireOS</strong>'a aşina iseniz, WLAN yapılandırması altında SSID'nin
+              tüm özelliklerini yapılandırabiliyordunuz. Catalyst 9800 serisi Wireless Controller'larda bu ayarlar WLAN Profile ve Policy
+              Profile arasında bölünmüştür. Ayrıca AireOS arayüzündeki Wireless > Global Configuration altında görülen bazı yapılandırmalar
+              AP Join Profile'a taşınmıştır. Burada her profile'ın altında yapılandırabileceğiniz tüm ayarların listesini bulabilirsiniz.
+            </p>
+            <button class="accordion-wlan-profile">
+              <h3 id="wlan-profile-accordion">+ WLAN Profile</h3>
+            </button>
+            <ul class="panel">
+              <li>802.11ax Settings per WLAN</li>
+              <li>802.11k</li>
+              <li>802.11v (BSS, DMS, TFS, WNM)</li>
+              <li>Access Control List (ACLs)</li>
+              <li>Authentication List</li>
+              <li>Band Select</li>
+              <li>Broadcast SSID</li>
+              <li>Cisco Client Extensions (CCX)</li>
+              <li>Client Association Limit</li>
+              <li>Coverage Hole Detection (CHD)</li>
+              <li>Delivery Traffic Indication Map (DTIM)</li>
+              <li>Diagnostic Channel Capability</li>
+              <li>Load Balance</li>
+              <li>Local Authentication Settings</li>
+              <li>Media Stream Settings</li>
+              <li>Off Channel Scanning Defer</li>
+              <li>P2P Blocking</li>
+              <li>Protected Management Frame (PMF)</li>
+              <li>Radio Policy</li>
+              <li>Roamed Voice Clients Re-Anchor</li>
+              <li>Security Settings (PSK, 802.1x, Web Auth)</li>
+              <li>Static IP Clients Support</li>
+              <li>Universal AP</li>
+              <li>Unscheduled Automatic Power Save Delivery (U-APSD) for WLAN</li>
+              <li>Wi-Fi Direct</li>
+              <li>Wi-Fi Multimedia (WMM)</li>
+              <li>Workgroup Bridge (WGB) Support</li>
+            </ul>
+            <button class="accordion-policy-profile">
+              <h3 id="policy-profile-accordion">+ Policy Profile</h3>
+            </button>
+            <ul class="panel">
+              <li>AAA Override</li>
+              <li>AAA Policy</li>
+              <li>Accounting List</li>
+              <li>Auto QoS</li>
+              <li>Call Snooping</li>
+              <li>Central/Local Switching</li>
+              <li>CiscoTrustSec (CTS)</li>
+              <li>Datalink ACL</li>
+              <li>Description</li>
+              <li>DHCP TLV Caching</li>
+              <li>DNS Layer Security Parameter Map / Umbrella Parameter Map</li>
+              <li>Fabric Profile</li>
+              <li>Flex NAT/PAT</li>
+              <li>Flex Split MAC ACL</li>
+              <li>Flex VLAN Central Switching</li>
+              <li>HTTP TLV Caching</li>
+              <li>Idle Threshold</li>
+              <li>Idle Timeout</li>
+              <li>IPv4 DHCP</li>
+              <li>IPv4/IPv6 ACL</li>
+              <li>IPv4/IPv6 Flexible Netflow Monitor</li>
+              <li>Local Subscriber Policy Name</li>
+              <li>Mobility Anchors</li>
+              <li>Multicast VLAN</li>
+              <li>NAC State</li>
+              <li>NBAR (Network Based Application Recognition) Protocol Discovery</li>
+              <li>Passive Client</li>
+              <li>RADIUS Profiling</li>
+              <li>Reanchor</li>
+              <li>Security Group ACLs (SGACLs</li>
+              <li>Service Policy</li>
+              <li>Session Timeout</li>
+              <li>SIP-CAC</li>
+              <li>Static IP Mobility</li>
+              <li>URL Filters</li>
+              <li>VLAN</li>
+              <li>WGB Broadcast Tagging</li>
+              <li>WGB VLAN</li>
+            </ul>
+            <button class="accordion-ap-join-profile">
+              <h3 id="ap-join-profile-accordion">+ AP Join Profile</h3>
+            </button>
+            <ul class="panel">
+              <li>2.4 GHz / 5 GHz Client Statistics Reporting Interval</li>
+              <li>802.1x Credentials for APs which act as supplicants</li>
+              <li>AP Preferred Mode (IPv4/IPv6)</li>
+              <li>AP Statistics</li>
+              <li>AP User Management</li>
+              <li>CAPWAP Backup Primary Controller</li>
+              <li>CAPWAP Backup Secondary Controller</li>
+              <li>CAPWAP Fallback</li>
+              <li>CAPWAP Retransmit Timers</li>
+              <li>CAPWAP Timers</li>
+              <li>CAPWAP Window Size</li>
+              <li>CDP for APs</li>
+              <li>Core Dump</li>
+              <li>Country Code</li>
+              <li>Description</li>
+              <li>Extended Module Support</li>
+              <li>Hyperlocation</li>
+              <li>ICap</li>
+              <li>Jumbo MTU</li>
+              <li>LAG Mode</li>
+              <li>LED State</li>
+              <li>Link Encryption</li>
+              <li>Link Latency</li>
+              <li>Mesh Profile</li>
+              <li>NTP Server</li>
+              <li>Packet Capture Profile</li>
+              <li>Persistent SSID Broadcast</li>
+              <li>Power over Ethernet (PoE)</li>
+              <li>Rogue Detection Settings</li>
+              <li>System Log</li>
+              <li>TCP MSS Configuration</li>
+              <li>Telnet/SSH Configuration</li>
+              <li>TFTP Downgrade</li>
+              <li>Trace Profile</li>
+              <li>USB Enable</li>
+            </ul>
+            <button class="accordion-flex-profile">
+              <h3 id="flex-profile-accordion">+ Flex Profile</h3>
+            </button>
+            <ul class="panel">
+              <li>ARP Caching</li>
+              <li>CTS Policy</li>
+              <li>Description</li>
+              <li>Fallback Radio Shut</li>
+              <li>Flex Resilient</li>
+              <li>HTTP Proxy IP Address</li>
+              <li>HTTP Proxy Port</li>
+              <li>Join Minimum Latency</li>
+              <li>Local Authentication</li>
+              <li>Native VLAN ID</li>
+              <li>OfficeExtend AP mode</li>
+              <li>Policy ACL</li>
+              <li>Predownload</li>
+            </ul>
+            <button class="accordion-rf-profile">
+              <h3 id="rf-profile-accordion">+ RF Profile</h3>
+            </button>
+            <ul class="panel">
+              <li>ATF Configuration</li>
+              <li>Band Select</li>
+              <li>Client Distribution</li>
+              <li>Coverage Hole Detection</li>
+              <li>Description</li>
+              <li>Dynamic Channel Assignment</li>
+              <li>High Density Parameters</li>
+              <li>High Speed Roam</li>
+              <li>Load Balance Settings</li>
+              <li>Operational Rates</li>
+              <li>Profile Thresholds for Traps</li>
+              <li>RRM (Radio Resource Management)</li>
+              <li>RSSI Settings</li>
+              <li>Transmit Power Control</li>
+            </ul>
+            <h2 id="icerik-network-topolojisi">Network Topolojisi</h2>
+            <figure>
+              <img src="images/Network-Topolojisi-light.webp" alt="Network Topolojisi" id="network-topolojisi" />
+            </figure>
+            <h2 id="icerik-konfigurasyon">Konfigürasyon</h2>
+            <h3 id="icerik-vlanlarin-olusturulmasi">VLAN'ların Oluşturulması</h3>
+            <p>Herhangi bir konfigürasyona başlamadan önce wireless istemcilerinin kullanacağı VLAN'ları oluşturmanız gerekir.</p>
+            <p><strong>Adım 1. </strong>Configuration > Layer2 > VLAN > + Add</p>
+            <figure>
+              <img src="images/Configuration-VLAN-light.webp" alt="Configuration VLAN" id="configuration-vlan" />
+            </figure>
+            <p><strong>Adım 2. </strong>Gerekli bilgileri (VLAN ID, Name) girin ve Apply to Device butonuna tıklayın.</p>
+            <figure>
+              <img src="images/Create-VLAN-light.webp" alt="Create VLAN" id="create-vlan" />
+            </figure>
+            <p><strong>Not: </strong>Eğer "Name" alanını boş bırakırsanız VLAN ismi "VLANXXXX" olarak atanır; burada XXXX, VLAN ID'dir.</p>
+            <p>Wireless'ta kullanacağınız tüm VLAN'lar için adım 1 ve adım 2'yi tekrarlayın.</p>
+            <p><strong>Adım 3:</strong> Oluşturduğunuz VLAN'ların Trunk portun "Allowed Vlan" listesinde olup olmadığını kontrol edin.</p>
+            <p>
+              Eğer Port Channel kullanıyorsanız, <strong>Configuration > Interface > Logical > Port Channel Name > General</strong>'a gidin.
+              "Allowed Vlan" alanında "All" seçeneğinin işaretli olduğunu görürseniz ekstra bir konfigürasyon yapmanıza gerek yok. "Allowed
+              Vlan" alanında "Vlan IDs" seçeneği işaretli ise, kullandığınız VLAN'ları listeye ekleyin ve "Update & Apply to Device"
+              butonuna tıklayın.
+            </p>
+            <p>
+              Eğer Port Channel kullanmıyorsanız, <strong>Configuration > Interface > Ethernet > Interface Name > General</strong>'a gidin.
+              "Allowed Vlan" alanında "All" seçeneğinin işaretli olduğunu görürseniz ekstra bir konfigürasyon yapmanıza gerek yok. "Allowed
+              Vlan" alanında "Vlan IDs" seçeneği işaretli ise, kullandığınız VLAN'ları listeye ekleyin ve "Update & Apply to Device"
+              butonuna tıklayın.
+            </p>
+            <p><strong>Konfigürasyonda değişiklik yapmanıza gerek yok:</strong></p>
+            <figure>
+              <img src="images/Trunk-Allowed-Vlan-All-light.webp" alt="Trunk Allowed Vlan: All" id="trunk-allowed-vlan-all" />
+            </figure>
+            <p><strong>Kullandığınız VLAN'ları listeye eklemelisiniz:</strong></p>
+            <figure>
+              <img
+                src="images/Trunk-Allowed-Vlan-Vlan-IDs-light.webp"
+                alt="Trunk Allowed Vlan: Vlan IDs"
+                id="trunk-allowed-vlan-vlan-ids"
+              />
+            </figure>
+            <h4>CLI:</h4>
+            <code>
+              <pre>
+configure terminal
 
  vlan 2602
   name Wireless
@@ -350,30 +462,32 @@
   switchport trunk allowed vlan add 2602
   end
 
-write</pre>
-                    </code>
-                    <h3 id="icerik-aaa-konfigurasyonu">AAA Konfigürasyonu (İsteğe Bağlı)</h3>
-                    <p>Tavsiye edilen konfigürasyon akışı:</p>
-                    <ol>
-                        <li>RADIUS Server'ın Eklenmesi</li>
-                        <li>RADIUS Group'un Oluşturulması</li>
-                        <li>AAA Method'un Oluşturulması</li>
-                    </ol>
-                    <h4 id="icerik-radius-serverin-eklenmesi">RADIUS Server'ın Eklenmesi</h4>
-                    <p><strong>Adım 1. </strong>Configuration > Security > AAA > Servers / Groups >  RADIUS > Servers > + Add</p>
-                    <figure>
-                        <img src="images/RADIUS-Servers-light.webp" alt="RADIUS Servers" id="radius-servers"/>
-                    </figure>
-                    <p><strong>Adım 2. </strong>Gerekli bilgileri (Name, Server Address, Key vb.) girin ve Apply to Device butonuna tıklayın.</p>
-                    <figure>
-                        <img src="images/Create-AAA-Radius-Server-light.webp" alt="Create AAA Radius Server" id="create-aaa-radius-server"/>
-                    </figure>
-                    <figure>
-                        <img src="images/Servers-light.webp" alt="Servers" id="servers"/>
-                    </figure>
-                    <h4>CLI:</h4>
-                    <code>
-<pre>configure terminal
+write</pre
+              >
+            </code>
+            <h3 id="icerik-aaa-konfigurasyonu">AAA Konfigürasyonu (İsteğe Bağlı)</h3>
+            <p>Tavsiye edilen konfigürasyon akışı:</p>
+            <ol>
+              <li>RADIUS Server'ın Eklenmesi</li>
+              <li>RADIUS Group'un Oluşturulması</li>
+              <li>AAA Method'un Oluşturulması</li>
+            </ol>
+            <h4 id="icerik-radius-serverin-eklenmesi">RADIUS Server'ın Eklenmesi</h4>
+            <p><strong>Adım 1. </strong>Configuration > Security > AAA > Servers / Groups > RADIUS > Servers > + Add</p>
+            <figure>
+              <img src="images/RADIUS-Servers-light.webp" alt="RADIUS Servers" id="radius-servers" />
+            </figure>
+            <p><strong>Adım 2. </strong>Gerekli bilgileri (Name, Server Address, Key vb.) girin ve Apply to Device butonuna tıklayın.</p>
+            <figure>
+              <img src="images/Create-AAA-Radius-Server-light.webp" alt="Create AAA Radius Server" id="create-aaa-radius-server" />
+            </figure>
+            <figure>
+              <img src="images/Servers-light.webp" alt="Servers" id="servers" />
+            </figure>
+            <h4>CLI:</h4>
+            <code>
+              <pre>
+configure terminal
 
 radius server ISE
  address ipv4 10.26.0.11 auth-port 1812 acct-port 1813
@@ -383,23 +497,32 @@ aaa server radius dynamic-author
  client 10.26.0.11 server-key [server-key]
  end
 
-write</pre>
-                    </code>
-                    <h4 id="icerik-radius-groupun-olusturulmasi">RADIUS Group'un Oluşturulması</h4>
-                    <p><strong>Adım 1. </strong>Configuration > Security > AAA > Servers / Groups >  RADIUS > Server Groups > + Add</p>
-                    <figure>
-                        <img src="images/Server-Groups-light.webp" alt="Server Groups" id="server-groups"/>
-                    </figure>
-                    <p><strong>Adım 2. </strong>Gerekli bilgileri girin ve bir önceki adımda oluşturduğunuz RADIUS Server'ı "Assigned Servers" alanına taşıdığınızdan emin olun.</p>
-                    <figure>
-                        <img src="images/Create-AAA-Radius-Server-Group-light.webp" alt="Create AAA Radius Server Group" id="create-aaa-radius-server-group"/>
-                    </figure>
-                    <figure>
-                        <img src="images/ISE-Group-light.webp" alt="ISE Group" id="ise-group"/>
-                    </figure>
-                    <h4>CLI:</h4>
-                    <code>
-<pre>configure terminal
+write</pre
+              >
+            </code>
+            <h4 id="icerik-radius-groupun-olusturulmasi">RADIUS Group'un Oluşturulması</h4>
+            <p><strong>Adım 1. </strong>Configuration > Security > AAA > Servers / Groups > RADIUS > Server Groups > + Add</p>
+            <figure>
+              <img src="images/Server-Groups-light.webp" alt="Server Groups" id="server-groups" />
+            </figure>
+            <p>
+              <strong>Adım 2. </strong>Gerekli bilgileri girin ve bir önceki adımda oluşturduğunuz RADIUS Server'ı "Assigned Servers"
+              alanına taşıdığınızdan emin olun.
+            </p>
+            <figure>
+              <img
+                src="images/Create-AAA-Radius-Server-Group-light.webp"
+                alt="Create AAA Radius Server Group"
+                id="create-aaa-radius-server-group"
+              />
+            </figure>
+            <figure>
+              <img src="images/ISE-Group-light.webp" alt="ISE Group" id="ise-group" />
+            </figure>
+            <h4>CLI:</h4>
+            <code>
+              <pre>
+configure terminal
 
 aaa group server radius ISE-Group
  server name ISE
@@ -407,81 +530,96 @@ aaa group server radius ISE-Group
  deadtime 5
  end
 
-write</pre>
-                    </code>
-                    <h4 id="icerik-aaa-methodun-olusturulmasi">AAA Method'un Oluşturulması</h4>
-                    <p><strong>Adım 1. </strong>Configuration > Security > AAA > AAA Method List > Authentication > + Add</p>
-                    <figure>
-                        <img src="images/AAA-Method-List-light.webp" alt="AAA Method List" id="aaa-method-list"/>
-                    </figure>
-                    <p><strong>Adım 2: </strong>Gerekli bilgileri (Method List Name, Type, Group Type vb.) girin ve bir önceki adımda oluşturduğunuz Radius Server Group'u "Assigned Server Groups" alanına taşıdığınızdan emin olun.</p>
-                    <figure>
-                        <img src="images/AAA-Authentication-light.webp" alt="AAA Authentication" id="aaa-authentication"/>
-                    </figure>
-                    <p><strong>Type:</strong></p>
-                    <ul>
-                        <li>dot1x: 802.1x</li>
-                        <li>login: WebAuth</li>
-                    </ul>
-                    <p><strong>Group Type:</strong></p>
-                    <ul>
-                        <li>group: External RADIUS Server</li>
-                        <li>local: Local Authentication</li>
-                    </ul>
-                    <p><strong>Adım 3. (İsteğe Bağlı): </strong>Authorization ve Accounting Method List'leri oluşturun.</p>
-                    <h4>CLI:</h4>
-                    <code>
-<pre>configure terminal
+write</pre
+              >
+            </code>
+            <h4 id="icerik-aaa-methodun-olusturulmasi">AAA Method'un Oluşturulması</h4>
+            <p><strong>Adım 1. </strong>Configuration > Security > AAA > AAA Method List > Authentication > + Add</p>
+            <figure>
+              <img src="images/AAA-Method-List-light.webp" alt="AAA Method List" id="aaa-method-list" />
+            </figure>
+            <p>
+              <strong>Adım 2: </strong>Gerekli bilgileri (Method List Name, Type, Group Type vb.) girin ve bir önceki adımda oluşturduğunuz
+              Radius Server Group'u "Assigned Server Groups" alanına taşıdığınızdan emin olun.
+            </p>
+            <figure>
+              <img src="images/AAA-Authentication-light.webp" alt="AAA Authentication" id="aaa-authentication" />
+            </figure>
+            <p><strong>Type:</strong></p>
+            <ul>
+              <li>dot1x: 802.1x</li>
+              <li>login: WebAuth</li>
+            </ul>
+            <p><strong>Group Type:</strong></p>
+            <ul>
+              <li>group: External RADIUS Server</li>
+              <li>local: Local Authentication</li>
+            </ul>
+            <p><strong>Adım 3. (İsteğe Bağlı): </strong>Authorization ve Accounting Method List'leri oluşturun.</p>
+            <h4>CLI:</h4>
+            <code>
+              <pre>
+configure terminal
 
 aaa authentication dot1x auth-method group ISE-Group
 exit
 
-write</pre>
-                    </code>
-                    <h3 id="icerik-policy-tag-konfigurasyonu">Policy Tag Konfigürasyonu</h3>
-                    <p>Tavsiye edilen konfigürasyon akışı:</p>
-                    <ol>
-                        <li>WLAN Profile'ın Oluşturulması</li>
-                        <li>Policy Profile'ın Oluşturulması</li>
-                        <li>Policy Tag'in Oluşturulması (SSID ve Policy Profile'ın Birbirine Bağlanması)</li>
-                        <li>Policy Tag'in Access Point'e Atanması</li>
-                    </ol>
-                    <h4 id="icerik-wlan-profilein-olusturulmasi">WLAN Profile'ın Oluşturulması</h4>
-                    <p><strong>Adım 1: </strong>Configuration > Tags & Profiles > WLANs > + Add</p>
-                    <figure>
-                        <img src="images/WLANs-light.webp" alt="WLANs" id="wlans"/>
-                    </figure>
-                    <p><strong>Adım 2: </strong>Gerekli bilgileri (Profile Name, SSID, Security Type vb.) girin ve Apply to Device butonuna tıklayın.</p>
-                    <figure>
-                        <img src="images/Add-WLAN-light.webp" alt="Add WLAN" id="add-wlan"/>
-                    </figure>
-                    <h4>CLI:</h4>
-                    <code>
-<pre>configure terminal
+write</pre
+              >
+            </code>
+            <h3 id="icerik-policy-tag-konfigurasyonu">Policy Tag Konfigürasyonu</h3>
+            <p>Tavsiye edilen konfigürasyon akışı:</p>
+            <ol>
+              <li>WLAN Profile'ın Oluşturulması</li>
+              <li>Policy Profile'ın Oluşturulması</li>
+              <li>Policy Tag'in Oluşturulması (SSID ve Policy Profile'ın Birbirine Bağlanması)</li>
+              <li>Policy Tag'in Access Point'e Atanması</li>
+            </ol>
+            <h4 id="icerik-wlan-profilein-olusturulmasi">WLAN Profile'ın Oluşturulması</h4>
+            <p><strong>Adım 1: </strong>Configuration > Tags & Profiles > WLANs > + Add</p>
+            <figure>
+              <img src="images/WLANs-light.webp" alt="WLANs" id="wlans" />
+            </figure>
+            <p>
+              <strong>Adım 2: </strong>Gerekli bilgileri (Profile Name, SSID, Security Type vb.) girin ve Apply to Device butonuna tıklayın.
+            </p>
+            <figure>
+              <img src="images/Add-WLAN-light.webp" alt="Add WLAN" id="add-wlan" />
+            </figure>
+            <h4>CLI:</h4>
+            <code>
+              <pre>
+configure terminal
 
 wlan [profile-name] [wlan-id] [ssid]
  --- desired settings ---
  no shutdown
 exit
 
-write</pre>
-                    </code>
-                    <h4 id="icerik-policy-profilein-olusturulmasi">Policy Profile'ın Oluşturulması</h4>
-                    <p><strong>Adım 1: </strong>Configuration > Tags & Profiles > Policy > + Add</p>
-                    <figure>
-                        <img src="images/Policy-Profile-light.webp" alt="Policy Profile" id="policy-profile"/>
-                    </figure>
-                    <p><strong>Adım 2: </strong>Gerekli bilgileri (Name, Description) girin ve Status'u aktif edin.</p>
-                    <figure>
-                        <img src="images/Add-Policy-Profile-General-light.webp" alt="Add Policy Profile General" id="add-policy-profile-general"/>
-                    </figure>
-                    <p><strong>Adım 3: </strong>Access Policies tabındaki VLAN alanını doldurun ve Apply to Device butonuna tıklayın.</p>
-                    <figure>
-                        <img src="images/Add-Policy-Profile-Access-Policies-light.webp" alt="Add Policy Profile Access Policies" id="add-policy-profile-access-policies"/>
-                    </figure>
-                    <h4>CLI:</h4>
-                    <code>
-<pre>configure terminal
+write</pre
+              >
+            </code>
+            <h4 id="icerik-policy-profilein-olusturulmasi">Policy Profile'ın Oluşturulması</h4>
+            <p><strong>Adım 1: </strong>Configuration > Tags & Profiles > Policy > + Add</p>
+            <figure>
+              <img src="images/Policy-Profile-light.webp" alt="Policy Profile" id="policy-profile" />
+            </figure>
+            <p><strong>Adım 2: </strong>Gerekli bilgileri (Name, Description) girin ve Status'u aktif edin.</p>
+            <figure>
+              <img src="images/Add-Policy-Profile-General-light.webp" alt="Add Policy Profile General" id="add-policy-profile-general" />
+            </figure>
+            <p><strong>Adım 3: </strong>Access Policies tabındaki VLAN alanını doldurun ve Apply to Device butonuna tıklayın.</p>
+            <figure>
+              <img
+                src="images/Add-Policy-Profile-Access-Policies-light.webp"
+                alt="Add Policy Profile Access Policies"
+                id="add-policy-profile-access-policies"
+              />
+            </figure>
+            <h4>CLI:</h4>
+            <code>
+              <pre>
+configure terminal
 
 wireless profile policy first-policy-profile
  description "First Policy Profile"
@@ -489,93 +627,121 @@ wireless profile policy first-policy-profile
  no shutdown
  end
 
-write</pre>
-                    </code>
-                    <h4 id="icerik-policy-tagin-olusturulmasi">Policy Tag'in Oluşturulması (SSID ve Policy Profile'ın Birbirine Bağlanması)</h4>
-                    <p>Policy Tag, SSID ile Policy Profile'ın bağlantısını sağlayan bir yapıdır. WLAN'ın hangi VLAN'da çalışacağını belirler.</p>
-                    <p><strong>Adım 1: </strong>Configuration > Tags & Profiles > Tags > Policy > + Add</p>
-                    <figure>
-                        <img src="images/Policy-Tag-light.webp" alt="Policy Tag" id="policy-tag"/>
-                    </figure>
-                    <p><strong>Adım 2: </strong>Gerekli bilgileri (Name, Description) girin ve WLAN-POLICY Maps alanındaki + Add butonuna tıklayarak oluşturduğunuz WLAN Profile ve Policy Profile'ı seçin, öncelikle Apply (✓) butonuna ardından Apply to Device butonuna tıklayın.</p>
-                    <figure>
-                        <img src="images/Add-Policy-Tag-light.webp" alt="Add Policy Tag" id="add-policy-tag"/>
-                    </figure>
-                    <h4>CLI:</h4>
-                    <code>
-<pre>configure terminal
+write</pre
+              >
+            </code>
+            <h4 id="icerik-policy-tagin-olusturulmasi">Policy Tag'in Oluşturulması (SSID ve Policy Profile'ın Birbirine Bağlanması)</h4>
+            <p>Policy Tag, SSID ile Policy Profile'ın bağlantısını sağlayan bir yapıdır. WLAN'ın hangi VLAN'da çalışacağını belirler.</p>
+            <p><strong>Adım 1: </strong>Configuration > Tags & Profiles > Tags > Policy > + Add</p>
+            <figure>
+              <img src="images/Policy-Tag-light.webp" alt="Policy Tag" id="policy-tag" />
+            </figure>
+            <p>
+              <strong>Adım 2: </strong>Gerekli bilgileri (Name, Description) girin ve WLAN-POLICY Maps alanındaki + Add butonuna tıklayarak
+              oluşturduğunuz WLAN Profile ve Policy Profile'ı seçin, öncelikle Apply (✓) butonuna ardından Apply to Device butonuna
+              tıklayın.
+            </p>
+            <figure>
+              <img src="images/Add-Policy-Tag-light.webp" alt="Add Policy Tag" id="add-policy-tag" />
+            </figure>
+            <h4>CLI:</h4>
+            <code>
+              <pre>
+configure terminal
 
 wireless tag policy first-policy-tag
  description "First Policy Tag"
  wlan first-wlan-profile policy first-policy-profile
  end
 
-write</pre>
-                    </code>
-                    <h4 id="icerik-policy-tagin-access-pointe-atanmasi">Policy Tag'in Access Point'e Atanması</h4>
-                    <p>Policy Tag'i direkt bir Access Point'e veya birden çok Access Point'e toplu olarak atayabilirsiniz.</p>
-                    <h4 id="icerik-policy-tagin-tek-access-pointe-atanmasi">Policy Tag'in Tek Access Point'e Atanması</h4>
-                    <p><strong>Adım 1: </strong>Configuration > Wireless > Access Points > AP-Name</p>
-                    <figure>
-                        <img src="images/Access-Points-light.webp" alt="Access Points" id="access-points-policy"/>
-                    </figure>
-                    <p><strong>Adım 2: </strong>General > Tags > Policy alanında oluşturduğunuz Policy Tag'i seçin ve Update & Apply to Device butonuna tıklayın.</p>
-                    <figure>
-                        <img src="images/Edit-AP-Policy-light.webp" alt="Edit AP" id="edit-ap"/>
-                    </figure>
-                    <p><strong>Not: </strong>Access Point'teki Policy Tag'i değiştirmeniz durumunda Access Point ile Wireless Controller arasındaki bağlantı yaklaşık 1 dakikalığına düşecektir, ardından Access Point Wireless Controller'a tekrar Join olur.</p>
-                    <h4>CLI:</h4>
-                    <code>
-<pre>configure terminal
+write</pre
+              >
+            </code>
+            <h4 id="icerik-policy-tagin-access-pointe-atanmasi">Policy Tag'in Access Point'e Atanması</h4>
+            <p>Policy Tag'i direkt bir Access Point'e veya birden çok Access Point'e toplu olarak atayabilirsiniz.</p>
+            <h4 id="icerik-policy-tagin-tek-access-pointe-atanmasi">Policy Tag'in Tek Access Point'e Atanması</h4>
+            <p><strong>Adım 1: </strong>Configuration > Wireless > Access Points > AP-Name</p>
+            <figure>
+              <img src="images/Access-Points-light.webp" alt="Access Points" id="access-points-policy" />
+            </figure>
+            <p>
+              <strong>Adım 2: </strong>General > Tags > Policy alanında oluşturduğunuz Policy Tag'i seçin ve Update & Apply to Device
+              butonuna tıklayın.
+            </p>
+            <figure>
+              <img src="images/Edit-AP-Policy-light.webp" alt="Edit AP" id="edit-ap" />
+            </figure>
+            <p>
+              <strong>Not: </strong>Access Point'teki Policy Tag'i değiştirmeniz durumunda Access Point ile Wireless Controller arasındaki
+              bağlantı yaklaşık 1 dakikalığına düşecektir, ardından Access Point Wireless Controller'a tekrar Join olur.
+            </p>
+            <h4>CLI:</h4>
+            <code>
+              <pre>
+configure terminal
 
 ap [ethernet-mac-addr]
  policy-tag first-policy-tag
  end
 
-write</pre>
-                    </code>
-                    <h4 id="icerik-policy-tagin-access-pointlere-toplu-atanmasi">Policy Tag'in Access Point'lere Toplu Atanması</h4>
-                    <p><strong>Adım 1: </strong>Configuration > Wireless Setup > Advanced > Start Now > Tag APs</p>
-                    <figure>
-                        <img src="images/Advanced-Wireless-Setup-light.webp" alt="Advanced Wireless Setup Policy Tag" id="advanced-wireless-setup-policy-tag"/>
-                    </figure>
-                    <p><strong>Adım 2: </strong>Policy Tag'i atayacağınız tüm Access Point'leri seçip + Tag APs butonuna tıklayın.</p>
-                    <figure>
-                        <img src="images/Tag-APs-Policy-Tag-light.webp" alt="Tag APs" id="tag-aps-policy-tag"/>
-                    </figure>
-                    <p><strong>Adım 3: </strong>Access Point'lere atamak istediğiniz Policy Tag'i seçin ve Apply to Device butonuna tıklayın.</p>
-                    <figure>
-                        <img src="images/Tag-APs-Policy-light.webp" alt="Tag APs Policy" id="tag-aps-policy"/>
-                    </figure>
-                    <p>Policy Tag konfigürasyonu bitti, sırada Site Tag konfigürasyonu var.</p>
-                    <h3 id="icerik-site-tag-konfigurasyonu">Site Tag Konfigürasyonu</h3>
-                    <p>Tavsiye edilen konfigürasyon akışı:</p>
-                    <ol>
-                        <li>AP Join Profile'ın Oluşturulması</li>
-                        <li>Flex Profile'ın Oluşturulması (İsteğe Bağlı, Access Point'ler Flex Modda ise)</li>
-                        <li>Site Tag'in Oluşturulması</li>
-                        <li>Site Tag'in Access Point'e Atanması</li>
-                    </ol>
-                    <h4 id="icerik-ap-join-profilein-olusturulmasi">AP Join Profile'ın Oluşturulması</h4>
-                    <p><strong>Adım 1: </strong>Configuration > Tags & Profiles > AP Join > + Add</p>
-                    <figure>
-                        <img src="images/AP-Join-light.webp" alt="AP Join" id="ap-join"/>
-                    </figure>
-                    <p><strong>Adım 2: </strong>Gerekli bilgileri (Name, Country Code, NTP Server vb.) girin.</p>
-                    <figure>
-                        <img src="images/Add-AP-Join-Profile-General-light.webp" alt="Add AP Join Profile" id="add-ap-join-profile"/>
-                    </figure>
-                    <p><strong>Adım 3 (İsteğe Bağlı): </strong>Access Point'lere SSH ile erişmek için AP Join Profile'da SSH'ı aktif edin.</p>
-                    <figure>
-                        <img src="images/Add-AP-Join-Profile-Management-Device-light.webp" alt="Add AP Join Profile Management Device" id="add-ap-join-profile-management-device"/>
-                    </figure>
-                    <p><strong>Adım 4 (İsteğe Bağlı): </strong>SSH bağlantısında kullanacağınız Username ve Password'ü belirleyin.</p>
-                    <figure>
-                        <img src="images/Add-AP-Join-Profile-Management-User-light.webp" alt="Add AP Join Profile Management User" id="add-ap-join-profile-management-user"/>
-                    </figure>
-                    <h4>CLI:</h4>
-                    <code>
-<pre>configure terminal
+write</pre
+              >
+            </code>
+            <h4 id="icerik-policy-tagin-access-pointlere-toplu-atanmasi">Policy Tag'in Access Point'lere Toplu Atanması</h4>
+            <p><strong>Adım 1: </strong>Configuration > Wireless Setup > Advanced > Start Now > Tag APs</p>
+            <figure>
+              <img
+                src="images/Advanced-Wireless-Setup-light.webp"
+                alt="Advanced Wireless Setup Policy Tag"
+                id="advanced-wireless-setup-policy-tag"
+              />
+            </figure>
+            <p><strong>Adım 2: </strong>Policy Tag'i atayacağınız tüm Access Point'leri seçip + Tag APs butonuna tıklayın.</p>
+            <figure>
+              <img src="images/Tag-APs-Policy-Tag-light.webp" alt="Tag APs" id="tag-aps-policy-tag" />
+            </figure>
+            <p><strong>Adım 3: </strong>Access Point'lere atamak istediğiniz Policy Tag'i seçin ve Apply to Device butonuna tıklayın.</p>
+            <figure>
+              <img src="images/Tag-APs-Policy-light.webp" alt="Tag APs Policy" id="tag-aps-policy" />
+            </figure>
+            <p>Policy Tag konfigürasyonu bitti, sırada Site Tag konfigürasyonu var.</p>
+            <h3 id="icerik-site-tag-konfigurasyonu">Site Tag Konfigürasyonu</h3>
+            <p>Tavsiye edilen konfigürasyon akışı:</p>
+            <ol>
+              <li>AP Join Profile'ın Oluşturulması</li>
+              <li>Flex Profile'ın Oluşturulması (İsteğe Bağlı, Access Point'ler Flex Modda ise)</li>
+              <li>Site Tag'in Oluşturulması</li>
+              <li>Site Tag'in Access Point'e Atanması</li>
+            </ol>
+            <h4 id="icerik-ap-join-profilein-olusturulmasi">AP Join Profile'ın Oluşturulması</h4>
+            <p><strong>Adım 1: </strong>Configuration > Tags & Profiles > AP Join > + Add</p>
+            <figure>
+              <img src="images/AP-Join-light.webp" alt="AP Join" id="ap-join" />
+            </figure>
+            <p><strong>Adım 2: </strong>Gerekli bilgileri (Name, Country Code, NTP Server vb.) girin.</p>
+            <figure>
+              <img src="images/Add-AP-Join-Profile-General-light.webp" alt="Add AP Join Profile" id="add-ap-join-profile" />
+            </figure>
+            <p><strong>Adım 3 (İsteğe Bağlı): </strong>Access Point'lere SSH ile erişmek için AP Join Profile'da SSH'ı aktif edin.</p>
+            <figure>
+              <img
+                src="images/Add-AP-Join-Profile-Management-Device-light.webp"
+                alt="Add AP Join Profile Management Device"
+                id="add-ap-join-profile-management-device"
+              />
+            </figure>
+            <p><strong>Adım 4 (İsteğe Bağlı): </strong>SSH bağlantısında kullanacağınız Username ve Password'ü belirleyin.</p>
+            <figure>
+              <img
+                src="images/Add-AP-Join-Profile-Management-User-light.webp"
+                alt="Add AP Join Profile Management User"
+                id="add-ap-join-profile-management-user"
+              />
+            </figure>
+            <h4>CLI:</h4>
+            <code>
+              <pre>
+configure terminal
 
 ap profile first-ap-join-profile
  description "First AP Join Profile"
@@ -586,132 +752,173 @@ ap profile first-ap-join-profile
  timezone use-controller
  end
 
-write</pre>
-                    </code>
-                    <h4 id="icerik-flex-profilein-olusturulmasi">Flex Profile'ın Oluşturulması (İsteğe Bağlı, Access Point'ler Flex Modda ise)</h4>
-                    <p><strong>Adım 1: </strong>Configuration > Tags & Profiles > Flex > + Add</p>
-                    <figure>
-                        <img src="images/Flex-Profile-light.webp" alt="Flex Profile" id="flex-profile"/>
-                    </figure>
-                    <p><strong>Adım 2: </strong>Gerekli bilgileri (Name, Description, Native VLAN ID vb.) girin ve Apply to Device butonuna tıklayın.</p>
-                    <figure>
-                        <img src="images/Add-Flex-Profile-light.webp" alt="Add Flex Profile" id="add-flex-profile"/>
-                    </figure>
-                    <h4>CLI:</h4>
-                    <code>
-<pre>configure terminal
+write</pre
+              >
+            </code>
+            <h4 id="icerik-flex-profilein-olusturulmasi">Flex Profile'ın Oluşturulması (İsteğe Bağlı, Access Point'ler Flex Modda ise)</h4>
+            <p><strong>Adım 1: </strong>Configuration > Tags & Profiles > Flex > + Add</p>
+            <figure>
+              <img src="images/Flex-Profile-light.webp" alt="Flex Profile" id="flex-profile" />
+            </figure>
+            <p>
+              <strong>Adım 2: </strong>Gerekli bilgileri (Name, Description, Native VLAN ID vb.) girin ve Apply to Device butonuna tıklayın.
+            </p>
+            <figure>
+              <img src="images/Add-Flex-Profile-light.webp" alt="Add Flex Profile" id="add-flex-profile" />
+            </figure>
+            <h4>CLI:</h4>
+            <code>
+              <pre>
+configure terminal
 
 wireless profile flex first-flex-profile
  description "First Flex Profile"
  native-vlan-id 2601
  end
 
-write</pre>
-                    </code>
-                    <h4 id="icerik-site-tagin-olusturulmasi">Site Tag'in Oluşturulması</h4>
-                    <p>Site Tag, AP Join Profile ile AP Flex Profile'ı içinde barındıran bir yapıdır.</p>
-                    <p><strong>Adım 1: </strong>Configuration > Tags & Profiles > Tags > Site > + Add</p>
-                    <figure>
-                        <img src="images/Site-Tag-light.webp" alt="Site Tag" id="site-tag"/>
-                    </figure>
-                    <p><strong>Adım 2: </strong>Gerekli bilgileri (Name, Description) girin. Oluşturduğunuz AP Join Profile ve Flex Profile'ı seçin, Apply to Device butonuna tıklayın.</p>
-                    <p><strong>Not: </strong>Site Tag içinde Flex Profile, yalnızca Local Site devre dışı bırakıldığında kullanılabilir.</p>
-                    <p><strong>Enable Local Site seçeneği aktif, dolayısıyla Flex Profile inaktif; bu Site Tag'deki Access Point'ler Local Modda çalışacaktır:</strong></p>
-                    <figure>
-                        <img src="images/Add-Site-Tag-Local-light.webp" alt="Site Tag Local" id="site-tag-local"/>
-                    </figure>
-                    <p><strong>Enable Local Site seçeneği inaktif, dolayısıyla Flex Profile aktif; bu Site Tag'deki Access Point'ler Flex Modda çalışacaktır:</strong></p>
-                    <figure>
-                        <img src="images/Add-Site-Tag-Flex-light.webp" alt="Site Tag Flex" id="site-tag-flex"/>
-                    </figure>
-                    <h4>CLI:</h4>
-                    <code>
-<pre>configure terminal
+write</pre
+              >
+            </code>
+            <h4 id="icerik-site-tagin-olusturulmasi">Site Tag'in Oluşturulması</h4>
+            <p>Site Tag, AP Join Profile ile AP Flex Profile'ı içinde barındıran bir yapıdır.</p>
+            <p><strong>Adım 1: </strong>Configuration > Tags & Profiles > Tags > Site > + Add</p>
+            <figure>
+              <img src="images/Site-Tag-light.webp" alt="Site Tag" id="site-tag" />
+            </figure>
+            <p>
+              <strong>Adım 2: </strong>Gerekli bilgileri (Name, Description) girin. Oluşturduğunuz AP Join Profile ve Flex Profile'ı seçin,
+              Apply to Device butonuna tıklayın.
+            </p>
+            <p><strong>Not: </strong>Site Tag içinde Flex Profile, yalnızca Local Site devre dışı bırakıldığında kullanılabilir.</p>
+            <p>
+              <strong
+                >Enable Local Site seçeneği aktif, dolayısıyla Flex Profile inaktif; bu Site Tag'deki Access Point'ler Local Modda
+                çalışacaktır:</strong
+              >
+            </p>
+            <figure>
+              <img src="images/Add-Site-Tag-Local-light.webp" alt="Site Tag Local" id="site-tag-local" />
+            </figure>
+            <p>
+              <strong
+                >Enable Local Site seçeneği inaktif, dolayısıyla Flex Profile aktif; bu Site Tag'deki Access Point'ler Flex Modda
+                çalışacaktır:</strong
+              >
+            </p>
+            <figure>
+              <img src="images/Add-Site-Tag-Flex-light.webp" alt="Site Tag Flex" id="site-tag-flex" />
+            </figure>
+            <h4>CLI:</h4>
+            <code>
+              <pre>
+configure terminal
 
 wireless tag site first-site-tag
  ap-profile first-ap-join-profile
  description "First Site Tag"
  end
 
-write</pre>
-                    </code>
-                    <h4 id="icerik-site-tagin-access-pointe-atanmasi">Site Tag'in Access Point'e Atanması</h4>
-                    <p>Site Tag'i direkt bir Access Point'e veya birden çok Access Point'e toplu olarak atayabilirsiniz.</p>
-                    <h4 id="icerik-site-tagin-tek-access-pointe-atanmasi">Site Tag'in Tek Access Point'e Atanması</h4>
-                    <p><strong>Adım 1: </strong>Configuration > Wireless > Access Points > AP-Name</p>
-                    <figure>
-                        <img src="images/Access-Points-light.webp" alt="Access Points" id="access-points-site"/>
-                    </figure>
-                    <p><strong>Adım 2: </strong>General > Tags > Site alanında oluşturduğunuz Site Tag'i seçin ve Update & Apply to Device butonuna tıklayın.</p>
-                    <figure>
-                        <img src="images/Edit-AP-Site-light.webp" alt="Edit AP Site" id="edit-ap-site"/>
-                    </figure>
-                    <p><strong>Not: </strong>Access Point'teki Site Tag'i değiştirmeniz durumunda Access Point ile Wireless Controller arasındaki bağlantı yaklaşık 1 dakikalığına düşecektir, ardından Access Point Wireless Controller'a tekrar Join olur.</p>
-                    <h4>CLI:</h4>
-                    <code>
-<pre>configure terminal
+write</pre
+              >
+            </code>
+            <h4 id="icerik-site-tagin-access-pointe-atanmasi">Site Tag'in Access Point'e Atanması</h4>
+            <p>Site Tag'i direkt bir Access Point'e veya birden çok Access Point'e toplu olarak atayabilirsiniz.</p>
+            <h4 id="icerik-site-tagin-tek-access-pointe-atanmasi">Site Tag'in Tek Access Point'e Atanması</h4>
+            <p><strong>Adım 1: </strong>Configuration > Wireless > Access Points > AP-Name</p>
+            <figure>
+              <img src="images/Access-Points-light.webp" alt="Access Points" id="access-points-site" />
+            </figure>
+            <p>
+              <strong>Adım 2: </strong>General > Tags > Site alanında oluşturduğunuz Site Tag'i seçin ve Update & Apply to Device butonuna
+              tıklayın.
+            </p>
+            <figure>
+              <img src="images/Edit-AP-Site-light.webp" alt="Edit AP Site" id="edit-ap-site" />
+            </figure>
+            <p>
+              <strong>Not: </strong>Access Point'teki Site Tag'i değiştirmeniz durumunda Access Point ile Wireless Controller arasındaki
+              bağlantı yaklaşık 1 dakikalığına düşecektir, ardından Access Point Wireless Controller'a tekrar Join olur.
+            </p>
+            <h4>CLI:</h4>
+            <code>
+              <pre>
+configure terminal
 
 ap [ethernet-mac-addr]
  site-tag first-site-tag
  end
 
-write</pre>
-                    </code>
-                    <h4 id="icerik-site-tagin-access-pointlere-toplu-atanmasi">Site Tag'in Access Point'lere Toplu Atanması</h4>
-                    <p><strong>Adım 1: </strong>Configuration > Wireless Setup > Advanced > Start Now > Tag APs</p>
-                    <figure>
-                        <img src="images/Advanced-Wireless-Setup-light.webp" alt="Advanced Wireless Setup Site Tag" id="advanced-wireless-setup-site-tag"/>
-                    </figure>
-                    <p><strong>Adım 2: </strong>Site Tag'i atayacağınız tüm Access Point'leri seçip + Tag APs butonuna tıklayın.</p>
-                    <figure>
-                        <img src="images/Tag-APs-Site-Tag-light.webp" alt="Tag APs Site Tag" id="tag-aps-site-tag"/>
-                    </figure>
-                    <p><strong>Adım 3: </strong>Access Point'lere atamak istediğiniz Site Tag'i seçin ve Apply to Device butonuna tıklayın.</p>
-                    <figure>
-                        <img src="images/Tag-APs-Site-light.webp" alt="Tag APs Site" id="tag-aps-site"/>
-                    </figure>
-                    <p>Site Tag konfigürasyonu bitti, sırada RF Tag konfigürasyonu var.</p>
-                    <h3 id="icerik-rf-tag-konfigurasyonu">RF Tag Konfigürasyonu</h3>
-                    <p>Tavsiye edilen konfigürasyon akışı:</p>
-                    <ol>
-                        <li>2.4 GHz, 5 GHz ve 6 GHz RF Profile'ların Oluşturulması</li>
-                        <li>RF Tag'in Oluşturulması</li>
-                        <li>RF Tag'in Access Point'e Atanması</li>
-                    </ol>
-                    <h4 id="icerik-rf-profilelarin-olusturulmasi">RF Profile'ların Oluşturulması</h4>
-                    <p><strong>Adım 1: </strong>Configuration > Tags & Profiles > RF/Radio > RF > + Add</p>
-                    <figure>
-                        <img src="images/RF-light.webp" alt="RF" id="rf"/>
-                    </figure>
-                    <p><strong>Adım 2: </strong>Gerekli bilgileri (Name, Radio Band, Description vb.) girin. 802.11 ve RRM ayarlarınızı ihtiyaca göre düzenleyebilirsiniz ardından Apply to Device butonuna tıklayın.</p>
-                    <figure>
-                        <img src="images/Add-RF-Profile-light.webp" alt="Add RF Profile" id="add-rf-profile"/>
-                    </figure>
-                    <p><strong>Adım 3: </strong>5 GHz ve 6 GHz için de RF Profile oluşturun.</p>
-                    <h4>CLI:</h4>
-                    <code>
-<pre>configure terminal
+write</pre
+              >
+            </code>
+            <h4 id="icerik-site-tagin-access-pointlere-toplu-atanmasi">Site Tag'in Access Point'lere Toplu Atanması</h4>
+            <p><strong>Adım 1: </strong>Configuration > Wireless Setup > Advanced > Start Now > Tag APs</p>
+            <figure>
+              <img
+                src="images/Advanced-Wireless-Setup-light.webp"
+                alt="Advanced Wireless Setup Site Tag"
+                id="advanced-wireless-setup-site-tag"
+              />
+            </figure>
+            <p><strong>Adım 2: </strong>Site Tag'i atayacağınız tüm Access Point'leri seçip + Tag APs butonuna tıklayın.</p>
+            <figure>
+              <img src="images/Tag-APs-Site-Tag-light.webp" alt="Tag APs Site Tag" id="tag-aps-site-tag" />
+            </figure>
+            <p><strong>Adım 3: </strong>Access Point'lere atamak istediğiniz Site Tag'i seçin ve Apply to Device butonuna tıklayın.</p>
+            <figure>
+              <img src="images/Tag-APs-Site-light.webp" alt="Tag APs Site" id="tag-aps-site" />
+            </figure>
+            <p>Site Tag konfigürasyonu bitti, sırada RF Tag konfigürasyonu var.</p>
+            <h3 id="icerik-rf-tag-konfigurasyonu">RF Tag Konfigürasyonu</h3>
+            <p>Tavsiye edilen konfigürasyon akışı:</p>
+            <ol>
+              <li>2.4 GHz, 5 GHz ve 6 GHz RF Profile'ların Oluşturulması</li>
+              <li>RF Tag'in Oluşturulması</li>
+              <li>RF Tag'in Access Point'e Atanması</li>
+            </ol>
+            <h4 id="icerik-rf-profilelarin-olusturulmasi">RF Profile'ların Oluşturulması</h4>
+            <p><strong>Adım 1: </strong>Configuration > Tags & Profiles > RF/Radio > RF > + Add</p>
+            <figure>
+              <img src="images/RF-light.webp" alt="RF" id="rf" />
+            </figure>
+            <p>
+              <strong>Adım 2: </strong>Gerekli bilgileri (Name, Radio Band, Description vb.) girin. 802.11 ve RRM ayarlarınızı ihtiyaca göre
+              düzenleyebilirsiniz ardından Apply to Device butonuna tıklayın.
+            </p>
+            <figure>
+              <img src="images/Add-RF-Profile-light.webp" alt="Add RF Profile" id="add-rf-profile" />
+            </figure>
+            <p><strong>Adım 3: </strong>5 GHz ve 6 GHz için de RF Profile oluşturun.</p>
+            <h4>CLI:</h4>
+            <code>
+              <pre>
+configure terminal
 
 ap dot11 24ghz rf-profile first-24ghz-rf-profile
  description "First 2.4 GHz RF Profile"
  --- desired settings ---
  end
 
-write</pre>
-                    </code>
-                    <h4 id="icerik-rf-tagin-olusturulmasi">RF Tag'in Oluşturulması</h4>
-                    <p>RF Tag, tüm RF Profile'ları içinde barındıran bir yapıdır.</p>
-                    <p><strong>Adım 1: </strong>Configuration > Tags & Profiles > Tags > RF > + Add</p>
-                    <figure>
-                        <img src="images/RF-Tags-light.webp" alt="RF Tags" id="rf-tags"/>
-                    </figure>
-                    <p><strong>Adım 2: </strong>Gerekli bilgileri (Name, Description) girin ve oluşturduğunuz RF Profile'ları seçip Apply to Device butonuna tıklayın.</p>
-                    <figure>
-                        <img src="images/Add-RF-Tag-light.webp" alt="Add RF Tag" id="add-rf-tag"/>
-                    </figure>
-                    <h4>CLI:</h4>
-                    <code>
-<pre>configure terminal
+write</pre
+              >
+            </code>
+            <h4 id="icerik-rf-tagin-olusturulmasi">RF Tag'in Oluşturulması</h4>
+            <p>RF Tag, tüm RF Profile'ları içinde barındıran bir yapıdır.</p>
+            <p><strong>Adım 1: </strong>Configuration > Tags & Profiles > Tags > RF > + Add</p>
+            <figure>
+              <img src="images/RF-Tags-light.webp" alt="RF Tags" id="rf-tags" />
+            </figure>
+            <p>
+              <strong>Adım 2: </strong>Gerekli bilgileri (Name, Description) girin ve oluşturduğunuz RF Profile'ları seçip Apply to Device
+              butonuna tıklayın.
+            </p>
+            <figure>
+              <img src="images/Add-RF-Tag-light.webp" alt="Add RF Tag" id="add-rf-tag" />
+            </figure>
+            <h4>CLI:</h4>
+            <code>
+              <pre>
+configure terminal
 
 wireless tag rf first-rf-tag
  24ghz-rf-policy first-24ghz-rf-profile
@@ -720,97 +927,180 @@ wireless tag rf first-rf-tag
  description "First RF Tag"
  end
 
-write</pre>
-                    </code>
-                    <h4 id="icerik-rf-tagin-access-pointe-atanmasi">RF Tag'in Access Point'e Atanması</h4>
-                    <p>RF Tag'i direkt bir Access Point'e veya birden çok Access Point'e toplu olarak atayabilirsiniz.</p>
-                    <h4 id="icerik-rf-tagin-tek-access-pointe-atanmasi">RF Tag'in Tek Access Point'e Atanması</h4>
-                    <p><strong>Adım 1: </strong>Configuration > Wireless > Access Points > AP-Name</p>
-                    <figure>
-                        <img src="images/Access-Points-light.webp" alt="Access Points" id="access-points-rf"/>
-                    </figure>
-                    <p><strong>Adım 2: </strong>General > Tags > RF alanında oluşturduğunuz RF Tag'i seçin ve Update & Apply to Device butonuna tıklayın.</p>
-                    <figure>
-                        <img src="images/Edit-AP-RF-light.webp" alt="Edit AP RF" id="edit-ap-rf"/>
-                    </figure>
-                    <p><strong>Not: </strong>Access Point'teki RF Tag'i değiştirmeniz durumunda Access Point ile Wireless Controller arasındaki bağlantı yaklaşık 1 dakikalığına düşecektir, ardından Access Point Wireless Controller'a tekrar Join olur.</p>
-                    <h4>CLI:</h4>
-                    <code>
-<pre>configure terminal
+write</pre
+              >
+            </code>
+            <h4 id="icerik-rf-tagin-access-pointe-atanmasi">RF Tag'in Access Point'e Atanması</h4>
+            <p>RF Tag'i direkt bir Access Point'e veya birden çok Access Point'e toplu olarak atayabilirsiniz.</p>
+            <h4 id="icerik-rf-tagin-tek-access-pointe-atanmasi">RF Tag'in Tek Access Point'e Atanması</h4>
+            <p><strong>Adım 1: </strong>Configuration > Wireless > Access Points > AP-Name</p>
+            <figure>
+              <img src="images/Access-Points-light.webp" alt="Access Points" id="access-points-rf" />
+            </figure>
+            <p>
+              <strong>Adım 2: </strong>General > Tags > RF alanında oluşturduğunuz RF Tag'i seçin ve Update & Apply to Device butonuna
+              tıklayın.
+            </p>
+            <figure>
+              <img src="images/Edit-AP-RF-light.webp" alt="Edit AP RF" id="edit-ap-rf" />
+            </figure>
+            <p>
+              <strong>Not: </strong>Access Point'teki RF Tag'i değiştirmeniz durumunda Access Point ile Wireless Controller arasındaki
+              bağlantı yaklaşık 1 dakikalığına düşecektir, ardından Access Point Wireless Controller'a tekrar Join olur.
+            </p>
+            <h4>CLI:</h4>
+            <code>
+              <pre>
+configure terminal
 
 ap [ethernet-mac-addr]
  rf-tag first-rf-tag
  end
 
-write</pre>
-                    </code>
-                    <h4 id="icerik-rf-tagin-access-pointlere-toplu-atanmasi">RF Tag'in Access Point'lere Toplu Atanması</h4>
-                    <p><strong>Adım 1: </strong>Configuration > Wireless Setup > Advanced > Start Now > Tag APs</p>
-                    <figure>
-                        <img src="images/Advanced-Wireless-Setup-light.webp" alt="Advanced Wireless Setup RF Tag" id="edit-wireless-setup-rf-tag"/>
-                    </figure>
-                    <p><strong>Adım 2: </strong>RF Tag'i atayacağınız tüm Access Point'leri seçip + Tag APs butonuna tıklayın.</p>
-                    <figure>
-                        <img src="images/Tag-APs-RF-Tag-light.webp" alt="Tag APs RF Tag" id="tag-aps-rf-tag"/>
-                    </figure>
-                    <p><strong>Adım 3: </strong>Access Point'lere atamak istediğiniz RF Tag'i seçin ve Apply to Device butonuna tıklayın.</p>
-                    <figure>
-                        <img src="images/Tag-APs-RF-light.webp" alt="Tag APs RF" id="tag-aps-rf"/>
-                    </figure>
-                    <p>Tüm profile ve tag konfigürasyonları bitti.</p>
-                    <h2 id="icerik-konfigurasyon-dogrulama">Konfigürasyon Doğrulama</h2>
-                    <p>Aşağıdaki komutları kullanarak konfigürasyonunuzu kontrol edebilirsiniz.</p>
-                    <h3 id="icerik-vlan-ve-interface-konfigurasyonu-dogrulama">VLAN ve Interface Konfigürasyonu</h3>
-                    <code>
-<pre>show vlan brief
+write</pre
+              >
+            </code>
+            <h4 id="icerik-rf-tagin-access-pointlere-toplu-atanmasi">RF Tag'in Access Point'lere Toplu Atanması</h4>
+            <p><strong>Adım 1: </strong>Configuration > Wireless Setup > Advanced > Start Now > Tag APs</p>
+            <figure>
+              <img src="images/Advanced-Wireless-Setup-light.webp" alt="Advanced Wireless Setup RF Tag" id="edit-wireless-setup-rf-tag" />
+            </figure>
+            <p><strong>Adım 2: </strong>RF Tag'i atayacağınız tüm Access Point'leri seçip + Tag APs butonuna tıklayın.</p>
+            <figure>
+              <img src="images/Tag-APs-RF-Tag-light.webp" alt="Tag APs RF Tag" id="tag-aps-rf-tag" />
+            </figure>
+            <p><strong>Adım 3: </strong>Access Point'lere atamak istediğiniz RF Tag'i seçin ve Apply to Device butonuna tıklayın.</p>
+            <figure>
+              <img src="images/Tag-APs-RF-light.webp" alt="Tag APs RF" id="tag-aps-rf" />
+            </figure>
+            <p>Tüm profile ve tag konfigürasyonları bitti.</p>
+            <h2 id="icerik-konfigurasyon-dogrulama">Konfigürasyon Doğrulama</h2>
+            <p>Aşağıdaki komutları kullanarak konfigürasyonunuzu kontrol edebilirsiniz.</p>
+            <h3 id="icerik-vlan-ve-interface-konfigurasyonu-dogrulama">VLAN ve Interface Konfigürasyonu</h3>
+            <code>
+              <pre>
+show vlan brief
 show interfaces trunk
-show running-config interface [interface-id]</pre>
-                    </code>
-                    <h3 id="icerik-aaa-konfigurasyonu-dogrulama">AAA Konfigürasyonu</h3>
-                    <code>
-<pre>show running-config aaa
-show aaa servers</pre>
-                    </code>
-                    <h3 id="icerik-wlan-konfigurasyonu-dogrulama">WLAN Konfigürasyonu</h3>
-                    <code>
-<pre>show wlan summary
+show running-config interface [interface-id]</pre
+              >
+            </code>
+            <h3 id="icerik-aaa-konfigurasyonu-dogrulama">AAA Konfigürasyonu</h3>
+            <code>
+              <pre>
+show running-config aaa
+show aaa servers</pre
+              >
+            </code>
+            <h3 id="icerik-wlan-konfigurasyonu-dogrulama">WLAN Konfigürasyonu</h3>
+            <code>
+              <pre>
+show wlan summary
 show running-config wlan [wlan-profile-name]
-show wlan { id [wlan-id] | name [wlan-profile-name] | all }</pre>
-                    </code>
-                    <h3 id="icerik-profile-konfigurasyonu-dogrulama">Profile Konfigürasyonu</h3>
-                    <code>
-<pre>show wireless profile { flex | policy } summary
+show wlan { id [wlan-id] | name [wlan-profile-name] | all }</pre
+              >
+            </code>
+            <h3 id="icerik-profile-konfigurasyonu-dogrulama">Profile Konfigürasyonu</h3>
+            <code>
+              <pre>
+show wireless profile { flex | policy } summary
 show wireless profile { flex | policy } detailed [profile-name]
-show ap profile name [ap-join-profile-name] detailed</pre>
-                    </code>
-                    <h3 id="icerik-tag-konfigurasyonu-dogrulama">Tag Konfigürasyonu</h3>
-                    <code>
-<pre>show wireless tag { policy | site | rf } summary
-show wireless tag { policy | site | rf } detailed [tag-name]</pre>
-                    </code>
-                    <h3 id="icerik-access-point-konfigurasyonu-dogrulama">Access Point Konfigürasyonu</h3>
-                    <code>
-<pre>show ap summary
+show ap profile name [ap-join-profile-name] detailed</pre
+              >
+            </code>
+            <h3 id="icerik-tag-konfigurasyonu-dogrulama">Tag Konfigürasyonu</h3>
+            <code>
+              <pre>
+show wireless tag { policy | site | rf } summary
+show wireless tag { policy | site | rf } detailed [tag-name]</pre
+              >
+            </code>
+            <h3 id="icerik-access-point-konfigurasyonu-dogrulama">Access Point Konfigürasyonu</h3>
+            <code>
+              <pre>
+show ap summary
 show ap tag summary
-show ap name [ap-name] tag { info | detail }</pre>
-                    </code>
-                    <h2 id="icerik-sikca-sorulan-sorular">Sıkça Sorulan Sorular</h2>
-                    <p><strong>Soru 1. </strong>Aynı Policy Profile'ı farklı WLAN Profile'larla kullanabilir miyim?<br><strong>Cevap: </strong>Evet</p>
-                    <p><strong>Soru 2. </strong>Aynı WLAN Profile'ı farklı Policy Tag'lerde kullanabilir miyim?<br><strong>Cevap: </strong>Evet</p>
-                    <p><strong>Soru 3. </strong>Aynı Policy Profile'ı farklı Policy Tag'lerde kullanabilir miyim?<br><strong>Cevap: </strong>Evet</p>
-                    <p><strong>Soru 4. </strong>Bir Policy Tag'de kullnanılabilecek maksimum WLAN Profile sayısı kaçtır?<br><strong>Cevap: </strong>16</p>
-                    <p><strong>Soru 5. </strong>Bir Access Point'teki üç tag'i de değiştirmek zorunda mıyım?<br><strong>Cevap: </strong>Hayır, sadece ihtiyacınız olan tag'leri güncelleyip diğerlerini Default Tag'lerde bırakabilirsiniz.</p>
-                    <p><strong>Kaynak: </strong><a href="https://www.cisco.com/c/en/us/support/docs/wireless/catalyst-9800-series-wireless-controllers/213911-understand-catalyst-9800-wireless-contro.html" target="_blank">Understand Catalyst 9800 Wireless Controllers Configuration Model</a></p>
-                </article>
-            </main>
-            <footer>
-                <hr>
-                <h2>Atlas Borap, CCIE #67754</h2>
-                <p>ccie [🐴] atlasborap [🫥] com</p>
-                <p>❤️</p>
-            </footer>
-        </div>
+show ap name [ap-name] tag { info | detail }</pre
+              >
+            </code>
+            <h2 id="icerik-sikca-sorulan-sorular">Sıkça Sorulan Sorular</h2>
+            <p>
+              <strong>Soru 1. </strong>Aynı Policy Profile'ı farklı WLAN Profile'larla kullanabilir miyim?<br /><strong>Cevap: </strong>Evet
+            </p>
+            <p>
+              <strong>Soru 2. </strong>Aynı WLAN Profile'ı farklı Policy Tag'lerde kullanabilir miyim?<br /><strong>Cevap: </strong>Evet
+            </p>
+            <p>
+              <strong>Soru 3. </strong>Aynı Policy Profile'ı farklı Policy Tag'lerde kullanabilir miyim?<br /><strong>Cevap: </strong>Evet
+            </p>
+            <p>
+              <strong>Soru 4. </strong>Bir Policy Tag'de kullnanılabilecek maksimum WLAN Profile sayısı kaçtır?<br /><strong>Cevap: </strong
+              >16
+            </p>
+            <p>
+              <strong>Soru 5. </strong>Bir Access Point'teki üç tag'i de değiştirmek zorunda mıyım?<br /><strong>Cevap: </strong>Hayır,
+              sadece ihtiyacınız olan tag'leri güncelleyip diğerlerini Default Tag'lerde bırakabilirsiniz.
+            </p>
+            <p>
+              <strong>Kaynak: </strong
+              ><a
+                href="https://www.cisco.com/c/en/us/support/docs/wireless/catalyst-9800-series-wireless-controllers/213911-understand-catalyst-9800-wireless-contro.html"
+                target="_blank"
+                >Understand Catalyst 9800 Wireless Controllers Configuration Model</a
+              >
+            </p>
+          </article>
+        </main>
+        <footer>
+          <hr />
+          <h2>Atlas Borap, CCIE #67754</h2>
+          <p>ccie [🐴] atlasborap [🫥] com</p>
+          <p>❤️</p>
+        </footer>
+      </div>
     </div>
-    <script defer src="../assets/darkmode-cisco-catalyst-9800-wireless-controller-konfigurasyon-modeli.js"></script>
-</body>
+    <script>
+      const button = document.getElementById("dark-mode-toggle");
+
+      const enableDarkMode = () => {
+        document.body.classList.add("darkmode");
+        document.getElementById("changeicon").src = "../assets/light-mode.svg";
+
+        const images = document.getElementsByTagName("img");
+
+        for (let index = 0; index < images.length; index++) {
+          const element = images.item(index);
+
+          element.src = element.src.replace("-light", "-dark");
+        }
+
+        localStorage.setItem("darkMode", "enabled");
+      };
+
+      const disableDarkMode = () => {
+        document.body.classList.remove("darkmode");
+        document.getElementById("changeicon").src = "../assets/dark-mode.svg";
+
+        const images = document.getElementsByTagName("img");
+
+        for (let index = 0; index < images.length; index++) {
+          const element = images.item(index);
+
+          element.src = element.src.replace("-dark", "-light");
+        }
+
+        localStorage.setItem("darkMode", null);
+      };
+
+      button.onclick = () => {
+        let darkMode = localStorage.getItem("darkMode");
+        darkMode = localStorage.getItem("darkMode");
+
+        if (darkMode !== "enabled") {
+          enableDarkMode();
+        } else {
+          disableDarkMode();
+        }
+      };
+    </script>
+  </body>
 </html>
