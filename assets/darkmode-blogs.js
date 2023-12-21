@@ -45,14 +45,4 @@ button.onclick = () => {
 
 if (darkMode === 'enabled') {
   enableDarkMode();
-}
-
-darkModeToggle.addEventListener('click', () => {
-  darkMode = localStorage.getItem('darkMode');
-
-  if (darkMode !== 'enabled') {
-    enableDarkMode();
-  } else {
-    disableDarkMode();
-  }
-});
+};
