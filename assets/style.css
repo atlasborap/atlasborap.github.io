@@ -184,7 +184,8 @@ p.tarih {
 
 article a {
     color: var(--heading);
-    text-decoration: none;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
 }
 
 article a:hover {
