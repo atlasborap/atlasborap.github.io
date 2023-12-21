@@ -4,7 +4,7 @@ const button = document.getElementById("dark-mode-toggle");
 
 const enableDarkMode = () => {
   document.body.classList.add("darkmode");
-  document.getElementById("changeicon").src = "assets/light-mode.svg";
+  document.getElementById("changeicon").src = "../assets/light-mode.svg";
 
   const images = document.getElementsByTagName("img");
 
@@ -19,7 +19,7 @@ const enableDarkMode = () => {
 
 const disableDarkMode = () => {
   document.body.classList.remove("darkmode");
-  document.getElementById("changeicon").src = "assets/dark-mode.svg";
+  document.getElementById("changeicon").src = "../assets/dark-mode.svg";
 
   const images = document.getElementsByTagName("img");
 

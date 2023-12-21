@@ -93,7 +93,10 @@ body {
     }
 }
 
-header, main, article, footer {
+header,
+main,
+article,
+footer {
     width: 100%;
     color: var(--heading);
 }
@@ -150,11 +153,16 @@ hr {
     opacity: 0.7;
 }
 
-h1, h2 {
+h1,
+h2 {
     font-weight: 600;
 }
 
-h3, h4, h5, h6, p {
+h3,
+h4,
+h5,
+h6,
+p {
     font-weight: 400;
 }
 
@@ -250,7 +258,8 @@ tbody tr:nth-child(odd) {
     background-color: var(--muted1);
 }
 
-ol, ul {
+ol,
+ul {
     color: var(--text);
 }
 
@@ -258,14 +267,21 @@ li {
     line-height: 1.75em;
 }
 
-button.accordion-icerik, button.accordion-wlan-profile, button.accordion-policy-profile, button.accordion-ap-join-profile, button.accordion-flex-profile, button.accordion-rf-profile {
-    display: block;
-    border: 0;
-    padding: 0;
-    background-color: transparent;
-    color: var(--heading);
-    cursor: pointer;
-    line-height: 0;
+button.accordion-icerik-cisco-catalyst-9800-wireless-controller-konfigurasyon-modeli,
+button.accordion-wlan-profile-cisco-catalyst-9800-wireless-controller-konfigurasyon-modeli,
+button.accordion-policy-profile-cisco-catalyst-9800-wireless-controller-konfigurasyon-modeli,
+button.accordion-ap-join-profile-cisco-catalyst-9800-wireless-controller-konfigurasyon-modeli,
+button.accordion-flex-profile-cisco-catalyst-9800-wireless-controller-konfigurasyon-modeli,
+button.accordion-rf-profile-cisco-catalyst-9800-wireless-controller-konfigurasyon-modeli,
+button.accordion-icerik-cisco-access-point-modlari-flex-ve-sniffer-konfigurasyonu
+{
+display: block;
+border: 0;
+padding: 0;
+background-color: transparent;
+color: var(--heading);
+cursor: pointer;
+line-height: 0;
 }
 
 ul {
