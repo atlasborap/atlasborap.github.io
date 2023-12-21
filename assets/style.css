@@ -16,7 +16,6 @@
     --secondary-accent: #51515f;
     --critical: #dc2626;
     --critical-accent: #991b1b;
-    --link: #dddde7;
 }
 
 .darkmode {
@@ -35,7 +34,6 @@
     --secondary-accent: #303650;
     --critical: #dc2626;
     --critical-accent: #991b1b;
-    --link: #323855;
 }
 
 * {
@@ -186,8 +184,6 @@ p.tarih {
 
 article a {
     color: var(--heading);
-    background-color: var(--link);
-    padding: 0 2px;
     text-decoration: none;
 }
 
