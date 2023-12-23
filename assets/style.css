@@ -215,6 +215,11 @@ article.anasayfa a:hover {
     margin-bottom: 50px;
 }
 
+.anasayfa:last-of-type {
+    margin-top: 35px;
+    margin-bottom: 0px;
+}
+
 .anasayfa {
     margin-top: 50px;
     margin-bottom: 50px;
