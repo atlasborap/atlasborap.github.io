@@ -210,6 +210,11 @@ article.anasayfa a:hover {
     text-decoration-thickness: 1px;
 }
 
+.anasayfa:first-of-type {
+    margin-top: 35px;
+    margin-bottom: 50px;
+}
+
 .anasayfa {
     margin-top: 50px;
     margin-bottom: 50px;
