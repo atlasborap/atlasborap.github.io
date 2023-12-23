@@ -176,10 +176,16 @@ p {
     text-wrap: pretty;
 }
 
-p.tarih {
+p.tarih-anasayfa {
     font-size: 0.83em;
     line-height: 1em;
     margin-bottom: 6px;
+}
+
+p.tarih {
+    font-size: 0.83em;
+    line-height: 1em;
+    margin-bottom: 21px;
 }
 
 article a {
