@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cisco Access Point'ler, Wireless Controller'ı nasıl keşfeder ve nasıl join olurlar?">
+    <meta property="og:locale" content="tr_TR">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Cisco Access Point'lerin Wireless Controller'a Join Süreci - Atlas Borap, CCIE #67754">
+    <meta property="og:description" content="Cisco Access Point'ler, Wireless Controller'ı nasıl keşfeder ve nasıl join olurlar?">
+    <meta property="og:url" content="https://atlasborap.com/cisco-access-pointlerin-wireless-controllera-join-sureci/">
+    <meta property="og:site_name" content="Atlas Borap, CCIE #67754">
+    <meta property="article:section" content="Wireless">
+    <meta property="og:image" content="https://atlasborap.com/cisco-access-pointlerin-wireless-controllera-join-sureci/og-cisco-access-pointlerin-wireless-controllera-join-sureci.webp">
+    <link rel="stylesheet" href="../assets/normalize.css">
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="icon" href="../assets/favicon.ico">
+    <link rel="apple-touch-icon" href="../assets/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="../assets/favicon.ico">
+    <link rel="shortcut icon" href="../assets/favicon.ico">
+    <title>Cisco Access Point'lerin Wireless Controller'a Join Süreci - Atlas Borap, CCIE #67754</title>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <header>
+                <div class="atlasborap">
+                    <a href="../"><h2>Atlas Borap, CCIE #67754</h2></a>
+                </div>
+                <div class="darkmodebutton">
+                    <button id="dark-mode-toggle" class="dark-mode-toggle">
+                        <img src="../assets/dark-mode.svg" alt="Dark Mode" id="changeicon">
+                    </button>
+                </div>
+            </header>
+            <main>
+                <hr>
+                <article>
+                    <h1>Cisco Access Point'lerin Wireless Controller'a Join Süreci</h1>
+                    <p class="tarih">15 Ocak 2024 · 4 dakika okuma</p>
+                    <div class="icerik">
+                        <button class="accordion-icerik-cisco-access-pointlerin-wireless-controllera-join-sureci"><h2 id="icerik-accordion-cisco-access-pointlerin-wireless-controllera-join-sureci">+ İçerik</h2></button>
+                        <ul class="panel">
+                            <li><a href="#icerik-capwap-oturumunun-olusturulmasi">CAPWAP Oturumunun Oluşturulması</a></li>
+                            <li><a href="#icerik-dtls-oturumunun-olusturulmasi">DTLS Oturumunun Oluşturulması</a></li>
+                            <li><a href="#icerik-wireless-lan-controller-kesif-yontemleri">Wireless LAN Controller Keşif Yöntemleri</a></li>
+                            <li><a href="#icerik-wireless-lan-controller-secimi">Wireless LAN Controller Seçimi</a></li>
+                            <li><a href="#icerik-capwap-durumlari">CAPWAP Durumları</a></li>
+                            <ul>
+                                <li><a href="#icerik-capwap-state-discovery">CAPWAP Durumu: Discovery</a></li>
+                                <li><a href="#icerik-capwap-state-dtls-setup">CAPWAP Durumu: DTLS Setup</a></li>
+                                <li><a href="#icerik-capwap-state-join">CAPWAP Durumu: Join</a></li>
+                                <li><a href="#icerik-capwap-state-image-data">CAPWAP Durumu: Image Data</a></li>
+                                <li><a href="#icerik-capwap-state-configure">CAPWAP Durumu: Configure</a></li>
+                                <li><a href="#icerik-capwap-state-run">CAPWAP Durumu: Run</a></li>
+                            </ul>
+                            <li><a href="#icerik-konfigurasyon">Konfigürasyon</a></li>
+                            <ul>
+                                <li><a href="#icerik-statik-wlc-tanimlamasi">Statik WLC Tanımlaması</a></li>
+                                <li><a href="#icerik-sshin-aktif-edilmesi">SSH'ın Aktif Edilmesi</a></li>
+                                <li><a href="#icerik-data-link-encryption">Data Link Encryption</a></li>
+                            </ul>
+                            <li><a href="#icerik-dogrulama">Doğrulama</a></li>
+                            <li><a href="#icerik-sorun-giderme">Sorun Giderme</a></li>
+                            <ul>
+                                <li><a href="#icerik-wlc-arayuzunden-yapilacak-kontroller">WLC Arayüzünden Yapılacak Kontroller</a></li>
+                                <li><a href="#icerik-sorun-giderme-komutlari">Sorun Giderme Komutları</a></li>
+                                <ul>
+                                    <li><a href="#icerik-wireless-controllerda-kullanilan-komutlar">Wireless Controller'da Kullanılan Komutlar</a></li>
+                                    <li><a href="#icerik-wave-2-ve-catalyst-11ax-access-pointlerde-kullanilan-komutlar">Wave 2 ve Catalyst 11ax Access Point'lerde Kullanılan Komutlar</a></li>
+                                    <li><a href="#icerik-wave-1-access-pointlerde-kullanilan-komutlar">Wave 1 Access Point'lerde Kullanılan Komutlar</a></li>
+                                </ul>
+                            </ul>
+                        </ul>
+                        </div>
+                    <h2 id="icerik-capwap-oturumunun-olusturulmasi">CAPWAP Oturumunun Oluşturulması</h2>
+                    <p><strong>CAPWAP (Control And Provisioning Wireless Access Point)</strong>; Access Point'ler ve Wireless Controller arasında, <u>güvenli bir tünel üzerinden iletişimi sağlayan bir protokoldür.</u></p>
+                    <p>Cisco Access Point'lerin Wireless Controller'a Join Sürecini ayrıntılı olarak anlayabilmek için CAPWAP Oturumunun Oluşturulması Sürecini kavramanız önemlidir.</p>
+                    <p>CAPWAP sürecini başlatabilmek için Access Point'in bir IP adresine sahip olması gerektiğini lütfen unutmayın. Access Point'in IP adresi yoksa <strong>CAPWAP Oturum Oluşturma Sürecini</strong> başlatamaz.</p>
+                    <p>Bir Access Point'in CAPWAP Oturum Oluşturma Süreci şu adımlarla gerçekleşir:</p>
+                    <p>
+                        <ol>
+                            <li><strong>Access Point</strong>, <strong>Discovery Request (Keşif İsteği)</strong> gönderir. Bu konuda daha fazla bilgi için <a href="#icerik-wireless-lan-controller-kesif-yontemleri">Wireless LAN Controller Keşif Yöntemleri</a> bölümüne bakın.</li>
+                            <li><strong>Wireless Controller</strong>, <strong>Discovery Response (Keşif Yanıtı)</strong> gönderir.</li>
+                            <li><strong>DTLS Oturumunun Oluşturulması.</strong> Bundan sonraki tüm paketler şifrelenir ve herhangi bir paket analiz aracında (Wireshark, tcpdump vb.) <strong>DTLS Application Data</strong> Paketleri olarak gösterilir.</li>
+                            <li><strong>Access Point</strong>, <strong>Join Request (Katılma İsteği)</strong> gönderir.</li>
+                            <li><strong>Wireless Controller</strong>, <strong>Join Response (Katılma Yanıtı)</strong> gönderir.</li>
+                            <li><strong>Access Point</strong>, <strong>imaj kontrolü (image check)</strong> gerçekleştirir. Wireless Controller ile aynı versiyon yazılıma sahipse bir sonraki adıma geçer. Aksi taktirde imajı Wireless Controller'dan indirir ve yeni imajı yüklemek için yeniden başlatılır. Böyle bir durumda 1. adımdan itibaren işlemleri tekrarlar.</li>
+                            <li><strong>Access Point</strong>, <strong>Configuration Status Request (Yapılandırma Durumu İsteği)</strong> gönderir.</li>
+                            <li><strong>Wireless Controller</strong>, <strong>Configuration Status Response (Yapılandırma Durumu Yanıtı)</strong> gönderir.</li>
+                            <li><strong>Access Point</strong>, <strong>RUN</strong> durumuna geçer.</li>
+                            <li><strong>RUN</strong> durumu sırasında <strong>CAPWAP Tunnel Maintenance (CAPWAP Tünel Bakımı)</strong> iki şekilde gerçekleştirilir:</li>
+                            <ol>
+                                <li><strong>Keepalive</strong>'lar <strong>CAPWAP Data Tunnel</strong>'ı korumak için değiştirilir.</li>
+                                <li><strong>Access Point</strong>, <strong>Wireless Controller</strong>'a <strong>Echo Response</strong> ile yanıtlanması gereken bir <strong>Echo Request</strong> gönderir. Bunun amacı, <strong>CAPWAP Control Tunnel</strong>'ı korumaktır.</li>
+                            </ol>
+                        </ol>
+                </p>
+                    <figure>
+                        <img src="images/CAPWAP-Session-Establishment-Process-light.webp" alt="CAPWAP Session Establishment Process" id="capwap-session-establishment-process">
+                    </figure>
+                    <p><strong>Not: </strong>RFC 5415 uyarınca CAPWAP, UDP 5246 (CAPWAP Control için) ve UDP 5247 (CAPWAP Data için) portlarını kullanır.</p>
+                    <h2 id="icerik-dtls-oturumunun-olusturulmasi">DTLS Oturumunun Oluşturulması</h2>
+                    <p>Access Point, Wireless Controller'dan geçerli bir Discovery Response (Keşif Yanıtı) aldığında, <u>sonraki tüm paketleri güvenli bir tünel üzerinden iletmek için aralarında bir DTLS Tunnel kurulur</u>. DTLS Oturumunu kurma işlemi şu şekildedir:</p>
+                    <p>
+                        <ol>
+                            <li><strong>Access Point</strong>, <strong>Client Hello (İstemci Merhaba)</strong> mesajı gönderir.</li>
+                            <li><strong>Wireless Controller</strong>, doğrulama için <strong>Hello Verify Request (Merhaba Doğrulama İsteği)</strong> gönderir.</li>
+                            <li><strong>Access Point</strong>, doğrulama için tekrar <strong>Client Hello (İstemci Merhaba)</strong> mesajı gönderir.</li>
+                            <li><strong>Wireless Controller</strong>, şu paketleri sırayla gönderir:</li>
+                            <ol>
+                                <li><strong>Server Hello (Sunucu Merhaba)</strong></li>
+                                <li><strong>Certificate (Sertifika)</strong></li>
+                                <li><strong>Server Key Exchange (Sunucu Anahtar Değişimi)</strong></li>
+                                <li><strong>Certificate Request (Sertifika İsteği)</strong></li>
+                                <li><strong>Server Hello Done (Sunucu Merhaba Tamamlandı)</strong></li>
+                            </ol>
+                            <li><strong>Access Point</strong>, şu paketleri sırayla gönderir:</li>
+                            <ol>
+                                <li><strong>Certificate (Sertifika)</strong></li>
+                                <li><strong>Client Key Exchange (İstemci Anahtar Değişimi)</strong></li>
+                                <li><strong>Certificate Verify (Sertifika Doğrulama)</strong></li>
+                                <li><strong>Change Cipher Spec (Şifre Spesifikasyonunu Değiştir)</strong></li>
+                            </ol>
+                            <li><strong>Wireless Controller</strong>, <strong>Access Point</strong>'in <strong>Change Cipher Spec (Şifre Spesifikasyonunu Değiştir)</strong> mesajına kendi <strong>Change Cipher Spec (Şifre Spesifikasyonunu Değiştir)</strong> mesajıyla yanıt verir.</li>
+                            <ol>
+                                <li><strong>Change Cipher Spec (Şifre Spesifikasyonunu Değiştir)</strong></li>
+                            </ol>
+                        </ol>
+                    </p>
+                    <p><strong>Wireless Controller</strong> tarafından gönderilen son <strong>Change Cipher Spec (Şifre Spesifikasyonunu Değiştir)</strong> mesajının ardından <u>güvenli tünel kurulur ve her iki yönde gönderilen tüm trafik şifrelenir</u>.</p>
+                    <h2 id="icerik-wireless-lan-controller-kesif-yontemleri">Wireless LAN Controller Keşif Yöntemleri</h2>
+                    <p>Access Point'lerin, ağdaki Wireless Controller'ı keşfetmeleri için çeşitli seçenekler vardır:</p>
+                    <p>
+                        <ul>
+                            <li class="secenek"><strong>DHCP Option 43: </strong>Access Point'ler, DHCP sunucusundan IP ile birlikte Option 43 bilgisini de alırlar. <u>Option 43, Access Point'lere Wireless Controller'ın IPv4 bilgisini sağlar.</u> Wireless Controller'ın IPv4 bilgisini alan Access Point, bu IP'ye <strong>Discovery Request (Keşif İsteği)</strong> gönderir ve CAPWAP Oturumunun Oluşturulmasına başlanmış olur. Bu yöntem, farklı lokasyonlarda çalışan Access Point'lerin olduğu büyük dağıtımlar için uygundur.</li>
+                            <li class="secenek"><strong>DHCP Option 52: </strong>Access Point'ler, DHCP sunucusundan IP ile birlikte Option 52 bilgisini de alırlar. <u>Option 52, Access Point'lere Wireless Controller'ın IPv6 bilgisini sağlar.</u> Wireless Controller'ın IPv6 bilgisini alan Access Point, bu IP'ye <strong>Discovery Request (Keşif İsteği)</strong> gönderir ve CAPWAP Oturumunun Oluşturulmasına başlanmış olur. Option 43 ile aynı senaryoda kullanım için uygundur.</li>
+                            <li class="secenek"><strong>DNS Discovery: </strong>Access Point'ler, <strong>CISCO-CAPWAP-CONTROLLER.localdomain</strong> DNS kaydını sorgular. Bu sorguya cevap olarak alacakları IPv4 veya IPv6 adreslerine <strong>Discovery Request (Keşif İsteği)</strong> gönderirler. Dolayısıyla DNS sunucunuzda bu kaydı <u>Wireless Controller'ın Wireless Interface IP adresini (Access Point'lerin Join isteği gönderdikleri IP)</u> gösterecek şekilde oluşturmanız gerekmektedir. Bu yöntem, Access Point'lerin Wireless Controller ile aynı lokasyonda olduğu dağıtımlar için uygundur.</li>
+                            <li class="secenek"><strong>Layer 3 Broadcast: </strong>Access Point'ler, otomatik olarak 255.255.255.255 broadcast adresine <strong>Discovery Request (Keşif İsteği)</strong> gönderirler; Access Point ile aynı subnet'te olan bir Wireless Controller'ın <strong>Discovery Response (Keşif Yanıtı)</strong> vermesi beklenir. Bu yöntem, Access Point'ler ile Wireless Controller'ın aynı subnet'te olduğu senaryolar için uygundur.</li>
+                            <li class="secenek"><strong>Statik Konfigürasyon: </strong>Access Point'e console veya SSH bağlantısı yapıp <code>capwap ap primary-base [wlc-hostname] [wlc-IP-address]</code> komutuyla statik giriş yapabilirsiniz.</li>
+                            <li class="secenek"><strong>Mobility Discovery: </strong>Access Point; daha önce bir Mobility Group'a üye Wireless Controller'a Join olmuşsa, bu Access Point aynı zamanda bu Mobility Group'taki diğer Wireless Controller'ların da bir kaydını bulundurur.</li>
+                        </ul>
+                    </p>
+                    <p><strong>Not: </strong>Listelenen Wireless Controller keşif yöntemlerinin herhangi bir öncelik sırası yoktur.</p>
+                    <h2 id="icerik-wireless-lan-controller-secimi">Wireless LAN Controller Seçimi</h2>
+                    <p>Access Point, Wireless LAN Controller keşif yöntemlerinden herhangi birini kullanarak bir WLC'den <strong>Discovery Response (Keşif Yanıtı)</strong> aldığında aşağıdaki kriterlere göre join olacağı Wireless Controller'ı seçer.</p>
+                    <p>
+                        <ol>
+                            <li class="secenek"><strong>Primary Controller: </strong><code>capwap ap primary-base [wlc-hostname] [wlc-IP-address]</code> komutuyla yapılandırılmıştır.</li>
+                            <li class="secenek"><strong>Secondary Controller: </strong><code>capwap ap secondary-base [wlc-hostname] [wlc-IP-address]</code> komutuyla yapılandırılmıştır.</li>
+                            <li class="secenek"><strong>Tertiary Controller: </strong><code>capwap ap tertiary-base [wlc-hostname] [wlc-IP-address]</code> komutuyla yapılandırılmıştır.</li>
+                            <li class="secenek">Daha önce hiçbir Primary (Birincil), Secondary (İkincil) veya Tertiary (Üçüncül) WLC yapılandırılmamışsa AP, <strong>Discovery Request'ine (Keşif İsteğine)</strong> yanıt veren ilk WLC'ye join olur.</li>
+                        </ol>
+                    </p>
+                    <h2 id="icerik-capwap-durumlari">CAPWAP Durumları</h2>
+                    <p>Access Point'e console bağlantısı yaparak Join sürecindeki tüm CAPWAP Durumlarını takip edebilirsiniz.</p>
+                    <h3 id="icerik-capwap-state-discovery">CAPWAP State: Discovery</h3>
+                    <p>Aşağıdaki log'larda öncelike <strong>CAPWAP</strong>'in <strong>Init</strong> Durumu, ardından <strong>Discovery</strong> Durumu görünmektedir.</p>
+                    <p>Log'u inceleyecek olursak; Access Point öncelikle, <strong>DHCP Option 43</strong>'ten WLC IP Adresini öğrenmektedir, ardından <strong>DNS sorgusu</strong>yla öğreniyor ve son olarak <strong>Layer 3 Broadcast</strong> yapmaktadır.</p>
+                    <p>En alttaki Log satırında ise 10.26.1.10 IP'li WLC'den <strong>Discovery Response (Keşif Yanıt)</strong> mesajı geldiği görünüyor.</p>
+                    <h4>LOG:</h4>
+                    <code class="codelog">
+<pre class="prelog">[*01/15/2024 00:00:00.0100] <strong>CAPWAP State: Init</strong>
+[*01/15/2024 00:00:00.0200] 
+[*01/15/2024 00:00:00.0200] <strong>CAPWAP State: Discovery</strong>
+[*01/15/2024 00:00:00.0300] <strong>Got WLC address 10.26.1.10 from DHCP.</strong>
+[*01/15/2024 00:00:00.0400] <strong>IP DNS query for CISCO-CAPWAP-CONTROLLER.cisco.local</strong>
+[*01/15/2024 00:00:00.0500] <strong>DNS resolved CISCO-CAPWAP-CONTROLLER.cisco.local</strong>
+[*01/15/2024 00:00:00.0600] <strong>DNS discover IP addr: 10.26.1.10</strong>
+[*01/15/2024 00:00:00.0700] <strong>Discovery Request sent to 10.26.1.10, discovery type STATIC_CONFIG(1)</strong>
+[*01/15/2024 00:00:00.0800] <strong>Discovery Request sent to 10.26.1.10, discovery type DNS(3)</strong>
+[*01/15/2024 00:00:00.0900] <strong>Discovery Request sent to 255.255.255.255, discovery type UNKNOWN(0)</strong>
+[*01/15/2024 00:00:00.1000] 
+[*01/15/2024 00:00:00.1000] <strong>CAPWAP State: Discovery</strong>
+[*01/15/2024 00:00:00.1100] <strong>Discovery Response from 10.26.1.10</strong></pre>
+                    </code>
+                    <h3 id="icerik-capwap-state-dtls-setup">CAPWAP State: DTLS Setup</h3>
+                    <p>Burada Access Point ile Wireless Controller arasında <strong>DTLS Tunnel</strong> kurulmaktadır. Bundan sonraki tüm trafik şifrelenecektir.</p>
+                    <h4>LOG:</h4>
+                    <code class="codelog">
+<pre class="prelog">[*01/15/2024 00:01:00.0100] <strong>CAPWAP State: DTLS Setup</strong>
+[*01/15/2024 00:01:00.0200] First connect to vWLC, accept vWLC by default
+[*01/15/2024 00:01:00.0300] 
+[*01/15/2024 00:01:00.0300] dtls_verify_server_cert: vWLC is using SSC, returning 1
+[*01/15/2024 00:01:00.0400] sudi99_request_check_and_load: Use HARSA SUDI certificate</pre>
+                    </code>
+                    <h3 id="icerik-capwap-state-join">CAPWAP State: Join</h3>
+                    <p><strong>DTLS Tunnel</strong> kurulduktan sonra Access Point Wireless Controller'a <strong>Join Request (Katılma İsteği)</strong> göndermektedir. Wireless Controller ise <strong>Join Response (Katılma Yanıtı)</strong> mesajıyla bu talebi onaylamıştır.</p>
+                    <h4>LOG:</h4>
+                    <code class="codelog">
+<pre class="prelog">[*01/15/2024 00:01:01.0100] <strong>CAPWAP State: Join</strong>
+[*01/15/2024 00:01:01.0200] <strong>Sending Join request to 10.26.1.10</strong> through port 5248, packet size 1376
+[*01/15/2024 00:01:01.0300] <strong>Join Response from 10.26.1.10</strong>, packet size 1397
+[*01/15/2024 00:01:01.0400] <strong>AC accepted</strong> previous sent request with result code: 0
+[*01/15/2024 00:01:01.0500] Received wlcType 0, timer 30</pre>
+                    </code>
+                    <h3 id="icerik-capwap-state-image-data">CAPWAP State: Image Data</h3>
+                    <p>Access Point, kendi üstündeki yazılım versiyonuyla Wireless Controller versiyonunu karşılaştırmaktadır. Versiyonların farklı olması durumunda uyumlu versiyonu Wireless Controller üzerinden indirir ve kendini yeniden başlatarak versiyonunu günceller. Log'ları incelediğimizde versiyonların aynı olduğunu ve güncelleme işleminin atlandığını görmekteyiz.</p>
+                    <h4>LOG:</h4>
+                    <code class="codelog">
+<pre class="prelog">[*01/15/2024 00:01:02.0100] <strong>CAPWAP State: Image Data</strong>
+[*01/15/2024 00:01:02.0200] <strong>AP image version 17.9.4.27 backup 17.3.5.42, Controller 17.9.4.27</strong>
+[*01/15/2024 00:01:02.0300] <strong>Version is the same, do not need update.</strong>
+[*01/15/2024 00:01:02.0400] status 'upgrade.sh: Script called with args:[NO_UPGRADE]'
+[*01/15/2024 00:01:02.0500] do NO_UPGRADE, part1 is active part</pre>
+                    </code>
+                    <h3 id="icerik-capwap-state-configure">CAPWAP State: Configure</h3>
+                    <p>Access Point, Wireless Controller ile aynı versiyona sahip olduğunu doğruladıktan sonra mevcut yapılandırmalarını Wireless Controller'a bildirir. Genelde bu, Access Point'in yapılandırmalarını (Wireless Controller'da mevcutsa) korumasını istediği anlamına gelir.</p>
+                    <h4>LOG:</h4>
+                    <code class="codelog">
+<pre class="prelog">[*01/15/2024 00:01:03.0100] <strong>CAPWAP State: Configure</strong>
+[*01/15/2024 00:01:03.0200] Telnet is not supported by AP, should not encode this payload
+[*01/15/2024 00:01:03.0300] Radio [1] Administrative state DISABLED  change to ENABLED 
+[*01/15/2024 00:01:03.0400] Radio [0] Administrative state DISABLED  change to ENABLED 
+[*01/15/2024 00:01:03.0500] DOT11_DRV[0]: Stop Radio0
+[*01/15/2024 00:01:03.0600] Stopped Radio 0
+[*01/15/2024 00:01:03.0700] DOT11_DRV[1]: Stop Radio1
+[*01/15/2024 00:01:03.0800] Stopped Radio 1</pre>
+                    </code>
+                    <h3 id="icerik-capwap-state-run">CAPWAP State: Run</h3>
+                    <p>Bu noktada Access Point, Wireless Controller'a Join olmuş ve konfigürasyonunu alarak çalışmaya başlamıştır.</p>
+                    <h4>LOG:</h4>
+                    <code class="codelog">
+<pre class="prelog">[*01/15/2024 00:01:04.0100] <strong>CAPWAP State: Run</strong>
+[*01/15/2024 00:01:04.0200] <strong>AP has joined controller Catalyst-9800</strong>
+[*01/15/2024 00:01:04.0300] <strong>Flexconnect Switching to Connected Mode!</strong>
+[*01/15/2024 00:01:04.0400] IOT device ttyiot0 not found
+[*01/15/2024 00:01:04.0500] Previous AP mode is 2, change to 2
+[*01/15/2024 00:01:04.0600] Current session mode: ssh, Configured: Telnet-No, SSH-Yes, Console-Yes
+[*01/15/2024 00:01:04.0700] Current session mode: telnet, Configured: Telnet-No, SSH-Yes, Console-Yes
+[*01/15/2024 00:01:04.0800] Current session mode: console, Configured: Telnet-No, SSH-Yes, Console-Yes
+[*01/15/2024 00:01:04.0900] <strong>chpasswd: password for user changed</strong>
+[*01/15/2024 00:01:04.1000] <strong>chpasswd: password for user changed</strong>
+[*01/15/2024 00:01:04.1100] Same LSC mode, no action needed
+[*01/15/2024 00:01:04.1200] CLSM[00:00:00:00:00:00]: U3 Client RSSI Stats feature is deprecated; can no longer be enabled
+[*01/15/2024 00:01:04.1300] Got WSA Server config TLVs
+[*01/15/2024 00:01:04.1400] <strong>AP tag  change to new-policy-tag</strong>
+[*01/15/2024 00:01:04.1500] flags value is 1 process iot_radio
+[*01/15/2024 00:01:04.1600] Powering down BLE radio
+[*01/15/2024 00:01:04.1700] set cleanair [slot0][band0] disable
+[*01/15/2024 00:01:04.1800] set cleanair [slot1][band1] disable</pre>
+                    </code>
+                    <h2 id="icerik-konfigurasyon">Konfigürasyon</h2>
+                    <h3 id="icerik-statik-wlc-tanimlamasi">Statik WLC Tanımlaması</h3>
+                    <p><strong>Configuration > Wireless > Access Points</strong> sayfasında üzerinde değişiklik yapacağınız Access Point'i seçip, <strong>High Availability</strong> sekmesinde <strong>Primary</strong>, <strong>Secondary</strong> ve <strong>Tertiary Controller</strong> bilgilerini girebilirsiniz.</p>
+                    <figure>
+                        <img src="images/Edit-AP-High-Availability-Primary-Controller-light.webp" alt="Edit AP High Availability Primary Controller" id="edit-ap-high-availability-primary-controller">
+                    </figure>
+                    <p><strong>Access Point</strong>'in <strong>High Availability</strong> sekmesinde girilen <strong>Primary</strong>, <strong>Secondary</strong> ve <strong>Tertiary Controller</strong> bilgilerinin <strong>AP Join Profile > CAPWAP > High Availability</strong>'de yapılandırılan <strong>Backup Primary</strong> ve <strong>Backup Secondary Controller</strong>'dan farklı olduğunu lütfen unutmayın.</p>
+                    <p><strong>Primary</strong>, <strong>Secondary</strong> ve <strong>Tertiary Controller</strong>'lar sırasıyla <strong>1</strong>, <strong>2</strong> ve <strong>3</strong> öncelik değerlerine sahipken; <strong>Backup Primary</strong> ve <strong>Backup Secondary Controller</strong>'lar sırasıyla <strong>4</strong> ve <strong>5</strong> öncelik değerlerine sahiptir.</p>
+                    <p><strong>AP Join Profile > CAPWAP > High Availability</strong> sekmesindeki <strong>AP Fallback to Primary</strong> aktif edilse bile, <strong>Access Point</strong> öncelikle <strong>Primary Controller</strong>'a Join olmayı dener. Access Point ancak <strong>CAPWAP Down</strong> durumunda <strong>4</strong> ve <strong>5</strong> öncelik değerlerine sahip olan <strong>Backup Primary Controller</strong> ve <strong>Backup Secondary Controller</strong>'lara Join olur.</p>
+                    <figure>
+                        <img src="images/Edit-AP-Join-Profile-CAPWAP-High-Availability-light.webp" alt="Edit AP Join Profile CAPWAP High Availability" id="edit-ap-join-profile-capwap-high-availability">
+                    </figure>
+                    <p><strong>Not: </strong><strong>AP Join Profile</strong>'ın <strong>High Availability</strong> sekmesinde yapılandırılan <strong>Wireless Controller</strong> bilgileri <strong>Access Point</strong>'in <strong>High Availability</strong> sekmesinde yapılandırılan <strong>Wireless Controller</strong> bilgilerini etkilemez.</p>
+                    <h3 id="icerik-sshin-aktif-edilmesi">SSH'ın Aktif Edilmesi</h3>
+                    <p>Access Point'lerdeki log'lara erişmek ve CAPWAP Oturumunun durumunu incelemek için cihaza uzaktan erişim ihtiyacı duyabilirsiniz. Dolayısıyla SSH'ı aktif etmekte fayda var.</p>
+                    <p><strong>Adım 1: </strong>Access Point'lere SSH ile erişmek için AP Join Profile'da SSH'ı aktif edin.</p>
+                    <figure>
+                        <img src="images/Add-AP-Join-Profile-Management-Device-light.webp" alt="Add AP Join Profile Management Device" id="add-ap-join-profile-management-device"/>
+                    </figure>
+                    <p><strong>Adım 2: </strong>SSH bağlantısında kullanacağınız Username ve Password'ü belirleyin.</p>
+                    <figure>
+                        <img src="images/Add-AP-Join-Profile-Management-User-light.webp" alt="Add AP Join Profile Management User" id="add-ap-join-profile-management-user"/>
+                    </figure>
+                    <h3 id="icerik-data-link-encryption">Data Link Encryption</h3>
+                    <p><strong>Client (İstemci)</strong> bazlı bir sorunu <strong>Packet Capture (Paket Yakalama)</strong> yöntemiyle çözmeniz gereken bir durumda <strong>Configuration > Tags & Profiles > AP Join > CAPWAP > Advanced</strong> sekmesindeki <strong>Data Link Encryption</strong> seçeneğinin inaktif olduğundan emin olun. Aksi takdirde trafik şifrelenecektir.</p>
+                    <figure>
+                        <img src="images/Edit-AP-Join-Profile-CAPWAP-Advanced-light.webp" alt="Add AP Join Profile CAPWAP Advanced" id="add-ap-join-profile-capwap-advanced"/>
+                    </figure>
+                    <p><strong>Not: </strong><strong>Data Encryption</strong> yalnızca <strong>CAPWAP DATA</strong> trafiğini şifreler. <strong>CAPWAP Control</strong> trafiği zaten <u>DTLS aracılığıyla şifrelenmiştir</u>.</p>
+                    <h2 id="icerik-dogrulama">Doğrulama</h2>
+                    <p>Access Point'in Wireless Controller'a Join olma sürecini analiz etmek için Wireless Controller'ın <a href="https://www.cisco.com/c/en/us/support/docs/wireless/catalyst-9800-series-wireless-controllers/213949-wireless-debugging-and-log-collection-on.html#toc-hId-2114447724" target="_blank">Packet Capture</a> yeteneğinden faydalanabilirsiniz.</p>
+                    <figure>
+                        <img src="images/CAPWAP-Packet-Capture.webp" alt="CAPWAP Packet Capture" id="capwap-packet-capture"/>
+                    </figure>
+                    <h2 id="icerik-sorun-giderme">Sorun Giderme</h2>
+                    <h3 id="icerik-wlc-arayuzunden-yapilacak-kontroller">WLC Arayüzünden Yapılacak Kontroller</h3>
+                    <p>Wireless Controller arayüzünde, <strong>Monitoring > Wireless > AP Statistics > Join Statistics</strong> sayfasındaki <strong>Last Reboot Reason</strong> ve <strong>Last Reconnect Reason</strong> alanlarında ilgili Access Point'in son reboot ve son reconnect sebeplerini görebilirsiniz.</p>
+                    <figure>
+                        <img src="images/AP-Statistics-Join-Statistics-light.webp" alt="AP Statistics - Join Statistics" id="ap-statistics-join-statistics"/>
+                    </figure>
+                    <p>Ayrıntılı bilgi almak istediğiniz Access Point'e tıklayarak son join olma tarih ve saati gibi bilgilere erişebilirsiniz.</p>
+                    <figure>
+                        <img src="images/Join-Statistics-General-light.webp" alt="Join Statistics - General" id="join-statistics-general"/>
+                    </figure>
+                    <p>Daha detaylı istatistik bilgileri için aynı sayfadaki <strong>Statistics</strong> sekmesine erişebilirsiniz.</p>
+                    <figure>
+                        <img src="images/Join-Statistics-Statistics-light.webp" alt="Join Statistics - Statistics" id="join-statistics-statistics"/>
+                    </figure>
+                    <h3 id="icerik-sorun-giderme-komutlari">Sorun Giderme Komutları</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi deserunt pariatur, blanditiis recusandae fuga quod vitae similique eveniet aliquid asperiores praesentium id, sed, dignissimos molestiae ducimus fugit quaerat. Quia, voluptate!</p>
+                    <h4 id="icerik-wireless-controllerda-kullanilan-komutlar">Wireless Controller'da Kullanılan Komutlar</h4>
+                    <code>
+<pre>show ap summary
+debug capwap error
+debug capwap packet</pre>
+                    </code>
+                    <h4 id="icerik-wave-2-ve-catalyst-11ax-access-pointlerde-kullanilan-komutlar">Wave 2 ve Catalyst 11ax Access Point'lerde Kullanılan Komutlar</h4>
+                    <code>
+<pre>debug capwap client events
+debug capwap client error
+debug dtls client error
+debug dtls client event
+debug capwap client keepalive
+test capwap restart
+capwap ap erase all</pre>
+                    </code>
+                    <h4 id="icerik-wave-1-access-pointlerde-kullanilan-komutlar">Wave 1 Access Point'lerde Kullanılan Komutlar</h4>
+                    <code>
+<pre>debug capwap console cli
+debug capwap client no-reload
+show dtls stats
+clear capwap ap all-config</pre>
+                    </code>
+                    <p><strong>Kaynak: </strong><a href="https://www.cisco.com/c/en/us/support/docs/wireless/catalyst-9120axe-access-point/221056-understand-the-ap-join-process-with-the.html" target="_blank">Understand the AP Join Process with the Catalyst 9800 WLC</a></p>
+                </article>
+            </main>
+            <footer>
+                <hr>
+                <h2>Atlas Borap, CCIE #67754</h2>
+                <p>ccie [🐴] atlasborap [🫥] com</p>
+                <p>❤️</p>
+            </footer>
+        </div>
+    </div>
+    <script defer src="../assets/darkmode-blogs.js"></script>
+    <script defer src="../assets/accordions.js"></script>
+</body>
+</html>
