@@ -46,6 +46,13 @@ code {
     color: var(--heading);
 }
 
+.codelog {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    border-radius: 20px;
+}
+
 code pre {
     padding: 15px;
     border-radius: 20px;
@@ -53,6 +60,14 @@ code pre {
     font-family: 'Courier New', monospace;
     background-color: var(--layer2);
     color: var(--heading);
+}
+
+pre strong {
+    font-family: 'Courier New', monospace;
+}
+
+.prelog {
+    padding: 0 15px 0 15px;
 }
 
 @media only screen and (max-width: 992px) {
@@ -173,7 +188,6 @@ h5 {
 p {
     line-height: 1.75em;
     color: var(--text);
-    text-wrap: pretty;
 }
 
 p.tarih-anasayfa {
@@ -294,7 +308,8 @@ button.accordion-policy-profile-cisco-catalyst-9800-wireless-controller-konfigur
 button.accordion-ap-join-profile-cisco-catalyst-9800-wireless-controller-konfigurasyon-modeli,
 button.accordion-flex-profile-cisco-catalyst-9800-wireless-controller-konfigurasyon-modeli,
 button.accordion-rf-profile-cisco-catalyst-9800-wireless-controller-konfigurasyon-modeli,
-button.accordion-icerik-cisco-access-point-modlari-flex-ve-sniffer-konfigurasyonu
+button.accordion-icerik-cisco-access-point-modlari-flex-ve-sniffer-konfigurasyonu,
+button.accordion-icerik-cisco-access-pointlerin-wireless-controllera-join-sureci
 {
 display: block;
 border: 0;
@@ -309,9 +324,17 @@ ul {
     list-style: circle;
 }
 
+ol > ol {
+    list-style: lower-latin;
+}
+
 ul.panel {
     display: none;
     overflow: hidden;
+}
+
+.secenek {
+    margin-bottom: 16px;
 }
 
 figure {
