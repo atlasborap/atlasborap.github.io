@@ -2,22 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://atlasborap.com/</loc>
-    <lastmod>2023-12-15</lastmod>
+    <lastmod>2023-01-14</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://atlasborap.com/cisco-certified-internetwork-expert/</loc>
-    <lastmod>2023-12-15</lastmod>
+    <lastmod>2023-01-14</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://atlasborap.com/cisco-catalyst-9800-wireless-controller-konfigurasyon-modeli/</loc>
-    <lastmod>2023-12-15</lastmod>
+    <lastmod>2023-01-14</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://atlasborap.com/cisco-access-point-modlari-flex-ve-sniffer-konfigurasyonu/</loc>
-    <lastmod>2023-12-15</lastmod>
+    <lastmod>2023-01-14</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://atlasborap.com/cisco-access-pointlerin-wireless-controllera-join-sureci/</loc>
+    <lastmod>2023-01-14</lastmod>
     <priority>0.8</priority>
   </url>
 </urlset>
